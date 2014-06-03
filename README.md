@@ -1,4 +1,4 @@
 jamesonstone.github.io
 ======================
 
-blug
+Blog
