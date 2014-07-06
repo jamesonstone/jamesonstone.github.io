@@ -1,0 +1,10 @@
+---
+layout: post
+title: Test post
+---
+
+h1. {{page.title}}
+p(meta). 05 July 2014 - Brooklyn, New York
+
+
+This is the test blog post for "Jameson Stone":http://jamesonstone.github.io/ . We're really interested in how it all works. 
