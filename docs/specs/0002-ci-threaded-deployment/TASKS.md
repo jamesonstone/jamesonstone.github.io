@@ -190,7 +190,7 @@ unresolved_assumptions: 0
   - `bundle exec jekyll build`
   - `ruby scripts/validate_site.rb`
   - `rg -n "new_post|no review|manual merge|GitHub Pages" .agents/skills/threaded-blog-post/SKILL.md README.md`
-  - `find .github -maxdepth 2 -path .github/workflows/* -type f -print`
+  - `find .github -maxdepth 2 -path '.github/workflows/*' -type f -print`
   - `git status --short --branch`
 - **EXPECTED FILES**:
   - none
@@ -214,7 +214,7 @@ unresolved_assumptions: 0
 - **VERIFY**:
   - `git diff origin/GH-1..HEAD -- .agents/skills/threaded-blog-post/SKILL.md README.md AGENTS.md CLAUDE.md .github/copilot-instructions.md docs/agents/TOOLING.md scripts/validate_site.rb scripts/validate_site_test.rb`
   - `rg -n "CNAME|workflow_dispatch|deploy|force-push|merge the PR|Generated-by|Co-authored-by|source: threaded_discussion|reviewed: true" .agents README.md AGENTS.md CLAUDE.md .github scripts`
-  - `find .github -maxdepth 2 -path .github/workflows/* -type f -print`
+  - `find .github -maxdepth 2 -path '.github/workflows/*' -type f -print`
 - **EXPECTED FILES**:
   - none
 - **RISK**: Medium because this is the last point to catch scope creep before staging.
