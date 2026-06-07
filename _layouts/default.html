@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description | escape }}">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="{{ '/blog/' | relative_url }}">Blog</a>
+        <a href="{{ '/paintings/' | relative_url }}">Paintings</a>
+        <a href="{{ '/projects/' | relative_url }}">Projects</a>
+        <a href="{{ '/about/' | relative_url }}">About</a>
+      </nav>
+    </header>
+
+    <main class="site-main">
+      {{ content }}
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        <a href="{{ '/about/' | relative_url }}">Jameson Stone</a>
+        <span aria-hidden="true">/</span>
+        <a href="https://github.com/jamesonstone">GitHub</a>
+      </p>
+    </footer>
+  </body>
+</html>
