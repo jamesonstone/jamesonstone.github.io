@@ -62,6 +62,12 @@ def assert_file(path)
   fail_with("missing file: #{path.delete_prefix("#{ROOT}/")}")
 end
 
+def assert_post_permalink(post_id, route)
+  return if File.file?(site_path(route))
+
+  fail_with("#{post_id} missing rendered permalink: #{route}")
+end
+
 def site_path(url)
   File.join(SITE, url.delete_prefix("/"))
 end
@@ -128,7 +134,7 @@ post_sources.each do |source_path|
   assert_post_front_matter(post_id, metadata)
 
   route = "/blog/#{post_date_path(post_id, metadata["date"])}/#{post_slug(source_path)}.html"
-  assert_file(site_path(route))
+  assert_post_permalink(post_id, route)
 end
 
 LEGACY_POSTS.each do |post_id, route|

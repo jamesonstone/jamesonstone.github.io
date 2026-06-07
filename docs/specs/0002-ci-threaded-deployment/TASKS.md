@@ -57,11 +57,12 @@ unresolved_assumptions: 0
   - `git status --short --branch`
   - `git remote -v`
   - `git rev-parse --abbrev-ref HEAD`
-  - `gh pr list --head "$CURRENT_BRANCH" --state all --json number,url,state,isDraft,headRefName,baseRefName,assignees`
+  - `gh pr list --head GH-3 --state all --json number,url,state,isDraft,headRefName,baseRefName,assignees`
   - `gh repo view --json defaultBranchRef -q .defaultBranchRef.name`
-  - `gh issue list --state open --search "ci threaded deployment new_post in:title" --json number,title,url`
-  - `git fetch origin "$BASE_BRANCH"`
-  - `test "$(git rev-parse --abbrev-ref HEAD)" = "GH-123"`
+  - `gh issue view 3 --json number,title,url,state`
+  - `git fetch origin GH-1`
+  - `git branch --show-current`
+  - `git merge-base --is-ancestor origin/GH-1 HEAD`
 - **EXPECTED FILES**:
   - none
 - **RISK**: High because starting from the wrong branch would mix this implementation with unrelated PR work.
@@ -148,6 +149,7 @@ unresolved_assumptions: 0
   - Validate rendered permalink exists under `_site/blog/YYYY/MM/DD/slug.html`.
   - Preserve legacy archive-specific checks for migrated posts.
   - Preserve existing route, hidden draft, forbidden output, custom workflow, local asset, and internal blog-link checks.
+  - Add focused regression tests for generic post metadata and permalink validation.
 - **ACCEPTANCE**:
   - Validator fails with specific messages for missing required post metadata.
   - Validator fails with a specific message when a post's rendered permalink is missing.
@@ -155,10 +157,13 @@ unresolved_assumptions: 0
   - No custom workflow, schema package, external dependency, or CI configuration is introduced.
 - **VERIFY**:
   - `ruby -c scripts/validate_site.rb`
+  - `ruby -c scripts/validate_site_test.rb`
+  - `ruby scripts/validate_site_test.rb`
   - `bundle exec jekyll build`
   - `ruby scripts/validate_site.rb`
 - **EXPECTED FILES**:
   - `scripts/validate_site.rb`
+  - `scripts/validate_site_test.rb`
 - **RISK**: Medium because validator changes can break existing archive validation if the generic and legacy paths are not separated cleanly.
 - **ROLLBACK**: Revert only `scripts/validate_site.rb` if validation behavior regresses.
 - **NOTES**: Do not add provenance fields or require `excerpt` or `tags`.
@@ -174,15 +179,18 @@ unresolved_assumptions: 0
 - **ACCEPTANCE**:
   - `bundle exec jekyll build` succeeds.
   - `ruby scripts/validate_site.rb` succeeds after the build.
+  - `ruby scripts/validate_site_test.rb` succeeds.
   - Required skill and README strings are present.
   - No `.github/workflows/*` file is introduced.
   - `_site/` remains untracked.
 - **VERIFY**:
   - `ruby -c scripts/validate_site.rb`
+  - `ruby -c scripts/validate_site_test.rb`
+  - `ruby scripts/validate_site_test.rb`
   - `bundle exec jekyll build`
   - `ruby scripts/validate_site.rb`
   - `rg -n "new_post|no review|manual merge|GitHub Pages" .agents/skills/threaded-blog-post/SKILL.md README.md`
-  - `find .github/workflows -maxdepth 1 -type f -print 2>/dev/null`
+  - `find .github -maxdepth 2 -path .github/workflows/* -type f -print`
   - `git status --short --branch`
 - **EXPECTED FILES**:
   - none
@@ -204,9 +212,9 @@ unresolved_assumptions: 0
   - No secrets or machine-local config are staged or ready to stage.
   - Any remaining implementation risk is documented in final handoff.
 - **VERIFY**:
-  - `git diff -- .agents/skills/threaded-blog-post/SKILL.md README.md AGENTS.md CLAUDE.md .github/copilot-instructions.md docs/agents/TOOLING.md scripts/validate_site.rb`
-  - `rg -n "CNAME|workflow_dispatch|deploy|force-push|merge the PR|Generated-by|Co-authored-by|source: threaded_discussion|reviewed: true" .agents README.md AGENTS.md CLAUDE.md .github scripts || true`
-  - `find .github/workflows -maxdepth 1 -type f -print 2>/dev/null`
+  - `git diff origin/GH-1..HEAD -- .agents/skills/threaded-blog-post/SKILL.md README.md AGENTS.md CLAUDE.md .github/copilot-instructions.md docs/agents/TOOLING.md scripts/validate_site.rb scripts/validate_site_test.rb`
+  - `rg -n "CNAME|workflow_dispatch|deploy|force-push|merge the PR|Generated-by|Co-authored-by|source: threaded_discussion|reviewed: true" .agents README.md AGENTS.md CLAUDE.md .github scripts`
+  - `find .github -maxdepth 2 -path .github/workflows/* -type f -print`
 - **EXPECTED FILES**:
   - none
 - **RISK**: Medium because this is the last point to catch scope creep before staging.
@@ -231,19 +239,16 @@ unresolved_assumptions: 0
   - PR body preserves `Description`, `How to Test`, and `Ticket` headings.
   - PR checks are observed and reported as passing, pending, failing, unavailable, or not run.
 - **VERIFY**:
-  - `git diff -- <each changed file>`
-  - `git add <each changed file>`
+  - `git diff origin/GH-1..HEAD --stat`
   - `git diff --staged`
   - `git config user.name`
   - `git config user.email`
   - `git var GIT_AUTHOR_IDENT`
   - `git var GIT_COMMITTER_IDENT`
-  - `git commit`
   - `git status --short --branch`
-  - `gh pr list --head GH-123 --state all --json number,url,state,isDraft,headRefName,baseRefName,assignees`
-  - `git push -u origin GH-123`
-  - `gh pr view --json number,url,author,state,isDraft,assignees`
-  - `gh pr checks`
+  - `gh pr list --head GH-3 --state all --json number,url,state,isDraft,headRefName,baseRefName,assignees`
+  - `gh pr view 4 --json number,url,author,state,isDraft,assignees,baseRefName,headRefName,statusCheckRollup`
+  - `gh issue view 3 --json number,title,state,url`
 - **EXPECTED FILES**:
   - `.agents/skills/threaded-blog-post/SKILL.md`
   - `README.md`
@@ -252,6 +257,7 @@ unresolved_assumptions: 0
   - `.github/copilot-instructions.md`
   - `docs/agents/TOOLING.md`
   - `scripts/validate_site.rb`
+  - `scripts/validate_site_test.rb`
   - `docs/PROJECT_PROGRESS_SUMMARY.md`
   - `docs/specs/0002-ci-threaded-deployment/BRAINSTORM.md`
   - `docs/specs/0002-ci-threaded-deployment/SPEC.md`
