@@ -6,9 +6,7 @@ permalink: /
 
 # Jameson Stone
 
-Notes, archive posts, paintings, and small public records.
-
-I use this site as a source-first blog: short Markdown posts live beside older archive material, paintings, projects, and contact details.
+Put the AGI in the bag, bro.
 
 ## Latest Posts
 
