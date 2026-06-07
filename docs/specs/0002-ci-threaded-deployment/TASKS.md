@@ -22,7 +22,7 @@ unresolved_assumptions: 0
 | T005 | Extend generic generated-post validation | done | agent | T001 |
 | T006 | Run build and validator evidence checks | done | agent | T003, T004, T005 |
 | T007 | Review scope, safety, and workflow conformance | done | agent | T006 |
-| T008 | Deliver implementation through issue-number PR | todo | agent | T007 |
+| T008 | Deliver implementation through issue-number PR | done | agent | T007 |
 
 ## TASK LIST
 
@@ -33,7 +33,7 @@ unresolved_assumptions: 0
 - [x] T005: Extend generic generated-post validation [PLAN-COMPONENTS](./PLAN.md#components)
 - [x] T006: Run build and validator evidence checks [PLAN-TESTING](./PLAN.md#testing)
 - [x] T007: Review scope, safety, and workflow conformance [PLAN-RISKS](./PLAN.md#risks)
-- [ ] T008: Deliver implementation through issue-number PR [PLAN-INTERFACES](./PLAN.md#interfaces)
+- [x] T008: Deliver implementation through issue-number PR [PLAN-INTERFACES](./PLAN.md#interfaces)
 
 ## TASK DETAILS
 
