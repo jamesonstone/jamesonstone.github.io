@@ -65,12 +65,21 @@ a:focus {
 }
 
 .site-title {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55ch;
   color: var(--text);
   font-family: var(--mono);
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.2;
   text-decoration: none;
+}
+
+.site-title__emoji {
+  display: inline-block;
+  min-width: 1.35em;
+  text-align: center;
 }
 
 .site-nav,
