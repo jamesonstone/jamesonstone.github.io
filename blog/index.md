@@ -12,9 +12,9 @@ Short notes and migrated archive posts.
   {% for post in site.posts %}
     <li>
       <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <a class="post-list__title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
       {% if post.archive %}
-        <span class="note">Archive</span>
+        <span class="note note--archive">Archive</span>
       {% endif %}
     </li>
   {% endfor %}

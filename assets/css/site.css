@@ -244,6 +244,10 @@ blockquote {
   text-decoration-color: transparent;
 }
 
+.post-list__title {
+  display: block;
+}
+
 .post-list a:hover,
 .post-list a:focus {
   color: var(--accent);
@@ -277,6 +281,26 @@ blockquote {
   color: var(--muted);
   font-size: 1rem;
   line-height: 1.58;
+}
+
+.note {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.note--archive {
+  margin-top: 0.45rem;
 }
 
 .archive-link {
