@@ -3,6 +3,7 @@
 
 require "yaml"
 require "date"
+require "time"
 
 ROOT = File.expand_path("..", __dir__)
 SITE = File.join(ROOT, "_site")
@@ -61,6 +62,12 @@ def assert_file(path)
   fail_with("missing file: #{path.delete_prefix("#{ROOT}/")}")
 end
 
+def assert_post_permalink(post_id, route)
+  return if File.file?(site_path(route))
+
+  fail_with("#{post_id} missing rendered permalink: #{route}")
+end
+
 def site_path(url)
   File.join(SITE, url.delete_prefix("/"))
 end
@@ -72,6 +79,10 @@ def source_files
   (explicit_paths + glob_paths).uniq
 end
 
+def post_sources
+  Dir.glob(File.join(ROOT, "_posts", "*.md")).sort
+end
+
 def front_matter(path)
   text = File.read(path)
   match = text.match(/\A---\n(.*?)\n---\n/m)
@@ -80,10 +91,50 @@ def front_matter(path)
   YAML.safe_load(match[1], permitted_classes: [Date, Time], aliases: false) || {}
 end
 
+def post_slug(path)
+  post_id = File.basename(path, ".md")
+  match = post_id.match(/\A\d{4}-\d{2}-\d{2}-(.+)\z/)
+  fail_with("invalid post filename: _posts/#{File.basename(path)}") unless match
+
+  match[1]
+end
+
+def post_date_path(post_id, value)
+  fail_with("#{post_id} missing required date front matter") unless value
+
+  date =
+    case value
+    when Date, Time
+      value
+    else
+      Time.parse(value.to_s)
+    end
+
+  date.strftime("%Y/%m/%d")
+rescue ArgumentError
+  fail_with("#{post_id} has invalid date front matter")
+end
+
+def assert_post_front_matter(post_id, metadata)
+  fail_with("#{post_id} missing required layout front matter") unless metadata.key?("layout")
+  fail_with("#{post_id} must use post layout") unless metadata["layout"] == "post"
+  fail_with("#{post_id} missing required title front matter") if metadata["title"].to_s.strip.empty?
+  fail_with("#{post_id} missing required date front matter") unless metadata.key?("date")
+end
+
 fail_with("_site is missing; run bundle exec jekyll build first") unless Dir.exist?(SITE)
 
 REQUIRED_ROUTES.each do |route|
   assert_file(site_path(route))
+end
+
+post_sources.each do |source_path|
+  post_id = File.basename(source_path, ".md")
+  metadata = front_matter(source_path)
+  assert_post_front_matter(post_id, metadata)
+
+  route = "/blog/#{post_date_path(post_id, metadata["date"])}/#{post_slug(source_path)}.html"
+  assert_post_permalink(post_id, route)
 end
 
 LEGACY_POSTS.each do |post_id, route|

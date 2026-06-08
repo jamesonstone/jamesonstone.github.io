@@ -3,6 +3,7 @@
 ## Skills
 
 - Repo-local canonical skills live under `.agents/skills/*/SKILL.md`
+- For a user thread containing the exact `new_post` trigger, open `.agents/skills/threaded-blog-post/SKILL.md`
 - For feature-scoped work, start with the current feature's canonical front matter `skills`, falling back to the legacy `SPEC.md` `## SKILLS` table only when front matter is absent
 - Keep the selected skill set minimal and actionable
 
