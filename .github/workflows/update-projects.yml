@@ -1,0 +1,115 @@
+name: Update projects page
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-projects
+  cancel-in-progress: false
+
+jobs:
+  update-projects:
+    name: Check GitHub repositories
+    runs-on: ubuntu-latest
+    if: github.repository == 'jamesonstone/jamesonstone.github.io'
+
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Check out or create projects update branch
+        env:
+          UPDATE_BRANCH: automation/update-projects
+        run: |
+          set -euo pipefail
+
+          git fetch origin "$UPDATE_BRANCH" || true
+          if git rev-parse --verify "origin/$UPDATE_BRANCH" >/dev/null 2>&1; then
+            git checkout -B "$UPDATE_BRANCH" "origin/$UPDATE_BRANCH"
+          else
+            git checkout -B "$UPDATE_BRANCH"
+          fi
+
+      - name: Update projects page from GitHub repositories
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ruby scripts/update_projects_from_github.rb
+
+      - name: Detect projects page changes
+        id: changes
+        run: |
+          if git diff --quiet -- projects.md; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate generated site
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          bundle exec jekyll build
+          ruby scripts/validate_site.rb
+
+      - name: Create or update projects page pull request
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPDATE_BRANCH: automation/update-projects
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet -- projects.md; then
+            echo "No new changes to commit."
+            exit 0
+          fi
+
+          git add projects.md
+          git commit -m "docs: update projects page from GitHub repositories"
+          git push -u origin "$UPDATE_BRANCH"
+
+          cat > /tmp/update-projects-pr.md <<'BODY'
+          ## Description
+
+          - :memo: Adds newly discovered public repositories to the Projects page.
+          - :wrench: Uses deterministic GitHub metadata and README text to draft short project descriptions.
+
+          ## How to Test
+
+          1. `bundle exec jekyll build`
+          2. `ruby scripts/validate_site.rb`
+
+          ## Ticket
+
+          Automated follow-up from the projects page updater workflow.
+          BODY
+
+          if gh pr view "$UPDATE_BRANCH" >/dev/null 2>&1; then
+            gh pr edit "$UPDATE_BRANCH" \
+              --title ":memo: Update projects page from GitHub repositories" \
+              --body-file /tmp/update-projects-pr.md \
+              --add-assignee jamesonstone
+          else
+            gh pr create \
+              --base master \
+              --head "$UPDATE_BRANCH" \
+              --title ":memo: Update projects page from GitHub repositories" \
+              --body-file /tmp/update-projects-pr.md \
+              --assignee jamesonstone
+          fi

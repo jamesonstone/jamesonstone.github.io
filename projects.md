@@ -6,7 +6,19 @@ permalink: /projects/
 
 # Projects
 
-Archive notes for public project work. Links are kept restrained until each old project source can be checked during migration.
+Some public tools I have been building recently, plus older archive notes.
+
+## Current Tools
+
+<ul class="project-list">
+  <li><strong><a href="https://github.com/jamesonstone/kit">kit</a></strong>: A portable, document-first workflow harness for specs, planning, implementation, review, and handoff.</li>
+  <li><strong><a href="https://github.com/jamesonstone/yp">yp</a></strong>: A tiny path-copying CLI for sending files, directories, or picker selections to the clipboard.</li>
+  <li><strong><a href="https://github.com/jamesonstone/kp">kp</a></strong>: A local prompt utility for keeping reusable coding-agent prompts close at hand in the shell.</li>
+  <li><strong><a href="https://github.com/jamesonstone/event-collector">event-collector</a></strong>: An HTTP service and CLI for collecting generic event envelopes with hash validation and idempotency.</li>
+  <li><strong><a href="https://github.com/jamesonstone/sso-testkit">sso-testkit</a></strong>: A Go CLI for checking SSO readiness with scenario files, token-exchange probes, and redacted reports.</li>
+</ul>
+
+## Archive
 
 <ul class="project-list">
   <li><strong>project-aurora</strong>: Handling everything between development and operations with Kubeless.</li>

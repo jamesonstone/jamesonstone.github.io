@@ -33,6 +33,10 @@ REQUIRED_ROUTES = [
   "/feed.xml"
 ].freeze
 
+ALLOWED_WORKFLOWS = [
+  "update-projects.yml"
+].freeze
+
 HIDDEN_DRAFT_SLUGS = %w[
   zen-team
   walled-garden
@@ -172,8 +176,9 @@ forbidden_outputs.each do |path|
   fail_with("forbidden generated output exists: #{path}") if File.exist?(site_path(path))
 end
 
-workflow_files = Dir.glob(File.join(ROOT, ".github", "workflows", "*"))
-fail_with("custom GitHub Actions workflow exists") unless workflow_files.empty?
+workflow_files = Dir.glob(File.join(ROOT, ".github", "workflows", "*")).map { |path| File.basename(path) }
+unexpected_workflows = workflow_files - ALLOWED_WORKFLOWS
+fail_with("unexpected GitHub Actions workflow exists: #{unexpected_workflows.first}") unless unexpected_workflows.empty?
 
 scan_files = source_files + Dir.glob(File.join(SITE, "**", "*")).select { |path| File.file?(path) }
 HIDDEN_DRAFT_SLUGS.each do |slug|
