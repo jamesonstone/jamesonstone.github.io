@@ -8,7 +8,7 @@ home: true
 <div class="home-page">
   <section class="home-hero" aria-labelledby="home-title">
     <h1 id="home-title">Jameson Stone</h1>
-    <p class="tagline">Put the AGI in the bag, bro.</p>
+    <p class="tagline">Just put the AGI in the bag, bro.</p>
   </section>
 
   <section class="home-section" aria-labelledby="latest-posts">
@@ -30,5 +30,6 @@ home: true
     </ol>
 
     <p class="archive-link"><a href="{{ '/blog/' | relative_url }}">Read the full archive</a></p>
+
   </section>
 </div>
