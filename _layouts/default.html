@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description | escape }}">
-    <link rel="icon" href="data:,">
+    <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
     <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
   </head>
   <body>
     <header class="site-header">
       <div class="site-header__inner">
-        <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        <a class="site-title" href="{{ '/' | relative_url }}">
+          <span class="site-title__emoji" data-random-header-emoji aria-hidden="true">✨</span>
+          <span>{{ site.title }}</span>
+        </a>
         <nav class="site-nav" aria-label="Primary navigation">
           <a href="{{ '/blog/' | relative_url }}">Blog</a>
           <a href="{{ '/paintings/' | relative_url }}">Paintings</a>
@@ -32,5 +35,6 @@
         <a href="mailto:jameson@stone.tc">Email</a>
       </nav>
     </footer>
+    <script src="{{ '/assets/js/site.js' | relative_url }}"></script>
   </body>
 </html>

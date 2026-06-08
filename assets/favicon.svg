@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Diamond">
+  <rect width="64" height="64" rx="12" fill="#fbfaf4"/>
+  <path d="M32 8 56 32 32 56 8 32Z" fill="#0b6358"/>
+  <path d="M32 15 49 32 32 49 15 32Z" fill="#fbfaf4"/>
+  <path d="M32 20 44 32 32 44 20 32Z" fill="#24211c"/>
+</svg>
