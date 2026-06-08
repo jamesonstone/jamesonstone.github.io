@@ -106,6 +106,7 @@ class ValidateSiteTest < Minitest::Test
       paintings/index.html
       projects/index.html
       about/index.html
+      feed.xml
     ].each do |route|
       write_site_file(root, route)
     end

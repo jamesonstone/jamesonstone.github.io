@@ -29,7 +29,8 @@ REQUIRED_ROUTES = [
   "/blog/index.html",
   "/paintings/index.html",
   "/projects/index.html",
-  "/about/index.html"
+  "/about/index.html",
+  "/feed.xml"
 ].freeze
 
 HIDDEN_DRAFT_SLUGS = %w[
