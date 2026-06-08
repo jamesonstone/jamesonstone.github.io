@@ -1,0 +1,148 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "yaml"
+require "date"
+
+ROOT = File.expand_path("..", __dir__)
+SITE = File.join(ROOT, "_site")
+
+LEGACY_POSTS = {
+  "2019-12-28-i-hop" => "/blog/2019/12/28/i-hop.html",
+  "2020-01-12-weather-pre" => "/blog/2020/01/12/weather-pre.html",
+  "2020-01-17-makefile-semver" => "/blog/2020/01/17/makefile-semver.html",
+  "2020-01-18-manage-struct" => "/blog/2020/01/18/manage-struct.html",
+  "2020-01-18-post-commit-semver" => "/blog/2020/01/18/post-commit-semver.html",
+  "2020-01-25-debezium" => "/blog/2020/01/25/debezium.html",
+  "2020-02-01-team-slack" => "/blog/2020/02/01/team-slack.html",
+  "2020-02-15-compose-kafka" => "/blog/2020/02/15/compose-kafka.html",
+  "2020-02-22-pt1-k8s-dashboard" => "/blog/2020/02/22/pt1-k8s-dashboard.html",
+  "2020-02-22-pt2-k8s-dashboard" => "/blog/2020/02/22/pt2-k8s-dashboard.html",
+  "2020-02-26-kubeless" => "/blog/2020/02/26/kubeless.html",
+  "2020-03-01-kotlinconsumer" => "/blog/2020/03/01/kotlinconsumer.html",
+  "2020-03-04-avro-schema" => "/blog/2020/03/04/avro-schema.html"
+}.freeze
+
+REQUIRED_ROUTES = [
+  "/index.html",
+  "/blog/index.html",
+  "/paintings/index.html",
+  "/projects/index.html",
+  "/about/index.html"
+].freeze
+
+HIDDEN_DRAFT_SLUGS = %w[
+  zen-team
+  walled-garden
+  right-problem
+  prog-dev-eng
+].freeze
+
+SOURCE_PATHS = [
+  "index.md",
+  "projects.md",
+  "about.md"
+].freeze
+
+SOURCE_GLOBS = [
+  "_posts/*.md",
+  "blog/**/*.md",
+  "paintings/**/*.md"
+].freeze
+
+def fail_with(message)
+  warn "validate_site: #{message}"
+  exit 1
+end
+
+def assert_file(path)
+  return if File.file?(path)
+
+  fail_with("missing file: #{path.delete_prefix("#{ROOT}/")}")
+end
+
+def site_path(url)
+  File.join(SITE, url.delete_prefix("/"))
+end
+
+def source_files
+  explicit_paths = SOURCE_PATHS.map { |path| File.join(ROOT, path) }
+  glob_paths = SOURCE_GLOBS.flat_map { |glob| Dir.glob(File.join(ROOT, glob)) }
+
+  (explicit_paths + glob_paths).uniq
+end
+
+def front_matter(path)
+  text = File.read(path)
+  match = text.match(/\A---\n(.*?)\n---\n/m)
+  fail_with("missing front matter: #{path.delete_prefix("#{ROOT}/")}") unless match
+
+  YAML.safe_load(match[1], permitted_classes: [Date, Time], aliases: false) || {}
+end
+
+fail_with("_site is missing; run bundle exec jekyll build first") unless Dir.exist?(SITE)
+
+REQUIRED_ROUTES.each do |route|
+  assert_file(site_path(route))
+end
+
+LEGACY_POSTS.each do |post_id, route|
+  source_path = File.join(ROOT, "_posts", "#{post_id}.md")
+  assert_file(source_path)
+  assert_file(site_path(route))
+
+  metadata = front_matter(source_path)
+  fail_with("#{post_id} must use post layout") unless metadata["layout"] == "post"
+  fail_with("#{post_id} must be marked archive") unless metadata["archive"] == true
+  fail_with("#{post_id} missing date_source") unless metadata["date_source"]
+  fail_with("#{post_id} missing title") unless metadata["title"]
+  fail_with("#{post_id} missing date") unless metadata["date"]
+end
+
+forbidden_sources = [
+  File.join(ROOT, "CNAME"),
+  File.join(ROOT, "params.json"),
+  File.join(ROOT, "javascripts", "scale.fix.js"),
+  File.join(ROOT, "stylesheets", "styles.css"),
+  File.join(ROOT, "stylesheets", "pygment_trac.css")
+]
+forbidden_sources.each do |path|
+  fail_with("forbidden source exists: #{path.delete_prefix("#{ROOT}/")}") if File.exist?(path)
+end
+
+forbidden_outputs = %w[
+  /Gemfile
+  /Gemfile.lock
+  /README.md
+  /scripts/validate_site.rb
+]
+forbidden_outputs.each do |path|
+  fail_with("forbidden generated output exists: #{path}") if File.exist?(site_path(path))
+end
+
+workflow_files = Dir.glob(File.join(ROOT, ".github", "workflows", "*"))
+fail_with("custom GitHub Actions workflow exists") unless workflow_files.empty?
+
+scan_files = source_files + Dir.glob(File.join(SITE, "**", "*")).select { |path| File.file?(path) }
+HIDDEN_DRAFT_SLUGS.each do |slug|
+  offenders = scan_files.select { |path| File.read(path).include?(slug) }
+  offenders.reject! { |path| path.include?("/docs/") }
+  next if offenders.empty?
+
+  fail_with("hidden draft slug #{slug.inspect} found in #{offenders.first.delete_prefix("#{ROOT}/")}")
+end
+
+source_files.each do |path|
+  text = File.read(path)
+
+  text.scan(%r{(?:!\[[^\]]*\]\(|src=")(/assets/[^)"\s]+)}) do |match|
+    asset_path = File.join(ROOT, match.first.delete_prefix("/"))
+    assert_file(asset_path)
+  end
+
+  text.scan(%r{\]\((/blog/\d{4}/\d{2}/\d{2}/[^)#\s]+\.html)\)}) do |match|
+    assert_file(site_path(match.first))
+  end
+end
+
+puts "validate_site: ok"

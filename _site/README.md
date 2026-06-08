@@ -1,4 +1,0 @@
-jamesonstone.github.io
-======================
-
-Blog

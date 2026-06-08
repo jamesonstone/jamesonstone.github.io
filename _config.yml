@@ -1,0 +1,33 @@
+title: Jameson Stone
+description: Notes, archive posts, paintings, and projects by Jameson Stone.
+url: "https://jamesonstone.github.io"
+baseurl: ""
+
+markdown: kramdown
+highlighter: rouge
+theme: null
+permalink: /blog/:year/:month/:day/:title.html
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - .bundle/
+  - .coderabbit.yaml
+  - .env
+  - .envrc
+  - .github/
+  - .gitignore
+  - .kit.yaml
+  - AGENTS.md
+  - CLAUDE.md
+  - docs/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - scripts/
+  - vendor/

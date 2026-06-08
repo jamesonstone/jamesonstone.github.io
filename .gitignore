@@ -1,0 +1,14 @@
+# Kit local generated environment, cache, and scratch artifacts
+.env
+.envrc
+/.bundle/
+/_site/
+/vendor/bundle/
+.kit/runs/
+.kit/loops/
+.kit/state.json
+.kit/cache/
+.kit/tmp/
+.kit/temp/
+.kit/*.tmp
+.kit/*.lock
