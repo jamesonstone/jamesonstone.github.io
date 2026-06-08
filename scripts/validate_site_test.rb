@@ -83,6 +83,32 @@ class ValidateSiteTest < Minitest::Test
     end
   end
 
+  def test_allowed_projects_workflow_passes
+    with_site_fixture do |root|
+      workflow_dir = File.join(root, ".github", "workflows")
+      FileUtils.mkdir_p(workflow_dir)
+      File.write(File.join(workflow_dir, "update-projects.yml"), "name: Update projects page\n")
+
+      stdout, stderr, status = run_validator(root)
+
+      assert status.success?, stderr
+      assert_includes stdout, "validate_site: ok"
+    end
+  end
+
+  def test_unexpected_workflow_fails
+    with_site_fixture do |root|
+      workflow_dir = File.join(root, ".github", "workflows")
+      FileUtils.mkdir_p(workflow_dir)
+      File.write(File.join(workflow_dir, "deploy.yml"), "name: Deploy\n")
+
+      _stdout, stderr, status = run_validator(root)
+
+      refute status.success?
+      assert_includes stderr, "unexpected GitHub Actions workflow exists: deploy.yml"
+    end
+  end
+
   private
 
   def with_site_fixture
