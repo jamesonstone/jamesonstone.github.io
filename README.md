@@ -1,6 +1,15 @@
-# jamesonstone.github.io
+```text
+     ██╗███████╗
+     ██║██╔════╝
+     ██║███████╗
+██   ██║╚════██║
+╚█████╔╝███████║
+ ╚════╝ ╚══════╝
+```
 
-Source-first Jekyll blog for short posts, archive writing, paintings, and project notes.
+**Personal site of Jameson Stone**
+
+✍️ Short posts, archive writing, paintings, and project notes.
 
 ## Local Preview
 
