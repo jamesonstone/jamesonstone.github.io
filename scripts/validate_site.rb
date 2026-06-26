@@ -26,12 +26,24 @@ LEGACY_POSTS = {
 
 REQUIRED_ROUTES = [
   "/index.html",
+  "/llms.txt",
   "/blog/index.html",
   "/paintings/index.html",
   "/projects/index.html",
   "/about/index.html",
   "/feed.xml"
 ].freeze
+
+LLMS_REQUIRED_SITE_ROUTES = [
+  "/",
+  "/blog/",
+  "/paintings/",
+  "/projects/",
+  "/about/",
+  "/feed.xml"
+].freeze
+
+LLMS_LATEST_POST_LIMIT = 5
 
 ALLOWED_WORKFLOWS = [
   "update-projects.yml"
@@ -46,6 +58,7 @@ HIDDEN_DRAFT_SLUGS = %w[
 
 SOURCE_PATHS = [
   "index.md",
+  "llms.txt",
   "projects.md",
   "about.md"
 ].freeze
@@ -96,6 +109,43 @@ def front_matter(path)
   YAML.safe_load(match[1], permitted_classes: [Date, Time], aliases: false) || {}
 end
 
+def site_config
+  @site_config ||= YAML.safe_load(File.read(File.join(ROOT, "_config.yml")), aliases: false) || {}
+end
+
+def site_base_url
+  url = site_config["url"].to_s.delete_suffix("/")
+  fail_with("_config.yml missing url") if url.empty?
+
+  baseurl = site_config["baseurl"].to_s
+  baseurl = "/#{baseurl}" unless baseurl.empty? || baseurl.start_with?("/")
+
+  "#{url}#{baseurl}".delete_suffix("/")
+end
+
+def absolute_site_url(route)
+  route = "/#{route}" unless route.start_with?("/")
+
+  return "#{site_base_url}/" if route == "/"
+
+  "#{site_base_url}#{route}"
+end
+
+def post_time(post_id, value)
+  fail_with("#{post_id} missing required date front matter") unless value
+
+  case value
+  when Time
+    value
+  when Date
+    Time.new(value.year, value.month, value.day)
+  else
+    Time.parse(value.to_s)
+  end
+rescue ArgumentError
+  fail_with("#{post_id} has invalid date front matter")
+end
+
 def post_slug(path)
   post_id = File.basename(path, ".md")
   match = post_id.match(/\A\d{4}-\d{2}-\d{2}-(.+)\z/)
@@ -105,19 +155,7 @@ def post_slug(path)
 end
 
 def post_date_path(post_id, value)
-  fail_with("#{post_id} missing required date front matter") unless value
-
-  date =
-    case value
-    when Date, Time
-      value
-    else
-      Time.parse(value.to_s)
-    end
-
-  date.strftime("%Y/%m/%d")
-rescue ArgumentError
-  fail_with("#{post_id} has invalid date front matter")
+  post_time(post_id, value).strftime("%Y/%m/%d")
 end
 
 def assert_post_front_matter(post_id, metadata)
@@ -125,6 +163,55 @@ def assert_post_front_matter(post_id, metadata)
   fail_with("#{post_id} must use post layout") unless metadata["layout"] == "post"
   fail_with("#{post_id} missing required title front matter") if metadata["title"].to_s.strip.empty?
   fail_with("#{post_id} missing required date front matter") unless metadata.key?("date")
+end
+
+def latest_post_records
+  post_sources.map do |source_path|
+    post_id = File.basename(source_path, ".md")
+    metadata = front_matter(source_path)
+
+    {
+      path: source_path,
+      date: post_time(post_id, metadata["date"]),
+      route: "/blog/#{post_date_path(post_id, metadata["date"])}/#{post_slug(source_path)}.html"
+    }
+  end.sort_by { |post| [post[:date], post[:path]] }.reverse.first(LLMS_LATEST_POST_LIMIT)
+end
+
+def project_urls
+  text = File.read(File.join(ROOT, "projects.md"))
+  text.scan(%r{https://github\.com/jamesonstone/[A-Za-z0-9._-]+}).sort.uniq
+end
+
+def markdown_links(text)
+  text.scan(/\[[^\]]+\]\(([^)\s]+)\)/).flatten
+end
+
+def required_llms_urls
+  site_urls = LLMS_REQUIRED_SITE_ROUTES.map { |route| absolute_site_url(route) }
+  post_urls = latest_post_records.map { |post| absolute_site_url(post[:route]) }
+
+  (site_urls + post_urls + project_urls).uniq
+end
+
+def assert_llms_txt_current
+  source_path = File.join(ROOT, "llms.txt")
+  output_path = site_path("/llms.txt")
+  assert_file(source_path)
+  assert_file(output_path)
+
+  source_text = File.read(source_path)
+  fail_with("llms.txt must start with an H1 title") unless source_text.start_with?("# ")
+  fail_with("llms.txt missing blockquote summary") unless source_text.match?(/^>\s+\S/)
+  fail_with("llms.txt missing at least one H2 section") unless source_text.match?(/^##\s+\S/)
+  fail_with("generated llms.txt does not match source llms.txt") unless File.read(output_path) == source_text
+
+  links = markdown_links(source_text)
+  required_llms_urls.each do |url|
+    next if links.include?(url)
+
+    fail_with("llms.txt missing required link: #{url}")
+  end
 end
 
 fail_with("_site is missing; run bundle exec jekyll build first") unless Dir.exist?(SITE)
@@ -154,6 +241,8 @@ LEGACY_POSTS.each do |post_id, route|
   fail_with("#{post_id} missing title") unless metadata["title"]
   fail_with("#{post_id} missing date") unless metadata["date"]
 end
+
+assert_llms_txt_current
 
 forbidden_sources = [
   File.join(ROOT, "CNAME"),

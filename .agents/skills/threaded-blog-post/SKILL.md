@@ -64,6 +64,8 @@ Stop and ask for a title or slug adjustment when there is a collision.
 
 ## Validation
 
+Update root `llms.txt` when the new post changes the latest-five post list. Follow `docs/references/rules/llms-txt.md` and keep the entry concise.
+
 Run the local checks that prove the generated post fits the current source-first Jekyll site:
 
 ```sh

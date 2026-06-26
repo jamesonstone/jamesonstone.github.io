@@ -3,7 +3,7 @@ name: Update projects page
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 permissions:
@@ -109,7 +109,7 @@ jobs:
               --add-assignee jamesonstone
           else
             gh pr create \
-              --base master \
+              --base main \
               --head "$UPDATE_BRANCH" \
               --title ":memo: Update projects page from GitHub repositories" \
               --body-file /tmp/update-projects-pr.md \
