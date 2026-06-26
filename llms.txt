@@ -1,0 +1,34 @@
+# Jameson Stone
+
+> Personal blog and commonplace book for short notes, archive writing, paintings, and small software projects by Jameson Stone.
+
+Put the AGI in the bag, bro.
+
+## Primary Pages
+
+- [Home](https://jamesonstone.github.io/): The blog homepage and latest writing.
+- [Blog](https://jamesonstone.github.io/blog/): Complete writing archive.
+- [Paintings](https://jamesonstone.github.io/paintings/): A small visual archive.
+- [Projects](https://jamesonstone.github.io/projects/): Public tools and project records.
+- [About](https://jamesonstone.github.io/about/): Profile and contact details.
+- [RSS](https://jamesonstone.github.io/feed.xml): Feed for posts.
+
+## Latest Posts
+
+- [Getting Started Avro Schema and Debezium](https://jamesonstone.github.io/blog/2020/03/04/avro-schema.html): Notes on Avro schemas, Debezium, and data serialization.
+- [Creating a Kafka Consumer with Kafka, Kotlin, PostgreSQL, and Debezium](https://jamesonstone.github.io/blog/2020/03/01/kotlinconsumer.html): A Kotlin consumer experiment built around Kafka and Debezium messages.
+- [Getting Started with Kubeless](https://jamesonstone.github.io/blog/2020/02/26/kubeless.html): Setup notes for deploying a Kubeless function on Kubernetes.
+- [Pt 2: Installing and Configuring the Kubernetes Dashboard with Kind](https://jamesonstone.github.io/blog/2020/02/22/pt2-k8s-dashboard.html): Follow-up notes on Kubernetes Dashboard authentication and safe usage.
+- [Pt 1: Installing and Configuring the Kubernetes Dashboard with Kind](https://jamesonstone.github.io/blog/2020/02/22/pt1-k8s-dashboard.html): Initial setup notes for the Kubernetes Dashboard on Kind.
+
+## Projects
+
+- [kit](https://github.com/jamesonstone/kit): A portable, document-first workflow harness for specs, planning, implementation, review, and handoff.
+- [yp](https://github.com/jamesonstone/yp): A tiny path-copying CLI for sending files, directories, or picker selections to the clipboard.
+- [kp](https://github.com/jamesonstone/kp): A local prompt utility for keeping reusable coding-agent prompts close at hand in the shell.
+- [event-collector](https://github.com/jamesonstone/event-collector): An HTTP service and CLI for collecting generic event envelopes with hash validation and idempotency.
+- [sso-testkit](https://github.com/jamesonstone/sso-testkit): A Go CLI for checking SSO readiness with scenario files, token-exchange probes, and redacted reports.
+
+## Machine Indexes
+
+- [llms.txt](https://jamesonstone.github.io/llms.txt): Curated LLM entrypoint for this site.

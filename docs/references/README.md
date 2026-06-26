@@ -17,3 +17,10 @@
 - `tooling.md` — local tooling and command references that are broader than one feature
 - `external-systems.md` — durable notes about external systems, APIs, or integrations
 - `rules/` — pointer-loaded durable rulesets such as frontend UI rules, testing rules, API conventions, security constraints, or domain rules
+
+## Active Rulesets
+
+- `rules/github-pr-delivery.md` — issue-number branch and ready pull request delivery
+- `rules/llms-txt.md` — `/llms.txt` freshness requirements for public site content
+- `rules/safety-guardrails.md` — always-on git and GitHub safety checks
+- `rules/work-lane-gating.md` — implementation lane classification and gating
