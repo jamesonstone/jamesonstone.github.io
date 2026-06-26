@@ -60,6 +60,21 @@ class UpdateProjectsFromGithubTest < Minitest::Test
     end
   end
 
+  def test_escapes_markdown_sensitive_llms_text
+    with_fixture do |projects_path, llms_path|
+      client = FakeClient.new(
+        [repo("tool[kit]", created_at: "2026-06-08T05:00:00Z", description: "Fast <beta> [guide]")],
+        {},
+        "tool[kit]" => "https://github.com/jamesonstone/tool-kit"
+      )
+
+      updater(projects_path, llms_path, client).run
+      llms_text = File.read(llms_path)
+
+      assert_includes llms_text, "- [tool\\[kit\\]](https://github.com/jamesonstone/tool-kit): Fast &lt;beta&gt; \\[guide\\]."
+    end
+  end
+
   def test_dry_run_reports_entries_without_writing
     with_fixture do |projects_path, llms_path|
       original_projects = File.read(projects_path)
@@ -185,13 +200,18 @@ class UpdateProjectsFromGithubTest < Minitest::Test
   end
 
   class FakeClient
-    def initialize(repos, readmes = {})
+    def initialize(repos, readmes = {}, html_urls = {})
       @repos = repos
       @readmes = readmes
+      @html_urls = html_urls
     end
 
     def repositories(_owner)
-      @repos
+      @repos.map do |repo|
+        next repo unless @html_urls.key?(repo["name"])
+
+        repo.merge("html_url" => @html_urls.fetch(repo["name"]))
+      end
     end
 
     def readme_text(_owner, repo_name)

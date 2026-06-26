@@ -241,11 +241,15 @@ class ProjectsUpdater
   end
 
   def render_llms_entry(entry)
-    name = entry.name
+    name = markdown_text(entry.name)
     url = entry.url
-    description = entry.description
+    description = markdown_text(entry.description)
 
     "- [#{name}](#{url}): #{description}"
+  end
+
+  def markdown_text(text)
+    CGI.escapeHTML(text).gsub(/([\\`*_{}\[\]()])/, "\\\\\\1")
   end
 end
 
