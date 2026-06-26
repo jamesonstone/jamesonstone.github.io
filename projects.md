@@ -16,6 +16,11 @@ Some public tools I have been building recently, plus older archive notes.
   <li><strong><a href="https://github.com/jamesonstone/kp">kp</a></strong>: A local prompt utility for keeping reusable coding-agent prompts close at hand in the shell.</li>
   <li><strong><a href="https://github.com/jamesonstone/event-collector">event-collector</a></strong>: An HTTP service and CLI for collecting generic event envelopes with hash validation and idempotency.</li>
   <li><strong><a href="https://github.com/jamesonstone/sso-testkit">sso-testkit</a></strong>: A Go CLI for checking SSO readiness with scenario files, token-exchange probes, and redacted reports.</li>
+  <li><strong><a href="https://github.com/jamesonstone/radar">radar</a></strong>: A Lightweight Process Observer for Agents.</li>
+  <li><strong><a href="https://github.com/jamesonstone/mint">mint</a></strong>: Compute the Next Version, Write the Changelog. Mint the Release.</li>
+  <li><strong><a href="https://github.com/jamesonstone/ding">ding</a></strong>: Get Invoices Paid.</li>
+  <li><strong><a href="https://github.com/jamesonstone/narrowband">narrowband</a></strong>: Discovering Meaningful problems worth solving.</li>
+  <li><strong><a href="https://github.com/jamesonstone/scout">scout</a></strong>: Finding Innovative AI Signals via Research Distillation.</li>
 </ul>
 
 ## Archive
