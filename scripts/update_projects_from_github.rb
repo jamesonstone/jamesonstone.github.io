@@ -249,7 +249,7 @@ class ProjectsUpdater
   end
 
   def markdown_text(text)
-    CGI.escapeHTML(text).gsub(/([\\`*_{}\[\]()])/, "\\\\\\1")
+    CGI.escapeHTML(text).gsub(/([\\`*_{}\[\]])/, "\\\\\\1")
   end
 end
 
