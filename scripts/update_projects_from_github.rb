@@ -88,20 +88,32 @@ class ProjectsUpdater
     (?<suffix><\/ul>)
   /mx
 
-  def initialize(owner:, cutoff:, projects_path:, client:)
+  LLMS_PROJECTS_PATTERN = /
+    (?<prefix>\#\#\s+Projects\b.*?\n\n)
+    (?<items>.*?)
+    (?<suffix>\n\#\#\s+Machine\s+Indexes\b)
+  /mx
+
+  def initialize(owner:, cutoff:, projects_path:, llms_path:, client:)
     @owner = owner
     @cutoff = Time.iso8601(cutoff)
     @projects_path = projects_path
+    @llms_path = llms_path
     @client = client
   end
 
   def run(dry_run: false)
-    text = File.read(@projects_path)
-    entries = new_entries(text)
+    projects_text = File.read(@projects_path)
+    entries = new_entries(projects_text)
     return [] if entries.empty?
 
-    updated = insert_entries(text, entries)
-    File.write(@projects_path, updated) unless dry_run
+    updated_projects = insert_entries(projects_text, entries)
+    updated_llms = insert_llms_entries(File.read(@llms_path), entries)
+
+    unless dry_run
+      File.write(@projects_path, updated_projects)
+      File.write(@llms_path, updated_llms)
+    end
     entries
   end
 
@@ -204,18 +216,40 @@ class ProjectsUpdater
     match = text.match(CURRENT_TOOLS_PATTERN)
     raise "projects page is missing a Current Tools project list" unless match
 
-    rendered = entries.map { |entry| render_entry(entry) }.join("\n")
+    rendered = entries.map { |entry| render_project_entry(entry) }.join("\n")
     text.sub(CURRENT_TOOLS_PATTERN) do
       "#{match[:prefix]}#{match[:items].rstrip}\n#{rendered}\n#{match[:suffix]}"
     end
   end
 
-  def render_entry(entry)
+  def insert_llms_entries(text, entries)
+    match = text.match(LLMS_PROJECTS_PATTERN)
+    raise "llms.txt is missing a Projects section" unless match
+
+    rendered = entries.map { |entry| render_llms_entry(entry) }.join("\n")
+    text.sub(LLMS_PROJECTS_PATTERN) do
+      "#{match[:prefix]}#{match[:items].rstrip}\n#{rendered}#{match[:suffix]}"
+    end
+  end
+
+  def render_project_entry(entry)
     name = CGI.escapeHTML(entry.name)
     url = CGI.escapeHTML(entry.url)
     description = CGI.escapeHTML(entry.description)
 
     "  <li><strong><a href=\"#{url}\">#{name}</a></strong>: #{description}</li>"
+  end
+
+  def render_llms_entry(entry)
+    name = markdown_text(entry.name)
+    url = entry.url
+    description = markdown_text(entry.description)
+
+    "- [#{name}](#{url}): #{description}"
+  end
+
+  def markdown_text(text)
+    CGI.escapeHTML(text).gsub(/([\\`*_{}\[\]])/, "\\\\\\1")
   end
 end
 
@@ -224,6 +258,7 @@ def parse_options(argv)
     owner: ENV.fetch("PROJECTS_OWNER", "jamesonstone"),
     cutoff: ENV.fetch("PROJECTS_CUTOFF", "2026-06-08T00:00:00-04:00"),
     projects_path: File.join(ROOT, "projects.md"),
+    llms_path: File.join(ROOT, "llms.txt"),
     repos_json: nil,
     dry_run: false
   }
@@ -233,6 +268,7 @@ def parse_options(argv)
     parser.on("--owner OWNER", "GitHub owner to inspect") { |value| options[:owner] = value }
     parser.on("--cutoff ISO8601", "Repository created_at cutoff") { |value| options[:cutoff] = value }
     parser.on("--projects PATH", "Projects page path") { |value| options[:projects_path] = value }
+    parser.on("--llms PATH", "llms.txt path to keep in sync") { |value| options[:llms_path] = value }
     parser.on("--repos-json PATH", "Read repository JSON from a file instead of GitHub") { |value| options[:repos_json] = value }
     parser.on("--dry-run", "Print planned additions without writing projects.md") { options[:dry_run] = true }
   end.parse!(argv)
@@ -248,6 +284,7 @@ if $PROGRAM_NAME == __FILE__
     owner: options[:owner],
     cutoff: options[:cutoff],
     projects_path: options[:projects_path],
+    llms_path: options[:llms_path],
     client: client
   )
 
