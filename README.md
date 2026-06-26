@@ -85,3 +85,8 @@ If the draft references images or other assets, the agent pauses before PR creat
 Update `/llms.txt` when a post changes the latest-post list, when public pages change, or when public GitHub projects are added. The maintenance rule lives in `docs/references/rules/llms-txt.md`.
 
 Approved source changes are delivered through a ready pull request for review. Publishing happens only after manual merge through GitHub Pages, followed by Pages status and production URL verification. This feature does not add a custom Actions workflow or `CNAME`.
+
+## Maintainer
+
+❤️ Lovingly overthought by [Jameson Stone](https://github.com/jamesonstone)
+🪖 Field notes at [jamesonstone.io](https://jamesonstone.io)
