@@ -28,6 +28,12 @@ Put the AGI in the bag, bro.
 - [kp](https://github.com/jamesonstone/kp): A local prompt utility for keeping reusable coding-agent prompts close at hand in the shell.
 - [event-collector](https://github.com/jamesonstone/event-collector): An HTTP service and CLI for collecting generic event envelopes with hash validation and idempotency.
 - [sso-testkit](https://github.com/jamesonstone/sso-testkit): A Go CLI for checking SSO readiness with scenario files, token-exchange probes, and redacted reports.
+- [radar](https://github.com/jamesonstone/radar): A lightweight process observer for agents.
+- [mint](https://github.com/jamesonstone/mint): Version, changelog, and release-state tooling.
+- [ding](https://github.com/jamesonstone/ding): Invoice payment tracking and workflow tooling.
+- [narrowband](https://github.com/jamesonstone/narrowband): Research automation for finding meaningful problems worth solving.
+- [scout](https://scout.jamesonstone.io/): Daily AI research intelligence distilled from Hugging Face Daily Papers.
+- [scout source](https://github.com/jamesonstone/scout): Source repository for Scout.
 
 ## Machine Indexes
 

@@ -20,7 +20,7 @@ Some public tools I have been building recently, plus older archive notes.
   <li><strong><a href="https://github.com/jamesonstone/mint">mint</a></strong>: Compute the Next Version, Write the Changelog. Mint the Release.</li>
   <li><strong><a href="https://github.com/jamesonstone/ding">ding</a></strong>: Get Invoices Paid.</li>
   <li><strong><a href="https://github.com/jamesonstone/narrowband">narrowband</a></strong>: Discovering Meaningful problems worth solving.</li>
-  <li><strong><a href="https://github.com/jamesonstone/scout">scout</a></strong>: Finding Innovative AI Signals via Research Distillation.</li>
+  <li><strong><a href="https://scout.jamesonstone.io/">scout</a></strong>: Finding Innovative AI Signals via Research Distillation. <a href="https://github.com/jamesonstone/scout">Source</a>.</li>
 </ul>
 
 ## Archive

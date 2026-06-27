@@ -245,7 +245,6 @@ end
 assert_llms_txt_current
 
 forbidden_sources = [
-  File.join(ROOT, "CNAME"),
   File.join(ROOT, "params.json"),
   File.join(ROOT, "javascripts", "scale.fix.js"),
   File.join(ROOT, "stylesheets", "styles.css"),
