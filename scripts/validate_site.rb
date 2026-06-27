@@ -180,7 +180,10 @@ end
 
 def project_urls
   text = File.read(File.join(ROOT, "projects.md"))
-  text.scan(%r{https://github\.com/jamesonstone/[A-Za-z0-9._-]+}).sort.uniq
+  href_urls = text.scan(%r{href="(https://[^"]+)"}).flatten
+  markdown_urls = markdown_links(text).select { |url| url.start_with?("https://") }
+
+  (href_urls + markdown_urls).sort.uniq
 end
 
 def markdown_links(text)

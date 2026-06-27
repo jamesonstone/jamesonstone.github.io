@@ -6,9 +6,24 @@ permalink: /projects/
 
 # Projects
 
-Some public tools I have been building recently, plus older archive notes.
+Public projects are things you can open and use. Code projects are source
+repositories, CLIs, and workflow tools. I keep them separate here so each list
+stays easy to scan.
 
-## Current Tools
+## Public Projects
+
+<ul class="project-list project-list--featured">
+  <li>
+    <article class="project-entry">
+      <h3><a href="https://scout.jamesonstone.io/">Scout</a></h3>
+      <p class="project-entry__meta">Daily AI research intelligence</p>
+      <p>Research briefs distilled from Hugging Face Daily Papers, ranked and summarized for builders who want the highest-signal AI papers first.</p>
+      <p class="project-entry__links"><a href="https://scout.jamesonstone.io/">Open Scout</a><a href="https://github.com/jamesonstone/scout">Source</a></p>
+    </article>
+  </li>
+</ul>
+
+## Code Projects
 
 <ul class="project-list">
   <li><strong><a href="https://github.com/jamesonstone/kit">kit</a></strong>: A portable, document-first workflow harness for specs, planning, implementation, review, and handoff.</li>
@@ -20,7 +35,6 @@ Some public tools I have been building recently, plus older archive notes.
   <li><strong><a href="https://github.com/jamesonstone/mint">mint</a></strong>: Compute the Next Version, Write the Changelog. Mint the Release.</li>
   <li><strong><a href="https://github.com/jamesonstone/ding">ding</a></strong>: Get Invoices Paid.</li>
   <li><strong><a href="https://github.com/jamesonstone/narrowband">narrowband</a></strong>: Discovering Meaningful problems worth solving.</li>
-  <li><strong><a href="https://scout.jamesonstone.io/">scout</a></strong>: Finding Innovative AI Signals via Research Distillation. <a href="https://github.com/jamesonstone/scout">Source</a>.</li>
 </ul>
 
 ## Archive

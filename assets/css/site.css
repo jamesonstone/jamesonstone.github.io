@@ -283,6 +283,38 @@ blockquote {
   line-height: 1.58;
 }
 
+.project-list--featured {
+  gap: 0;
+}
+
+.project-entry {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.project-entry h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+}
+
+.project-entry p {
+  margin-bottom: 0;
+}
+
+.project-entry__meta {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.project-entry__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+}
+
 .note {
   display: inline-flex;
   align-items: center;
