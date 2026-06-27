@@ -96,6 +96,18 @@ class ValidateSiteTest < Minitest::Test
     end
   end
 
+  def test_custom_domain_cname_passes
+    with_site_fixture do |root|
+      File.write(File.join(root, "CNAME"), "jamesonstone.io\n")
+      write_site_file(root, "CNAME", "jamesonstone.io\n")
+
+      stdout, stderr, status = run_validator(root)
+
+      assert status.success?, stderr
+      assert_includes stdout, "validate_site: ok"
+    end
+  end
+
   def test_unexpected_workflow_fails
     with_site_fixture do |root|
       workflow_dir = File.join(root, ".github", "workflows")
