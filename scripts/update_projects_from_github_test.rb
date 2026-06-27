@@ -96,13 +96,13 @@ class UpdateProjectsFromGithubTest < Minitest::Test
       projects_path = File.join(root, "projects.md")
       llms_path = File.join(root, "llms.txt")
       File.write(projects_path, "# Projects\n")
-      File.write(llms_path, "## Projects\n\n## Machine Indexes\n")
+      File.write(llms_path, "## Code Projects\n\n## Machine Indexes\n")
       client = FakeClient.new(
         [repo("new-tool", created_at: "2026-06-08T05:00:00Z", description: "New project helper")]
       )
 
       error = assert_raises(RuntimeError) { updater(projects_path, llms_path, client).run }
-      assert_includes error.message, "missing a Current Tools project list"
+      assert_includes error.message, "missing a Code Projects project list"
     end
   end
 
@@ -119,7 +119,7 @@ class UpdateProjectsFromGithubTest < Minitest::Test
       )
 
       error = assert_raises(RuntimeError) { updater(projects_path, llms_path, client).run }
-      assert_includes error.message, "llms.txt is missing a Projects section"
+      assert_includes error.message, "llms.txt is missing a Code Projects section"
     end
   end
 
@@ -169,7 +169,7 @@ class UpdateProjectsFromGithubTest < Minitest::Test
 
       # Projects
 
-      ## Current Tools
+      ## Code Projects
 
       <ul class="project-list">
         <li><strong><a href="https://github.com/jamesonstone/duplicate-tool">duplicate-tool</a></strong>: Already listed.</li>
@@ -189,7 +189,7 @@ class UpdateProjectsFromGithubTest < Minitest::Test
 
       > Test fixture.
 
-      ## Projects
+      ## Code Projects
 
       - [duplicate-tool](https://github.com/jamesonstone/duplicate-tool): Already listed.
 

@@ -153,6 +153,24 @@ class ValidateSiteTest < Minitest::Test
     end
   end
 
+  def test_missing_llms_public_project_link_fails
+    with_site_fixture do |root|
+      File.write(
+        File.join(root, "projects.md"),
+        <<~HTML
+          <ul class="project-list project-list--featured">
+            <li><a href="https://scout.jamesonstone.io/">Scout</a></li>
+          </ul>
+        HTML
+      )
+
+      _stdout, stderr, status = run_validator(root)
+
+      refute status.success?
+      assert_includes stderr, "llms.txt missing required link: https://scout.jamesonstone.io/"
+    end
+  end
+
   private
 
   def with_site_fixture

@@ -21,7 +21,12 @@ Put the AGI in the bag, bro.
 - [Pt 2: Installing and Configuring the Kubernetes Dashboard with Kind](https://jamesonstone.github.io/blog/2020/02/22/pt2-k8s-dashboard.html): Follow-up notes on Kubernetes Dashboard authentication and safe usage.
 - [Pt 1: Installing and Configuring the Kubernetes Dashboard with Kind](https://jamesonstone.github.io/blog/2020/02/22/pt1-k8s-dashboard.html): Initial setup notes for the Kubernetes Dashboard on Kind.
 
-## Projects
+## Public Projects
+
+- [Scout](https://scout.jamesonstone.io/): Daily AI research intelligence distilled from Hugging Face Daily Papers.
+- [Scout source](https://github.com/jamesonstone/scout): Source repository for Scout.
+
+## Code Projects
 
 - [kit](https://github.com/jamesonstone/kit): A portable, document-first workflow harness for specs, planning, implementation, review, and handoff.
 - [yp](https://github.com/jamesonstone/yp): A tiny path-copying CLI for sending files, directories, or picker selections to the clipboard.
@@ -32,8 +37,6 @@ Put the AGI in the bag, bro.
 - [mint](https://github.com/jamesonstone/mint): Version, changelog, and release-state tooling.
 - [ding](https://github.com/jamesonstone/ding): Invoice payment tracking and workflow tooling.
 - [narrowband](https://github.com/jamesonstone/narrowband): Research automation for finding meaningful problems worth solving.
-- [scout](https://scout.jamesonstone.io/): Daily AI research intelligence distilled from Hugging Face Daily Papers.
-- [scout source](https://github.com/jamesonstone/scout): Source repository for Scout.
 
 ## Machine Indexes
 

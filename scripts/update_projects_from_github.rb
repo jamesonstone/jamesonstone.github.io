@@ -82,14 +82,14 @@ class JsonRepoClient
 end
 
 class ProjectsUpdater
-  CURRENT_TOOLS_PATTERN = /
-    (?<prefix>\#\#\s+Current\s+Tools\b.*?<ul\s+class="project-list">\n)
+  CODE_PROJECTS_PATTERN = /
+    (?<prefix>\#\#\s+Code\s+Projects\b.*?<ul\s+class="project-list">\n)
     (?<items>.*?)
     (?<suffix><\/ul>)
   /mx
 
-  LLMS_PROJECTS_PATTERN = /
-    (?<prefix>\#\#\s+Projects\b.*?\n\n)
+  LLMS_CODE_PROJECTS_PATTERN = /
+    (?<prefix>\#\#\s+Code\s+Projects\b.*?\n\n)
     (?<items>.*?)
     (?<suffix>\n\#\#\s+Machine\s+Indexes\b)
   /mx
@@ -213,21 +213,21 @@ class ProjectsUpdater
   end
 
   def insert_entries(text, entries)
-    match = text.match(CURRENT_TOOLS_PATTERN)
-    raise "projects page is missing a Current Tools project list" unless match
+    match = text.match(CODE_PROJECTS_PATTERN)
+    raise "projects page is missing a Code Projects project list" unless match
 
     rendered = entries.map { |entry| render_project_entry(entry) }.join("\n")
-    text.sub(CURRENT_TOOLS_PATTERN) do
+    text.sub(CODE_PROJECTS_PATTERN) do
       "#{match[:prefix]}#{match[:items].rstrip}\n#{rendered}\n#{match[:suffix]}"
     end
   end
 
   def insert_llms_entries(text, entries)
-    match = text.match(LLMS_PROJECTS_PATTERN)
-    raise "llms.txt is missing a Projects section" unless match
+    match = text.match(LLMS_CODE_PROJECTS_PATTERN)
+    raise "llms.txt is missing a Code Projects section" unless match
 
     rendered = entries.map { |entry| render_llms_entry(entry) }.join("\n")
-    text.sub(LLMS_PROJECTS_PATTERN) do
+    text.sub(LLMS_CODE_PROJECTS_PATTERN) do
       "#{match[:prefix]}#{match[:items].rstrip}\n#{rendered}#{match[:suffix]}"
     end
   end
