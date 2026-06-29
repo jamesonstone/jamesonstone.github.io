@@ -25,6 +25,8 @@ Put the AGI in the bag, bro.
 
 - [Scout](https://scout.jamesonstone.io/): Daily AI research intelligence distilled from Hugging Face Daily Papers.
 - [Scout source](https://github.com/jamesonstone/scout): Source repository for Scout.
+- [Narrowband](https://narrowband.jamesonstone.io/): Evidence-first research for recurring workflow pain that could support durable software businesses.
+- [Narrowband source](https://github.com/jamesonstone/narrowband): Source repository for Narrowband.
 
 ## Code Projects
 
@@ -36,7 +38,6 @@ Put the AGI in the bag, bro.
 - [radar](https://github.com/jamesonstone/radar): A lightweight process observer for agents.
 - [mint](https://github.com/jamesonstone/mint): Version, changelog, and release-state tooling.
 - [ding](https://github.com/jamesonstone/ding): Invoice payment tracking and workflow tooling.
-- [narrowband](https://github.com/jamesonstone/narrowband): Research automation for finding meaningful problems worth solving.
 
 ## Machine Indexes
 

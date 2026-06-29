@@ -21,6 +21,14 @@ stays easy to scan.
       <p class="project-entry__links"><a href="https://scout.jamesonstone.io/">Open Scout</a><a href="https://github.com/jamesonstone/scout">Source</a></p>
     </article>
   </li>
+  <li>
+    <article class="project-entry">
+      <h3><a href="https://narrowband.jamesonstone.io/">Narrowband</a></h3>
+      <p class="project-entry__meta">Operational software opportunity research</p>
+      <p>Evidence-first research for recurring workflow pain that could support durable software businesses.</p>
+      <p class="project-entry__links"><a href="https://narrowband.jamesonstone.io/">Open Narrowband</a><a href="https://github.com/jamesonstone/narrowband">Source</a></p>
+    </article>
+  </li>
 </ul>
 
 ## Code Projects
@@ -34,7 +42,6 @@ stays easy to scan.
   <li><strong><a href="https://github.com/jamesonstone/radar">radar</a></strong>: A Lightweight Process Observer for Agents.</li>
   <li><strong><a href="https://github.com/jamesonstone/mint">mint</a></strong>: Compute the Next Version, Write the Changelog. Mint the Release.</li>
   <li><strong><a href="https://github.com/jamesonstone/ding">ding</a></strong>: Get Invoices Paid.</li>
-  <li><strong><a href="https://github.com/jamesonstone/narrowband">narrowband</a></strong>: Discovering Meaningful problems worth solving.</li>
 </ul>
 
 ## Archive
