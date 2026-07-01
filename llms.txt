@@ -15,11 +15,11 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
+- [Intelligence as a System of Beliefs](https://jamesonstone.github.io/blog/2026/07/01/intelligence-as-a-system-of-beliefs.html): An essay defining intelligence as an adaptive system of useful beliefs whose fitness transfers across domains.
 - [Getting Started Avro Schema and Debezium](https://jamesonstone.github.io/blog/2020/03/04/avro-schema.html): Notes on Avro schemas, Debezium, and data serialization.
 - [Creating a Kafka Consumer with Kafka, Kotlin, PostgreSQL, and Debezium](https://jamesonstone.github.io/blog/2020/03/01/kotlinconsumer.html): A Kotlin consumer experiment built around Kafka and Debezium messages.
 - [Getting Started with Kubeless](https://jamesonstone.github.io/blog/2020/02/26/kubeless.html): Setup notes for deploying a Kubeless function on Kubernetes.
 - [Pt 2: Installing and Configuring the Kubernetes Dashboard with Kind](https://jamesonstone.github.io/blog/2020/02/22/pt2-k8s-dashboard.html): Follow-up notes on Kubernetes Dashboard authentication and safe usage.
-- [Pt 1: Installing and Configuring the Kubernetes Dashboard with Kind](https://jamesonstone.github.io/blog/2020/02/22/pt1-k8s-dashboard.html): Initial setup notes for the Kubernetes Dashboard on Kind.
 
 ## Public Projects
 
