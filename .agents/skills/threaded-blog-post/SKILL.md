@@ -28,6 +28,8 @@ When `no review` is supplied:
 
 - Create exactly one post at `_posts/YYYY-MM-DD-slug.md`.
 - Use the current date in `America/New_York` for the filename and front matter unless the user supplied a valid explicit date.
+- For same-day publication, use a front matter time that is no later than the current `America/New_York` time. Do not default to noon if noon has not happened yet.
+- Use a future front matter timestamp only when the user explicitly asks to schedule the post for later publication.
 - If the supplied date is ambiguous or appears accidental, stop and ask.
 - Derive the title from the first Markdown `# Heading` when present.
 - Remove the title heading from the body only when doing so matches the existing post style; otherwise keep the body readable and concise.
@@ -37,7 +39,7 @@ When `no review` is supplied:
 ---
 layout: post
 title: "Post title"
-date: YYYY-MM-DD 12:00:00 -0400
+date: YYYY-MM-DD HH:MM:SS -0400
 ---
 ```
 
@@ -74,6 +76,8 @@ bundle exec jekyll build
 ruby scripts/validate_site.rb
 ```
 
+- For ordinary immediate publication, validation must use a normal Jekyll build. If the rendered permalink is missing because the post is future-dated, fix the front matter timestamp instead of validating only with `--future`.
+- Use `--future` only to test an intentionally scheduled post and call out that GitHub Pages will not publish it until a later build after that timestamp.
 Keep `_site/` untracked. If any command fails, report the exact failure and stop instead of weakening validation.
 
 ## Delivery

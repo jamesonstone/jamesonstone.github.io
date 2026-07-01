@@ -31,7 +31,7 @@ GEM_PATH="$PWD/vendor/bundle/ruby/2.6.0" \
 ruby vendor/bundle/ruby/2.6.0/bin/jekyll build
 ```
 
-Use `--future` only when validating a same-day post whose approved front matter time has not occurred yet.
+Use `--future` only when validating an intentionally scheduled post whose approved front matter time has not occurred yet. For ordinary immediate publication, fix the post timestamp so a normal Jekyll build renders the permalink.
 
 ## Validation
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Intelligence as a System of Beliefs"
-date: 2026-07-01 12:00:00 -0400
+date: 2026-07-01 09:00:00 -0400
 ---
 
 I've been converging on a different definition of intelligence.
