@@ -9,11 +9,11 @@
 
 ## PROJECT INTENT
 
-Kit is a document-first workflow harness for disciplined thought work. It keeps durable project context in canonical markdown artifacts so humans and coding agents can move from research to specification, planning, tasks, implementation, reflection, and completion with explicit traceability.
+`jamesonstone.github.io` is Jameson Stone's source-first personal site. It publishes short posts, migrated archive writing, paintings, project notes, and LLM-friendly site context through a simple Jekyll/GitHub Pages workflow.
 
 ## GLOBAL CONSTRAINTS
 
-See `docs/CONSTITUTION.md` for project-wide constraints and principles.
+See `docs/CONSTITUTION.md` for project-wide principles, constraints, non-goals, definitions, and workflow classification.
 
 ## FEATURE SUMMARIES
 
@@ -32,9 +32,9 @@ See `docs/CONSTITUTION.md` for project-wide constraints and principles.
 - **PAUSED**: no
 - **INTENT**: The site now has a clean source-first Jekyll blog, but creating a new post from a rough Codex thread still requires the agent to infer intent, draft structure, metadata, validation, issue creation, branch naming, PR delivery, and production verification from scattered context. That slows down short-post publishing and increases the chance that agents will skip review, choose inconsistent post metadata, duplicate PR rules, or treat GitHub Pages deployment as a custom automation problem.
 - **APPROACH**: Completed 8 ordered tasks plus reflection: safe issue-number implementation lane on `GH-3`, threaded-post skill, README guidance, concise routing pointer, generic post validation with regression tests, build/validator evidence checks, scope/safety review, ready PR delivery, and Kit verification run `20260607T223620.852829000Z-0e4ded`.
-- **OPEN ITEMS**: PR #4 is open for manual review and merge; after merge, future generated-post workflows should verify GitHub Pages status and the expected production URL.
+- **OPEN ITEMS**: none. PR #4 merged on 2026-06-08.
 - **POINTERS**: `docs/specs/0002-ci-threaded-deployment/BRAINSTORM.md`, `docs/specs/0002-ci-threaded-deployment/SPEC.md`, `docs/specs/0002-ci-threaded-deployment/PLAN.md`, `docs/specs/0002-ci-threaded-deployment/TASKS.md`
 
 ## LAST UPDATED
 
-2026-06-07 18:36:47 EDT
+2026-07-01

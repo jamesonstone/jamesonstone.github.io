@@ -170,7 +170,7 @@ references:
     type: repo_file
     target: scripts/validate_site.rb
     relation: verifies
-    read_policy: must
+    read_policy: evidence
     used_for: Existing build-output, route, archive, hidden draft, forbidden output, workflow, asset, and internal link validation.
     status: active
   - id: safety-guardrails

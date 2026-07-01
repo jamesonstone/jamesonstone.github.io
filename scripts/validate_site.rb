@@ -46,6 +46,7 @@ LLMS_REQUIRED_SITE_ROUTES = [
 LLMS_LATEST_POST_LIMIT = 5
 
 ALLOWED_WORKFLOWS = [
+  "auto-assign.yml",
   "update-projects.yml"
 ].freeze
 

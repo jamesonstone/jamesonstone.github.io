@@ -19,6 +19,12 @@
 - `docs/agents/RLM.md` — just-in-time context loading when broad context would be noisy
 - `docs/agents/TOOLING.md` — skills, dispatch, project-directory workflow, and secondary inputs
 
+## GitHub Delivery Hard Gate
+
+- In Kit-managed projects, issue, branch, staging, commit, push, and PR actions are mutation boundaries
+- Before any GitHub delivery mutation, load `docs/agents/GUARDRAILS.md` and the relevant `docs/references/rules/*` delivery rules
+- Repo-local Kit rules outrank global GitHub/plugin defaults; do not use generic branches, commits, PR bodies, or draft defaults when Kit defines the contract
+
 ## Conditional Context
 
 - `docs/specs/<feature>/` — active feature artifacts only
@@ -33,7 +39,7 @@
 - `docs/agents/TOOLING.md` — skills, dispatch, project-directory workflow, and secondary global inputs
 - `docs/agents/GUARDRAILS.md` — completion bar, safety rules, and validation expectations
 - `docs/references/README.md` — durable repo-local references that are broader than one feature
-- `docs/specs/<feature>/` — feature-level source of truth for requirements, plans, and tasks
+- `docs/specs/<feature>/SPEC.md` — v2 feature source of truth for requirements, plan, tasks, validation, reflection, delivery, and evidence
 
 ## Constraints
 

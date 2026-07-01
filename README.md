@@ -68,11 +68,11 @@ Use this front matter:
 ---
 layout: post
 title: "Post title"
-date: YYYY-MM-DD 12:00:00 -0400
+date: YYYY-MM-DD HH:MM:SS -0400
 ---
 ```
 
-Use the correct `America/New_York` UTC offset for the selected date.
+Use the correct `America/New_York` UTC offset for the selected date. For same-day publication, use a time that has already occurred; GitHub Pages skips future-dated posts during normal builds.
 
 Keep new posts short and direct. Add optional images under `assets/images/blog/` and reference them with site-root paths:
 

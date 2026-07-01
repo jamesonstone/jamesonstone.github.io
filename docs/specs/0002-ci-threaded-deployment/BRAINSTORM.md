@@ -146,7 +146,7 @@ references:
     type: repo_file
     target: scripts/validate_site.rb
     relation: verifies
-    read_policy: must
+    read_policy: evidence
     used_for: Existing local route, migrated post, hidden draft, forbidden output, and link validation.
     status: active
   - id: safety-guardrails

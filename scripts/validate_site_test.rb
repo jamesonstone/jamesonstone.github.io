@@ -96,6 +96,19 @@ class ValidateSiteTest < Minitest::Test
     end
   end
 
+  def test_allowed_auto_assign_workflow_passes
+    with_site_fixture do |root|
+      workflow_dir = File.join(root, ".github", "workflows")
+      FileUtils.mkdir_p(workflow_dir)
+      File.write(File.join(workflow_dir, "auto-assign.yml"), "name: Auto assign\n")
+
+      stdout, stderr, status = run_validator(root)
+
+      assert status.success?, stderr
+      assert_includes stdout, "validate_site: ok"
+    end
+  end
+
   def test_custom_domain_cname_passes
     with_site_fixture do |root|
       File.write(File.join(root, "CNAME"), "jamesonstone.io\n")
