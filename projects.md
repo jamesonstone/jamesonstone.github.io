@@ -42,6 +42,7 @@ stays easy to scan.
   <li><strong><a href="https://github.com/jamesonstone/radar">radar</a></strong>: A Lightweight Process Observer for Agents.</li>
   <li><strong><a href="https://github.com/jamesonstone/mint">mint</a></strong>: Compute the Next Version, Write the Changelog. Mint the Release.</li>
   <li><strong><a href="https://github.com/jamesonstone/ding">ding</a></strong>: Get Invoices Paid.</li>
+  <li><strong><a href="https://github.com/jamesonstone/beacon">beacon</a></strong>: Signal Layer for Coding Agents.</li>
 </ul>
 
 ## Archive
