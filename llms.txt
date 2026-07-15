@@ -38,7 +38,7 @@ Put the AGI in the bag, bro.
 - [radar](https://github.com/jamesonstone/radar): A lightweight process observer for agents.
 - [mint](https://github.com/jamesonstone/mint): Version, changelog, and release-state tooling.
 - [ding](https://github.com/jamesonstone/ding): Invoice payment tracking and workflow tooling.
-
+- [beacon](https://github.com/jamesonstone/beacon): Signal Layer for Coding Agents.
 ## Machine Indexes
 
 - [llms.txt](https://jamesonstone.github.io/llms.txt): Curated LLM entrypoint for this site.

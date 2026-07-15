@@ -1,3 +1,4 @@
+schema_version: 1
 goal_percentage: 95
 specs_dir: docs/specs
 skills_dir: .agents/skills
@@ -24,7 +25,7 @@ agents:
     - AGENTS.md
     - CLAUDE.md
     - .github/copilot-instructions.md
-instruction_scaffold_version: 2
+instruction_scaffold_version: 3
 feature_naming:
     numeric_width: 4
     separator: '-'
@@ -101,3 +102,5 @@ project_refresh:
     constitution:
         feature_interval: 5
         max_age_days: 30
+aws:
+    enabled: false
