@@ -9,6 +9,10 @@
 
 **Personal site of Jameson Stone**
 
+<!-- BEGIN KIT-MANAGED README BADGES -->
+[![Last commit](https://img.shields.io/github/last-commit/jamesonstone/jamesonstone.github.io)](https://github.com/jamesonstone/jamesonstone.github.io/commits) [![Open issues](https://img.shields.io/github/issues/jamesonstone/jamesonstone.github.io)](https://github.com/jamesonstone/jamesonstone.github.io/issues) [![Pull requests](https://img.shields.io/github/issues-pr/jamesonstone/jamesonstone.github.io)](https://github.com/jamesonstone/jamesonstone.github.io/pulls) [![Release](https://img.shields.io/github/v/release/jamesonstone/jamesonstone.github.io)](https://github.com/jamesonstone/jamesonstone.github.io/releases)
+<!-- END KIT-MANAGED README BADGES -->
+
 ✍️ Short posts, archive writing, paintings, and project notes.
 
 ## Local Preview
@@ -86,7 +90,6 @@ Update `/llms.txt` when a post changes the latest-post list, when public pages c
 
 Approved source changes are delivered through a ready pull request for review. Publishing happens only after manual merge through GitHub Pages, followed by Pages status and production URL verification. This feature does not add a custom Actions workflow or `CNAME`.
 
-## Maintainer
+## Maintainers
 
-❤️ Lovingly overthought by [Jameson Stone](https://github.com/jamesonstone)
-🪖 Field notes at [jamesonstone.io](https://jamesonstone.io)
+Maintained with 🪖 and ❤️ by [Jameson](https://github.com/jamesonstone) (`jamesonstone`).
