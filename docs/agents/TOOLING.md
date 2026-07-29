@@ -55,6 +55,7 @@
 
 ## Project Worktrees
 
+- Link the primary checkout's `.env` and `.envrc` into writable lanes by default when each exists
 - Work in the existing checkout when it already owns the requested lane
 - For a separate lane, reuse or create `~/worktrees/<owner>/<repository>/<lane>`; never put a worktree inside a repository
 - Use exact `GH-<number>` for durable issue lanes and uppercase detached `PR-<number>` only for temporary pull-request inspection
@@ -68,6 +69,7 @@
 - Remember that refs, remotes, objects, configuration, and stash state are shared across worktrees even though checkout, index, and `HEAD` are separate
 - Load `docs/references/worktrees.md` when worktree creation, repair, migration, or removal affects the task
 
+- Never copy environment contents or overwrite destination environment material; preserve a repository- or user-supplied `.envrc`, and remember that direnv approval remains path-specific
 ## Secondary Global Inputs
 
 - `~/.claude/CLAUDE.md`
