@@ -43,6 +43,9 @@ stays easy to scan.
   <li><strong><a href="https://github.com/jamesonstone/mint">mint</a></strong>: Compute the Next Version, Write the Changelog. Mint the Release.</li>
   <li><strong><a href="https://github.com/jamesonstone/ding">ding</a></strong>: Get Invoices Paid.</li>
   <li><strong><a href="https://github.com/jamesonstone/beacon">beacon</a></strong>: Signal Layer for Coding Agents.</li>
+  <li><strong><a href="https://github.com/jamesonstone/flx">flx</a></strong>: Source Control Rebuilt for the Agentic Era, with Git-Native Interoperability.</li>
+  <li><strong><a href="https://github.com/jamesonstone/hyperlite">hyperlite</a></strong>: NextGen] Signal Layer for Coding Agents.</li>
+  <li><strong><a href="https://github.com/jamesonstone/rivr">rivr</a></strong>: Unified Development Workspace Observability.</li>
 </ul>
 
 ## Archive
