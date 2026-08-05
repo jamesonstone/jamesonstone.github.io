@@ -41,7 +41,6 @@ Put the AGI in the bag, bro.
 - [beacon](https://github.com/jamesonstone/beacon): Signal Layer for Coding Agents.
 - [flx](https://github.com/jamesonstone/flx): Source Control Rebuilt for the Agentic Era, with Git-Native Interoperability.
 - [hyperlite](https://github.com/jamesonstone/hyperlite): NextGen Signal Layer for Coding Agents.
-- [rivr](https://github.com/jamesonstone/rivr): Unified Development Workspace Observability.
 - [rungrid](https://github.com/jamesonstone/rungrid): Unified Development Workspace Observability.
 - [ghostgc](https://github.com/jamesonstone/ghostgc): Garbage Collection for Abandoned AI Coding Runtimes.
 ## Machine Indexes
