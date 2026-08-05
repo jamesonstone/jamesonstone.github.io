@@ -46,6 +46,8 @@ stays easy to scan.
   <li><strong><a href="https://github.com/jamesonstone/flx">flx</a></strong>: Source Control Rebuilt for the Agentic Era, with Git-Native Interoperability.</li>
   <li><strong><a href="https://github.com/jamesonstone/hyperlite">hyperlite</a></strong>: NextGen Signal Layer for Coding Agents.</li>
   <li><strong><a href="https://github.com/jamesonstone/rivr">rivr</a></strong>: Unified Development Workspace Observability.</li>
+  <li><strong><a href="https://github.com/jamesonstone/rungrid">rungrid</a></strong>: Unified Development Workspace Observability.</li>
+  <li><strong><a href="https://github.com/jamesonstone/ghostgc">ghostgc</a></strong>: Garbage Collection for Abandoned AI Coding Runtimes.</li>
 </ul>
 
 ## Archive
