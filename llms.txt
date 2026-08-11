@@ -15,7 +15,7 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
-- [From Loops to Graphs: Control Theory as the Foundation of AI Engineering](https://jamesonstone.github.io/blog/2026/08/11/from-loops-to-graphs-control-theory-as-the-foundation-of-ai-engineering.html): An essay framing reliable AI agents as feedback controllers whose graph-shaped state enables causal scheduling, bounded actions, and parallel work.
+- [Loops Around Graphs: A Control-Theory Lens for AI Agents](https://jamesonstone.github.io/blog/2026/08/11/loops-around-graphs.html): An essay on feedback-driven agent runtimes where dependency graphs complement broader state and deterministic controls bound model-driven actions.
 - [Intelligence as a System of Beliefs](https://jamesonstone.github.io/blog/2026/07/01/intelligence-as-a-system-of-beliefs.html): An essay defining intelligence as an adaptive system of useful beliefs whose fitness transfers across domains.
 - [Getting Started Avro Schema and Debezium](https://jamesonstone.github.io/blog/2020/03/04/avro-schema.html): Notes on Avro schemas, Debezium, and data serialization.
 - [Creating a Kafka Consumer with Kafka, Kotlin, PostgreSQL, and Debezium](https://jamesonstone.github.io/blog/2020/03/01/kotlinconsumer.html): A Kotlin consumer experiment built around Kafka and Debezium messages.
