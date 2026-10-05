@@ -47,6 +47,8 @@ stays easy to scan.
   <li><strong><a href="https://github.com/jamesonstone/hyperlite">hyperlite</a></strong>: NextGen Signal Layer for Coding Agents.</li>
   <li><strong><a href="https://github.com/jamesonstone/rungrid">rungrid</a></strong>: Unified Development Workspace Observability.</li>
   <li><strong><a href="https://github.com/jamesonstone/ghostgc">ghostgc</a></strong>: Garbage Collection for Abandoned AI Coding Runtimes.</li>
+  <li><strong><a href="https://github.com/jamesonstone/loopc">loopc</a></strong>: PID-driven Process Control.</li>
+  <li><strong><a href="https://github.com/jamesonstone/kura">kura</a></strong>: Storehouse of CLI Commands.</li>
 </ul>
 
 ## Archive
