@@ -1,6 +1,6 @@
 (function () {
   var safeHeaderEmojis = ["✨", "📚", "📝", "💡", "🎨", "🧭", "🌿", "☕", "🪐", "💎"];
-  var homeTaglines = ["Just put the AGI in the bag, bro.", "p(doom) = 0", "Let 👏 the 👏 RSI 👏 cook 👏"];
+  var homeTaglines = ["Just put the AGI in the bag, bro.", "p(doom) = 0", "Let 👏 the 👏 RSI 👏 cook 👏", "model safety is an engineering problem"];
 
   function getLastValue(storageKey) {
     try {
