@@ -92,4 +92,4 @@ Approved source changes are delivered through a ready pull request for review. P
 
 ## Maintainers
 
-Maintained with 🪖 and ❤️ by [Jameson](https://github.com/jamesonstone) (`jamesonstone`).
+Maintained by the [jamesonstone](https://github.com/jamesonstone) team.

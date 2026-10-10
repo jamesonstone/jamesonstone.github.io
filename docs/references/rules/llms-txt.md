@@ -3,7 +3,7 @@ kind: ruleset
 slug: llms-txt
 description: Requires Kit-managed web services, websites, and APIs to expose an LLM-friendly /llms.txt endpoint.
 status: active
-registry_scope: downstream
+registry_scope: optional
 applies_to:
   - web
   - website
@@ -53,7 +53,6 @@ This rule does not apply to repositories with no web, HTTP, API, or hosted docum
 - Keep `/llms.txt` concise. It should orient and link; it should not duplicate the full documentation set.
 - Consider adding `/llms-full.txt` or linked Markdown documentation for expanded context when the service has substantial documentation.
 - Update `/llms.txt` in the same change when public routes, APIs, docs, SDKs, product capabilities, or integration workflows change.
-- When `/llms.txt` links dated content such as posts, articles, releases, or changelog entries, verify the normal site build actually publishes that content. Do not link future-dated content as current unless the change is intentionally scheduled.
 - Do not include secrets, private keys, internal-only credentials, environment-specific tokens, non-public customer data, privileged admin paths, or sensitive internal runbooks.
 - Do not use `/llms.txt` as a replacement for authorization controls, `robots.txt`, `sitemap.xml`, OpenAPI, or human documentation. It should complement those artifacts.
 
