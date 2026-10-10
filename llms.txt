@@ -23,11 +23,10 @@ Put the AGI in the bag, bro.
 
 ## Public Projects
 
-- [Scout](https://scout.jamesonstone.io/): Daily AI research intelligence distilled from Hugging Face Daily Papers.
-- [Scout source](https://github.com/jamesonstone/scout): Source repository for Scout.
-- [Narrowband](https://narrowband.jamesonstone.io/): Evidence-first research for recurring workflow pain that could support durable software businesses.
-- [Narrowband source](https://github.com/jamesonstone/narrowband): Source repository for Narrowband.
-
+- [Hyperlite](https://github.com/jamesonstone/hyperlite): A native macOS window and CLI for tracking pull requests, reviews, conflicts, and GitHub Actions across projects.
+- [Hyperlite guide](https://github.com/jamesonstone/hyperlite/blob/main/docs/USER_GUIDE.md): Application behavior, keyboard shortcuts, and CLI commands.
+- [Kit](https://github.com/jamesonstone/kit): A provider-neutral CLI for agent contracts, contextual rules, project memory, and repository validation.
+- [Kit getting started](https://github.com/jamesonstone/kit#how-kit-works): How Kit works and commands for new and existing projects.
 - [Mint](https://jamesonstone.io/mint/): Semantic versioning, changelogs, and release automation across production, non-production, and sandbox environments.
 - [Mint source](https://github.com/jamesonstone/mint): CLI and GitHub Action source repository for Mint.
 
