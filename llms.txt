@@ -28,6 +28,9 @@ Put the AGI in the bag, bro.
 - [Narrowband](https://narrowband.jamesonstone.io/): Evidence-first research for recurring workflow pain that could support durable software businesses.
 - [Narrowband source](https://github.com/jamesonstone/narrowband): Source repository for Narrowband.
 
+- [Mint](https://jamesonstone.io/mint/): Semantic versioning, changelogs, and release automation across production, non-production, and sandbox environments.
+- [Mint source](https://github.com/jamesonstone/mint): CLI and GitHub Action source repository for Mint.
+
 ## Code Projects
 
 - [kit](https://github.com/jamesonstone/kit): A portable, document-first workflow harness for specs, planning, implementation, review, and handoff.

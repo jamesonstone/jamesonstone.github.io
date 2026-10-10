@@ -29,6 +29,14 @@ stays easy to scan.
       <p class="project-entry__links"><a href="https://narrowband.jamesonstone.io/">Open Narrowband</a><a href="https://github.com/jamesonstone/narrowband">Source</a></p>
     </article>
   </li>
+  <li>
+    <article class="project-entry">
+      <h3><a href="https://jamesonstone.io/mint/">Mint</a></h3>
+      <p class="project-entry__meta">Semantic versioning and release automation</p>
+      <p>A CLI and GitHub Action for computing versions, writing changelogs, and managing releases across production, non-production, and sandbox environments.</p>
+      <p class="project-entry__links"><a href="https://jamesonstone.io/mint/">Read the docs</a><a href="https://github.com/jamesonstone/mint">Source</a></p>
+    </article>
+  </li>
 </ul>
 
 ## Code Projects
