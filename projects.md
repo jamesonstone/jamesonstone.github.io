@@ -15,18 +15,18 @@ stays easy to scan.
 <ul class="project-list project-list--featured">
   <li>
     <article class="project-entry">
-      <h3><a href="https://scout.jamesonstone.io/">Scout</a></h3>
-      <p class="project-entry__meta">Daily AI research intelligence</p>
-      <p>Research briefs distilled from Hugging Face Daily Papers, ranked and summarized for builders who want the highest-signal AI papers first.</p>
-      <p class="project-entry__links"><a href="https://scout.jamesonstone.io/">Open Scout</a><a href="https://github.com/jamesonstone/scout">Source</a></p>
+      <h3><a href="https://github.com/jamesonstone/hyperlite">Hyperlite</a></h3>
+      <p class="project-entry__meta">Attention for active Git work</p>
+      <p>A native macOS window and CLI for tracking open pull requests, review feedback, merge conflicts, and GitHub Actions across your projects.</p>
+      <p class="project-entry__links"><a href="https://github.com/jamesonstone/hyperlite/blob/main/docs/USER_GUIDE.md">Read the guide</a><a href="https://github.com/jamesonstone/hyperlite">Source</a></p>
     </article>
   </li>
   <li>
     <article class="project-entry">
-      <h3><a href="https://narrowband.jamesonstone.io/">Narrowband</a></h3>
-      <p class="project-entry__meta">Operational software opportunity research</p>
-      <p>Evidence-first research for recurring workflow pain that could support durable software businesses.</p>
-      <p class="project-entry__links"><a href="https://narrowband.jamesonstone.io/">Open Narrowband</a><a href="https://github.com/jamesonstone/narrowband">Source</a></p>
+      <h3><a href="https://github.com/jamesonstone/kit">Kit</a></h3>
+      <p class="project-entry__meta">Repository-local contracts for coding agents</p>
+      <p>A provider-neutral CLI that installs agent contracts and contextual rules, maintains project memory, and validates repository guidance.</p>
+      <p class="project-entry__links"><a href="https://github.com/jamesonstone/kit#how-kit-works">Get started</a><a href="https://github.com/jamesonstone/kit">Source</a></p>
     </article>
   </li>
   <li>
