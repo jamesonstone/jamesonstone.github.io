@@ -45,7 +45,7 @@ If a change touches behavior covered by existing specs, update the relevant spec
 - Make sharp, contestable arguments when the reasoning supports them. Consensus, approval, and likability are not editorial goals. Do not soften a consequential conclusion into agreeable productivity advice.
 - Earn provocation through reasoning. Forced contrarianism, manufactured controversy, and unsupported factual certainty weaken the argument. Distinguish observation, inference, metaphor, and speculation without reflexive hedging.
 - Preserve semantic density: use the exact fitting word to compress simultaneous ideas. Complex vocabulary earns its place through precision and compression, never to perform intelligence. Keep the voice natural and the argument coherent.
-- Target 300–600 words of article body, excluding title metadata and front matter, usually in three dense paragraphs. Longer treatments may approach 1,000 words when their substance and density warrant it. Compress the argument without sacrificing its development.
+- Aim for 300–600 body words, excluding title metadata and front matter; finish sooner when the argument is complete, and approach 1,000 only when substance warrants it. Present the idea, justify it, and move on: do not repeat claims or add filler to meet a quota. Use natural paragraph breaks at coherent turns, without dense walls of text, arbitrary paragraph counts, or excessive standalone fragments.
 - Test the argument against its strongest objection. Let an objection change the thesis when warranted; do not force reconciliation or protect the author's intuition from scrutiny.
 
 ## NON-GOALS
