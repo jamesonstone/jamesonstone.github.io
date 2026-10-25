@@ -38,6 +38,15 @@ Use this for contained bug fixes, reviews, dependency updates, config changes, s
 
 If a change touches behavior covered by existing specs, update the relevant spec unless the change is purely mechanical.
 
+## BLOG EDITORIAL STANDARD
+
+- The blog is applied philosophy: use concrete experience to examine underlying premises, seek first-principles truth, and develop abstractions that change how a problem is understood.
+- Challenge received assumptions and the author's own objectives. Follow non-obvious relationships, feedback loops, and second-order consequences, including implications that invalidate the original question.
+- Make sharp, contestable arguments when the reasoning supports them. Consensus, approval, and likability are not editorial goals. Do not soften a consequential conclusion into agreeable productivity advice.
+- Earn provocation through reasoning. Forced contrarianism, manufactured controversy, and unsupported factual certainty weaken the argument. Distinguish observation, inference, metaphor, and speculation without reflexive hedging.
+- Preserve semantic density and precise, descriptive vocabulary. Non-linear thinking must still produce a coherent argument whose relationships a reader can examine. Existing posts inform structure and voice without limiting new ideas to familiar conclusions.
+- Test the argument against its strongest objection. Let an objection change the thesis when warranted; do not force reconciliation or protect the author's intuition from scrutiny.
+
 ## NON-GOALS
 
 - Do not turn the site into a SaaS landing page, portfolio funnel, CMS, SPA, server-rendered application, analytics platform, or newsletter system by default.
