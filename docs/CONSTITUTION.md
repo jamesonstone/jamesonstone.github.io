@@ -40,7 +40,7 @@ If a change touches behavior covered by existing specs, update the relevant spec
 
 ## BLOG EDITORIAL STANDARD
 
-- The blog is applied philosophy: use concrete experience to examine underlying premises, seek first-principles truth, and develop abstractions that change how a problem is understood.
+- The blog is applied philosophy: use concrete experience to examine underlying premises, seek first-principles truth, and develop abstractions that change how a problem is understood. Present propositions and their implications for readers to challenge, without memoir, confession, or author biography.
 - Challenge received assumptions and the author's own objectives. Follow non-obvious relationships, feedback loops, and second-order consequences, including implications that invalidate the original question.
 - Make sharp, contestable arguments when the reasoning supports them. Consensus, approval, and likability are not editorial goals. Do not soften a consequential conclusion into agreeable productivity advice.
 - Earn provocation through reasoning. Forced contrarianism, manufactured controversy, and unsupported factual certainty weaken the argument. Distinguish observation, inference, metaphor, and speculation without reflexive hedging.
