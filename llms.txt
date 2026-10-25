@@ -15,7 +15,7 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
-- [Applied Philosophy](https://jamesonstone.github.io/blog/2026/10/25/applied-philosophy.html): A manifesto for treating concepts, premises, and objectives as design material, with consequences that can challenge their justification.
+- [Applied Philosophy](https://jamesonstone.github.io/blog/2026/10/25/applied-philosophy.html): A short invitation to treat philosophical premises as engineering material.
 - [Introducing Mint](https://jamesonstone.github.io/blog/2026/10/18/introducing-mint.html): A short introduction to Mint v1.0.0 and its GitHub Actions release workflow.
 - [No Sacred Cows in AI](https://jamesonstone.github.io/blog/2026/10/17/no-sacred-cows-in-ai.html): An essay on revisable priors, skills, and the eventual obsolescence of capability scaffolding.
 - [The Shallow Expert](https://jamesonstone.github.io/blog/2026/10/12/the-shallow-expert.html): An essay on the gap between producing convincing analysis and understanding its assumptions, consequences, and limits.
