@@ -44,7 +44,8 @@ If a change touches behavior covered by existing specs, update the relevant spec
 - Challenge received assumptions and the author's own objectives. Follow non-obvious relationships, feedback loops, and second-order consequences, including implications that invalidate the original question.
 - Make sharp, contestable arguments when the reasoning supports them. Consensus, approval, and likability are not editorial goals. Do not soften a consequential conclusion into agreeable productivity advice.
 - Earn provocation through reasoning. Forced contrarianism, manufactured controversy, and unsupported factual certainty weaken the argument. Distinguish observation, inference, metaphor, and speculation without reflexive hedging.
-- Preserve semantic density and precise, descriptive vocabulary. Non-linear thinking must still produce a coherent argument whose relationships a reader can examine. Existing posts inform structure and voice without limiting new ideas to familiar conclusions.
+- Preserve semantic density: use the exact fitting word to compress simultaneous ideas. Complex vocabulary earns its place through precision and compression, never to perform intelligence. Keep the voice natural and the argument coherent.
+- Target 300–600 characters of article body, excluding title metadata and front matter. Most articles should not exceed 1,000 body characters; longer treatments are intentional exceptions. Compress the argument instead of explaining every implication separately.
 - Test the argument against its strongest objection. Let an objection change the thesis when warranted; do not force reconciliation or protect the author's intuition from scrutiny.
 
 ## NON-GOALS
