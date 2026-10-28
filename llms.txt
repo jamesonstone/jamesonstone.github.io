@@ -15,11 +15,11 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
+- [Team Joiners](https://jamesonstone.github.io/blog/2026/10/28/team-joiners.html): The useful divide in applied AI is between the mentally flexible and the team joiners.
 - [Applied Philosophy](https://jamesonstone.github.io/blog/2026/10/25/applied-philosophy.html): An engineering analogy for designing and implementing philosophical ideas in the real world.
 - [Superposition IV: Cheap Execution, Expensive Frames](https://jamesonstone.github.io/blog/2026/10/25/superposition-cheap-execution.html): How always-on agents expand ambition while making inherited problem frames expensive to abandon.
 - [Superposition III: Before the Prompt](https://jamesonstone.github.io/blog/2026/10/25/superposition-before-the-prompt.html): Anticipatory accommodation, prompt rituals, and the difference between disconnection and conceptual independence.
 - [Superposition II: Narrative](https://jamesonstone.github.io/blog/2026/10/25/superposition-narrative.html): Intuition, deliberation, and separating a claim's warrant from its significance within a life.
-- [Superposition I: Articulation](https://jamesonstone.github.io/blog/2026/10/25/superposition.html): How articulation selects a form and coherence can displace fidelity to an unfinished idea.
 
 ## Public Projects
 
