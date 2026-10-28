@@ -31,3 +31,9 @@ Hosted final-head validation, merge, updater execution, and Pages deployment evi
 ## Repository memory
 
 Created this spec to retain the non-destructive branch and reconciliation decisions. Updated docs/references/testing.md with the stable validation and rehearsal commands.
+
+## Verified review-handoff follow-up
+
+The first repaired production run passed validation but selected historical merged PR #16 via `gh pr view <branch>`. Complete the handoff by selecting only an open PR for the exact head and base, creating one when absent. Compare generated paths against the triggering source so already-committed pending output still receives validation and review on retries. Push normal branch merges without requiring an empty generated commit. Preserve all existing branch history and keep generated content unmerged.
+
+The follow-up uses an open-only head/base query, compares both generated paths with the triggering source, and skips empty generation commits while pushing preserved branch history. Local checks passed: 26 tests, 108 assertions, normal Jekyll build, site validation, and actionlint. Tests cover creating a fresh review PR, reusing an open PR by number, and delivering already-committed output without an empty commit.

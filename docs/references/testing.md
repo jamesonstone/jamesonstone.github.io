@@ -22,7 +22,7 @@ If dependencies are installed in the primary checkout, set `BUNDLE_PATH` to its 
 
 `Update projects page / Validate site and updater` runs the Ruby regressions, normal Jekyll build, and site invariants on every pull request. Its permissions are read-only. The publishing job is excluded from pull-request events.
 
-The workflow regression suite uses temporary local Git repositories, the actual workflow shell steps, and a stub GitHub CLI. It verifies preservation of pending branch changes, inclusion of current source, safe conflict failure, index-only change detection, and delivery of both generated files. It performs no network calls or public writes.
+The workflow regression suite uses temporary local Git repositories, the actual workflow shell steps, and a stub GitHub CLI. It verifies preservation of pending branch changes, inclusion of current source, safe conflict failure, index-only change detection, delivery of both generated files, open-only PR selection, and retrying already-committed output without empty commits. It performs no network calls or public writes.
 
 ## Updater rehearsal
 

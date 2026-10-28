@@ -48,22 +48,64 @@ class UpdateProjectsWorkflowTest < Minitest::Test
       assert status.success?, error
       assert_equal "changed=true\n", File.read(output)
       File.write(File.join(root, "projects.md"), "updated projects\n")
-      bin = File.join(root, "fake-bin")
-      Dir.mkdir(bin)
-      File.write(File.join(bin, "gh"), "#!/bin/sh\nexit 0\n")
-      File.chmod(0o755, File.join(bin, "gh"))
+      bin = fake_gh(root)
       _out, error, status = run_step(root, "Create or update projects page pull request", source,
-                                    "PATH" => "#{bin}:#{ENV.fetch('PATH')}")
+                                    "PATH" => "#{bin}:#{ENV.fetch('PATH')}", "GH_TEST_LOG" => File.join(root, "gh-log"))
       assert status.success?, error
       remote = git(root, "rev-parse", "origin/automation/update-projects").strip
       assert_equal "repaired index\n", git(root, "show", "#{remote}:llms.txt")
       assert_equal "updated projects\n", git(root, "show", "#{remote}:projects.md")
       assert_equal "pending\n", git(root, "show", "#{remote}:pending.txt")
       git(root, "merge-base", "--is-ancestor", source, remote)
+      log = File.read(File.join(root, "gh-log"))
+      assert_includes log, "--state open"
+      assert_includes log, "pr create --base main --head automation/update-projects"
+
+      _out, error, status = run_step(root, "Create or update projects page pull request", source,
+                                    "PATH" => "#{bin}:#{ENV.fetch('PATH')}",
+                                    "GH_TEST_LOG" => File.join(root, "gh-log"), "GH_TEST_OPEN_PR" => "123")
+      assert status.success?, error
+      assert_equal remote, git(root, "rev-parse", "HEAD").strip
+      assert_includes File.read(File.join(root, "gh-log")), "pr edit 123"
+    end
+  end
+
+  def test_committed_pending_output_is_validated_and_handed_off_without_empty_commit
+    with_repository do |root, source|
+      prepare(root, source)
+      File.write(File.join(root, "llms.txt"), "pending committed index\n")
+      git(root, "add", "llms.txt")
+      git(root, "commit", "-m", "pending generated output")
+      head = git(root, "rev-parse", "HEAD").strip
+      output = File.join(root, "step-output")
+      _out, error, status = run_step(root, "Detect projects page changes", source, "GITHUB_OUTPUT" => output)
+      assert status.success?, error
+      assert_equal "changed=true\n", File.read(output)
+      bin = fake_gh(root)
+      _out, error, status = run_step(root, "Create or update projects page pull request", source,
+                                    "PATH" => "#{bin}:#{ENV.fetch('PATH')}", "GH_TEST_LOG" => File.join(root, "gh-log"))
+      assert status.success?, error
+      assert_equal head, git(root, "rev-parse", "HEAD").strip
+      assert_equal head, git(root, "rev-parse", "origin/automation/update-projects").strip
+      assert_includes File.read(File.join(root, "gh-log")), "pr create --base main --head automation/update-projects"
     end
   end
 
   private
+
+  def fake_gh(root)
+    bin = File.join(root, "fake-bin")
+    Dir.mkdir(bin)
+    File.write(File.join(bin, "gh"), <<~SHELL)
+      #!/bin/sh
+      echo "$*" >> "$GH_TEST_LOG"
+      if [ "$1 $2" = "pr list" ]; then
+        echo "${GH_TEST_OPEN_PR:-}"
+      fi
+    SHELL
+    File.chmod(0o755, File.join(bin, "gh"))
+    bin
+  end
 
   def prepare(root, source)
     _out, error, status = run_step(root, "Check out or create projects update branch", source)
