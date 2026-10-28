@@ -57,6 +57,10 @@ stays easy to scan.
   <li><strong><a href="https://github.com/jamesonstone/ghostgc">ghostgc</a></strong>: Garbage Collection for Abandoned AI Coding Runtimes.</li>
   <li><strong><a href="https://github.com/jamesonstone/loopc">loopc</a></strong>: PID-driven Process Control.</li>
   <li><strong><a href="https://github.com/jamesonstone/kura">kura</a></strong>: Storehouse of CLI Commands.</li>
+  <li><strong><a href="https://github.com/jamesonstone/narrowband">narrowband</a></strong>: Discovering Meaningful problems worth solving.</li>
+  <li><strong><a href="https://github.com/jamesonstone/scout">scout</a></strong>: Finding Innovative AI Signals via Research Distillation.</li>
+  <li><strong><a href="https://github.com/jamesonstone/outpost">outpost</a></strong>: Durable Alerts From Committed Events.</li>
+  <li><strong><a href="https://github.com/jamesonstone/touchstone">touchstone</a></strong>: Personal Benchmark of LLM Performance and Efficiency.</li>
 </ul>
 
 ## Archive
