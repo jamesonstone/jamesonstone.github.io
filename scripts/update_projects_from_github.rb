@@ -107,7 +107,7 @@ class ProjectsUpdater
     entries = new_entries(projects_text)
     updated_projects = entries.empty? ? projects_text : insert_entries(projects_text, entries)
     llms_text = File.read(@llms_path)
-    indexed_urls = llms_text.scan(/\[[^\]]+\]\(([^)\s]+)\)/).flatten
+    indexed_urls = llms_text.scan(/\]\(([^)\s]+)\)/).flatten
     missing_entries = project_entries(updated_projects).reject { |entry| indexed_urls.include?(entry.url) }
     updated_llms = missing_entries.empty? ? llms_text : insert_llms_entries(llms_text, missing_entries)
 

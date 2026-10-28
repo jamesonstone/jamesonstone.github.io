@@ -72,6 +72,8 @@ class UpdateProjectsFromGithubTest < Minitest::Test
       llms_text = File.read(llms_path)
 
       assert_includes llms_text, "- [tool\\[kit\\]](https://github.com/jamesonstone/tool-kit): Fast &lt;beta&gt; \\[guide\\]."
+      updater(projects_path, llms_path, client).run
+      assert_equal llms_text, File.read(llms_path)
     end
   end
 

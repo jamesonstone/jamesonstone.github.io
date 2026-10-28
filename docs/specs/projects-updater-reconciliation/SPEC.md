@@ -22,7 +22,7 @@ The maintained project list supplies missing index descriptions. GitHub eligibil
 
 ## Validation and outcome
 
-Implemented reconciliation from maintained project entries, normal branch merging, two-file detection/staging, and a read-only PR validation job. Local validation passed: 25 tests, 91 assertions; Ruby syntax; normal Jekyll build; site invariants; actionlint; diff whitespace checks.
+Implemented reconciliation from maintained project entries, normal branch merging, two-file detection/staging, and a read-only PR validation job. Local validation passed: 25 tests, 92 assertions; Ruby syntax; normal Jekyll build; site invariants; actionlint; diff whitespace checks.
 
 An isolated clone rehearsal incorporated the real pending automation branch without conflicts, repaired the missing loopc and kura index entries, discovered current public projects, passed site validation, remained idempotent, and preserved the approved Team Joiners source byte-for-byte. Rehearsal output was not pushed or published.
 
