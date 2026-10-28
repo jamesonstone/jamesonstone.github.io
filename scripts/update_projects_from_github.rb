@@ -105,10 +105,11 @@ class ProjectsUpdater
   def run(dry_run: false)
     projects_text = File.read(@projects_path)
     entries = new_entries(projects_text)
-    return [] if entries.empty?
-
-    updated_projects = insert_entries(projects_text, entries)
-    updated_llms = insert_llms_entries(File.read(@llms_path), entries)
+    updated_projects = entries.empty? ? projects_text : insert_entries(projects_text, entries)
+    llms_text = File.read(@llms_path)
+    indexed_urls = llms_text.scan(/\]\(([^)\s]+)\)/).flatten
+    missing_entries = project_entries(updated_projects).reject { |entry| indexed_urls.include?(entry.url) }
+    updated_llms = missing_entries.empty? ? llms_text : insert_llms_entries(llms_text, missing_entries)
 
     unless dry_run
       File.write(@projects_path, updated_projects)
@@ -222,6 +223,16 @@ class ProjectsUpdater
     end
   end
 
+  def project_entries(text)
+    match = text.match(CODE_PROJECTS_PATTERN)
+    raise "projects page is missing a Code Projects project list" unless match
+
+    match[:items].scan(%r{<li><strong><a href="([^"]+)">([^<]+)</a></strong>:\s*(.*?)</li>}).map do |url, name, description|
+      ProjectEntry.new(name: CGI.unescapeHTML(name), url: CGI.unescapeHTML(url),
+                       description: CGI.unescapeHTML(description))
+    end
+  end
+
   def insert_llms_entries(text, entries)
     match = text.match(LLMS_CODE_PROJECTS_PATTERN)
     raise "llms.txt is missing a Code Projects section" unless match
@@ -270,7 +281,7 @@ def parse_options(argv)
     parser.on("--projects PATH", "Projects page path") { |value| options[:projects_path] = value }
     parser.on("--llms PATH", "llms.txt path to keep in sync") { |value| options[:llms_path] = value }
     parser.on("--repos-json PATH", "Read repository JSON from a file instead of GitHub") { |value| options[:repos_json] = value }
-    parser.on("--dry-run", "Print planned additions without writing projects.md") { options[:dry_run] = true }
+    parser.on("--dry-run", "Print planned additions without writing generated files") { options[:dry_run] = true }
   end.parse!(argv)
 
   options

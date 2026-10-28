@@ -72,6 +72,8 @@ class UpdateProjectsFromGithubTest < Minitest::Test
       llms_text = File.read(llms_path)
 
       assert_includes llms_text, "- [tool\\[kit\\]](https://github.com/jamesonstone/tool-kit): Fast &lt;beta&gt; \\[guide\\]."
+      updater(projects_path, llms_path, client).run
+      assert_equal llms_text, File.read(llms_path)
     end
   end
 
@@ -120,6 +122,52 @@ class UpdateProjectsFromGithubTest < Minitest::Test
 
       error = assert_raises(RuntimeError) { updater(projects_path, llms_path, client).run }
       assert_includes error.message, "llms.txt is missing a Code Projects section"
+    end
+  end
+
+  def test_repairs_existing_index_omissions_without_new_repositories
+    with_fixture do |projects_path, llms_path|
+      original_projects = File.read(projects_path)
+      File.write(llms_path, fixture_llms_text.sub(/^- \[duplicate-tool\].*\n/, ""))
+      runner = updater(projects_path, llms_path, FakeClient.new([]))
+
+      assert_empty runner.run
+      assert_equal original_projects, File.read(projects_path)
+      assert_includes File.read(llms_path), "- [duplicate-tool](https://github.com/jamesonstone/duplicate-tool): Already listed."
+      first_result = File.read(llms_path)
+      runner.run
+      assert_equal first_result, File.read(llms_path)
+    end
+  end
+
+  def test_repairs_existing_omissions_alongside_new_repositories
+    with_fixture do |projects_path, llms_path|
+      File.write(llms_path, fixture_llms_text.sub(/^- \[duplicate-tool\].*\n/, ""))
+      client = FakeClient.new([repo("new-tool", created_at: "2026-06-08T05:00:00Z", description: "New helper")])
+
+      entries = updater(projects_path, llms_path, client).run
+
+      assert_equal ["new-tool"], entries.map(&:name)
+      assert_includes File.read(llms_path), "https://github.com/jamesonstone/duplicate-tool"
+      assert_includes File.read(llms_path), "https://github.com/jamesonstone/new-tool"
+    end
+  end
+
+  def test_reconciliation_dry_run_preserves_both_files
+    with_fixture do |projects_path, llms_path|
+      File.write(llms_path, fixture_llms_text.sub(/^- \[duplicate-tool\].*\n/, ""))
+      before = [projects_path, llms_path].map { |path| File.read(path) }
+      updater(projects_path, llms_path, FakeClient.new([])).run(dry_run: true)
+      assert_equal before, [projects_path, llms_path].map { |path| File.read(path) }
+    end
+  end
+
+  def test_reconciliation_preserves_existing_index_text_and_other_sections
+    with_fixture do |projects_path, llms_path|
+      original = fixture_llms_text.sub("Already listed.", "A curated description.")
+      File.write(llms_path, original)
+      updater(projects_path, llms_path, FakeClient.new([])).run
+      assert_equal original, File.read(llms_path)
     end
   end
 
