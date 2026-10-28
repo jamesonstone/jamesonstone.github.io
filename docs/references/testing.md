@@ -1,46 +1,41 @@
 # Testing Reference
 
-## Purpose
+## Local checks
 
-- Follow `rules/testing-and-environment-validation.md` for the mandatory cross-project testing and production-safety contract
-- Record durable repo-wide testing guidance that is broader than one feature
-- Keep feature-specific testing details in the current feature's `SPEC.md` VALIDATION and OUTCOME sections; legacy staged flows may still use `PLAN.md` or `TASKS.md`
+Use the installed bundle and run:
 
-## Current State
+```sh
+ruby -c scripts/update_projects_from_github.rb
+ruby -c scripts/validate_site.rb
+ruby scripts/update_projects_from_github_test.rb
+ruby scripts/update_projects_workflow_test.rb
+ruby scripts/validate_site_test.rb
+bundle exec jekyll build
+ruby scripts/validate_site.rb
+actionlint .github/workflows/update-projects.yml
+git diff --check
+```
 
-- add project-specific testing guidance here when it becomes stable enough to reuse across features
-## Code-Level Validation
+If dependencies are installed in the primary checkout, set `BUNDLE_PATH` to its `vendor/bundle` directory. Generated `_site/` stays ignored.
 
-| Layer | Command | PR workflow or check | Required | Notes |
-| --- | --- | --- | --- | --- |
-| Project-specific | Document the canonical command | Document the GitHub Actions job | yes or no | Record fixtures, services, and scope |
+## Pull-request checks
 
-## High-Level Suites
+`Update projects page / Validate site and updater` runs the Ruby regressions, normal Jekyll build, and site invariants on every pull request. Its permissions are read-only. The publishing job is excluded from pull-request events.
 
-| Suite | Type | Environment | Command | Automation | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| Project-specific | end-to-end or live-integration | local or production | Document the ordered invocation | PR, post-deploy, or manual fallback | `tmp/<UTC-date>/<test>/<run-number>/` |
+The workflow regression suite uses temporary local Git repositories, the actual workflow shell steps, and a stub GitHub CLI. It verifies preservation of pending branch changes, inclusion of current source, safe conflict failure, index-only change detection, and delivery of both generated files. It performs no network calls or public writes.
 
-## Environment Preflights
+## Updater rehearsal
 
-- Document exact local topology, target identity, deployed-version checks, dependencies, and timeouts
-- Document which environments are not applicable instead of creating artificial suites
+For an isolated content rehearsal, use a temporary clone with the current repair source and the existing automation branch. Run its normal merge preparation, then invoke:
 
-## Credentials And Test Data
+```sh
+ruby scripts/update_projects_from_github.rb --repos-json /path/to/public-repositories.json
+bundle exec jekyll build
+ruby scripts/validate_site.rb
+```
 
-- List credential and secret names without values
-- Document synthetic-data naming, rate and cost limits, cleanup, and retention
+Repository metadata can also be a deterministic JSON fixture; no credentials are needed in fixture mode. `--dry-run` leaves both generated files untouched. Never stage or publish rehearsal output.
 
-## Evidence And Retention
+## Production verification
 
-- Keep `tmp/` ignored and record CI artifact locations and retention
-- Keep `tests/RUN_STATUS.md` curated at meaningful validation milestones
-
-## Automation And Fallbacks
-
-- Map code-level checks to pull-request jobs and high-level suites to PR or post-deployment jobs when feasible
-- Document ordered operator commands when safe automation is unavailable
-
-## Known Gaps
-
-- Record partial, blocked, skipped, and unavailable validation literally
+After an authorized merge, observe `Update projects page` for the exact merge commit. Confirm its validation passes and any generated PR includes both files. Do not automatically merge the generated content PR. Separately verify `pages-build-deployment` and the live article; an updater run is not deployment evidence.

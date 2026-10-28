@@ -15,18 +15,20 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
-- [Jameson's Law of Information Traversal](https://jamesonstone.github.io/blog/2026/10/05/jamesons-law-of-information-traversal.html): A short law on how complex ideas optimize for transmission over truth as they travel from their source, with a corollary on going closer to the source.
-- [Intelligence as a System of Beliefs](https://jamesonstone.github.io/blog/2026/07/01/intelligence-as-a-system-of-beliefs.html): An essay defining intelligence as an adaptive system of useful beliefs whose fitness transfers across domains.
-- [Getting Started Avro Schema and Debezium](https://jamesonstone.github.io/blog/2020/03/04/avro-schema.html): Notes on Avro schemas, Debezium, and data serialization.
-- [Creating a Kafka Consumer with Kafka, Kotlin, PostgreSQL, and Debezium](https://jamesonstone.github.io/blog/2020/03/01/kotlinconsumer.html): A Kotlin consumer experiment built around Kafka and Debezium messages.
-- [Getting Started with Kubeless](https://jamesonstone.github.io/blog/2020/02/26/kubeless.html): Setup notes for deploying a Kubeless function on Kubernetes.
+- [Team Joiners](https://jamesonstone.github.io/blog/2026/10/28/team-joiners.html): The useful divide in applied AI is between the mentally flexible and the team joiners.
+- [Applied Philosophy](https://jamesonstone.github.io/blog/2026/10/25/applied-philosophy.html): An engineering analogy for designing and implementing philosophical ideas in the real world.
+- [Superposition IV: Cheap Execution, Expensive Frames](https://jamesonstone.github.io/blog/2026/10/25/superposition-cheap-execution.html): How always-on agents expand ambition while making inherited problem frames expensive to abandon.
+- [Superposition III: Before the Prompt](https://jamesonstone.github.io/blog/2026/10/25/superposition-before-the-prompt.html): Anticipatory accommodation, prompt rituals, and the difference between disconnection and conceptual independence.
+- [Superposition II: Narrative](https://jamesonstone.github.io/blog/2026/10/25/superposition-narrative.html): Intuition, deliberation, and separating a claim's warrant from its significance within a life.
 
 ## Public Projects
 
-- [Scout](https://scout.jamesonstone.io/): Daily AI research intelligence distilled from Hugging Face Daily Papers.
-- [Scout source](https://github.com/jamesonstone/scout): Source repository for Scout.
-- [Narrowband](https://narrowband.jamesonstone.io/): Evidence-first research for recurring workflow pain that could support durable software businesses.
-- [Narrowband source](https://github.com/jamesonstone/narrowband): Source repository for Narrowband.
+- [Hyperlite](https://github.com/jamesonstone/hyperlite): A native macOS window and CLI for tracking pull requests, reviews, conflicts, and GitHub Actions across projects.
+- [Hyperlite guide](https://github.com/jamesonstone/hyperlite/blob/main/docs/USER_GUIDE.md): Application behavior, keyboard shortcuts, and CLI commands.
+- [Kit](https://github.com/jamesonstone/kit): A provider-neutral CLI for agent contracts, contextual rules, project memory, and repository validation.
+- [Kit getting started](https://github.com/jamesonstone/kit#how-kit-works): How Kit works and commands for new and existing projects.
+- [Mint](https://jamesonstone.io/mint/): Semantic versioning, changelogs, and release automation across production, non-production, and sandbox environments.
+- [Mint source](https://github.com/jamesonstone/mint): CLI and GitHub Action source repository for Mint.
 
 ## Code Projects
 

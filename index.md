@@ -8,7 +8,7 @@ home: true
 <div class="home-page">
   <section class="home-hero" aria-labelledby="home-title">
     <h1 id="home-title">Jameson Stone</h1>
-    <p class="tagline">Just put the AGI in the bag, bro.</p>
+    <p class="tagline" data-random-tagline>Just put the AGI in the bag, bro.</p>
   </section>
 
   <section class="home-section" aria-labelledby="latest-posts">
