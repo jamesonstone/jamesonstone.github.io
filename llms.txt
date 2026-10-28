@@ -45,6 +45,12 @@ Put the AGI in the bag, bro.
 - [hyperlite](https://github.com/jamesonstone/hyperlite): NextGen Signal Layer for Coding Agents.
 - [rungrid](https://github.com/jamesonstone/rungrid): Unified Development Workspace Observability.
 - [ghostgc](https://github.com/jamesonstone/ghostgc): Garbage Collection for Abandoned AI Coding Runtimes.
+- [loopc](https://github.com/jamesonstone/loopc): PID-driven Process Control.
+- [kura](https://github.com/jamesonstone/kura): Storehouse of CLI Commands.
+- [narrowband](https://github.com/jamesonstone/narrowband): Discovering Meaningful problems worth solving.
+- [scout](https://github.com/jamesonstone/scout): Finding Innovative AI Signals via Research Distillation.
+- [outpost](https://github.com/jamesonstone/outpost): Durable Alerts From Committed Events.
+- [touchstone](https://github.com/jamesonstone/touchstone): Personal Benchmark of LLM Performance and Efficiency.
 ## Machine Indexes
 
 - [llms.txt](https://jamesonstone.github.io/llms.txt): Curated LLM entrypoint for this site.
