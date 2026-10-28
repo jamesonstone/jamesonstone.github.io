@@ -79,7 +79,7 @@ jobs:
       - name: Detect projects page changes
         id: changes
         run: |
-          if git diff --quiet -- projects.md llms.txt; then
+          if git diff --quiet "$GITHUB_SHA" -- projects.md llms.txt; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -99,13 +99,10 @@ jobs:
         run: |
           set -euo pipefail
 
-          if git diff --quiet -- projects.md llms.txt; then
-            echo "No new changes to commit."
-            exit 0
+          if ! git diff --quiet -- projects.md llms.txt; then
+            git add projects.md llms.txt
+            git commit -m "docs: update projects page from GitHub repositories"
           fi
-
-          git add projects.md llms.txt
-          git commit -m "docs: update projects page from GitHub repositories"
           git push -u origin "$UPDATE_BRANCH"
 
           cat > /tmp/update-projects-pr.md <<'BODY'
@@ -124,8 +121,9 @@ jobs:
           Automated follow-up from the projects page updater workflow.
           BODY
 
-          if gh pr view "$UPDATE_BRANCH" >/dev/null 2>&1; then
-            gh pr edit "$UPDATE_BRANCH" \
+          OPEN_PR="$(gh pr list --head "$UPDATE_BRANCH" --base main --state open --json number --jq '.[0].number // empty')"
+          if [ -n "$OPEN_PR" ]; then
+            gh pr edit "$OPEN_PR" \
               --title ":memo: Update projects page from GitHub repositories" \
               --body-file /tmp/update-projects-pr.md \
               --add-assignee jamesonstone
