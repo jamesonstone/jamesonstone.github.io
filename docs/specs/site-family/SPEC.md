@@ -25,3 +25,7 @@ The local system Ruby points at missing Xcode SDK headers. A process-only RbConf
 ## Repository memory
 
 This spec retains the navigation and publication boundaries; the program ledger retains cross-repository identities and dependencies.
+
+## Organization descriptions
+
+A later explicit request replaces the Limina Dev and Spectral7 placeholders with evidence-backed high-level summaries. Limina Dev covers warehouse and logistics software, including the owner-named mapr/sortr projects. Spectral7 spans applied AI, logistics, communications, and knowledge systems. Authorized repository inventory/README review supports these categories; no private implementation, customer, operational details, or other private project names are published. The personal homepage and machine index use the same positioning as Reasoning Machines.
