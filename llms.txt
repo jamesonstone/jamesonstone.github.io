@@ -54,3 +54,16 @@ Put the AGI in the bag, bro.
 ## Machine Indexes
 
 - [llms.txt](https://jamesonstone.github.io/llms.txt): Curated LLM entrypoint for this site.
+
+## Studios and product sites
+
+- [Site family](https://jamesonstone.io/#site-family): Directory on the personal homepage.
+- [Reasoning Machines](https://reasoningmachines.co/): Independent studio for software, systems, and ideas.
+- [Applied Symbolics](https://github.com/appliedsymbolics): GitHub organization; its product sites are Ambient OS and OpenCarrier.
+- [Ambient OS](https://ambientos.dev/): Operations software marketing site.
+- [OpenCarrier](https://opencarrier.dev/): Carrier API marketing site.
+- [Limina Dev](https://limina-dev.github.io/): Limina Dev website.
+- [Spectral7](https://github.com/spectral7-ltd): GitHub organization.
+- [Scout](https://scout.jamesonstone.io/): AI research intelligence.
+- [Narrowband](https://narrowband.jamesonstone.io/): Software opportunity research.
+- [OpenVital](https://openvital.co/): The healthcare AI arm of Reasoning Machines. Medproof is its first product in development.
