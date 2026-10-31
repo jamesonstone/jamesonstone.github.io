@@ -396,3 +396,9 @@ blockquote {
     font-size: clamp(3rem, 16vw, 4.8rem);
   }
 }
+
+/* The homepage directory follows the writing, using the existing reading measure. */
+.site-family-list { gap: 0; }
+.site-family-list strong { font-size: 1.15rem; }
+.site-family-list p { margin: .35rem 0 0; font-size: 1rem; }
+.site-family-research { font-size: 1rem; }
