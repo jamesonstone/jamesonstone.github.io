@@ -23,7 +23,7 @@ class MachineContentTest < Minitest::Test
       File.write(File.join(root, "unlisted.md"), "---\nlayout: default\n---\nUNLISTED_SENTINEL")
       write_post(root, "2000-01-01-private.md", "published: false", "PRIVATE_SENTINEL")
       write_post(root, "2999-01-01-future.md", "", "FUTURE_SENTINEL")
-      code_body = "if [ 1 -lt 2 ]; then echo '<keep>'; fi\n<html>\nlayout: example\npermalink: /example/\n{% literal %}"
+      code_body = "if [ 1 -lt 2 ]; then echo '<keep>'; fi\nprintf '```'\n<html>\nlayout: example\npermalink: /example/\n{% literal %}"
       code = "```sh\n#{code_body}\n```"
       File.write(File.join(root, "_posts", "fixture-snippet.txt"), "RELATIVE_SNIPPET_SENTINEL")
       write_post(root, "2000-01-02-public.md", "", "PUBLIC_SENTINEL\n\n{{ page.title }}\n\n{% include_relative fixture-snippet.txt %}\n\n{% raw %}#{code}{% endraw %}\n\n[Home](/)")
@@ -46,7 +46,7 @@ class MachineContentTest < Minitest::Test
         refute_includes full, secret
       end
       # Generated shell/metadata must be clean; fenced examples may contain these strings.
-      generated = full.gsub(/```[^\n]*\n.*?```/m, "")
+      generated = full.gsub(/^(`{3})[^\n]*\n.*?^\1[ \t]*$/m, "")
       refute_match(/<\/?(?:html|body|nav|footer|header|ul|li)\b|^layout:|^permalink:|\{%/, generated)
       %w[amoteofdust continuity thelightthatbeckons].each do |painting|
         assert_includes full, "https://jamesonstone.io/assets/images/paintings/#{painting}.jpg"
