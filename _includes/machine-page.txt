@@ -1,0 +1,45 @@
+{%- if include.body -%}
+{%- assign body = include.body -%}
+{%- else -%}
+{%- assign metadata = include.source | split: '---' | slice: 1 | first -%}
+{%- capture frontmatter -%}---{{ metadata }}---{%- endcapture -%}
+{%- assign body = include.source | remove_first: frontmatter -%}
+{%- endif -%}
+{%- assign pieces = body | split: '<a href="' -%}
+{%- capture linked_body -%}
+{{- pieces | first -}}
+{%- for piece in pieces offset: 1 -%}
+{%- assign url = piece | split: '"' | first -%}
+{%- assign rest = piece | remove_first: url | remove_first: '">' -%}
+{%- assign label = rest | split: '</a>' | first -%}
+[{{ label }}]({{ url }}) {{ rest | remove_first: label | remove_first: '</a>' }}
+{%- endfor -%}
+{%- endcapture -%}
+{%- assign pieces = linked_body | split: '<img' -%}
+{%- capture image_body -%}
+{{- pieces | first -}}
+{%- for piece in pieces offset: 1 -%}
+{%- assign tag = piece | split: '>' | first -%}
+{%- assign image_url = tag | split: 'src="' | last | split: '"' | first -%}
+{%- assign alt = tag | split: 'alt="' | last | split: '"' | first -%}
+![{{ alt }}]({{ image_url }}){{ piece | remove_first: tag | remove_first: '>' }}
+{%- endfor -%}
+{%- endcapture -%}
+{{ image_body | replace: '<pre', '
+```
+<pre' | replace: '</pre>', '</pre>
+```
+' | replace: '<li>', '- ' | replace: '</li>', '
+
+' | replace: '</p>', '
+
+' | replace: '<h1>', '
+# ' | replace: '</h1>', '
+
+' | replace: '<h3>', '
+### ' | replace: '</h3>', '
+
+' | replace: '<h2>', '
+## ' | replace: '</h2>', '
+
+' | strip_html | replace: '&lt;', '<' | replace: '&gt;', '>' | replace: '&quot;', '"' | replace: '&#39;', "'" | replace: '&#x27;', "'" | replace: '&amp;', '&' | replace: '&middot;', '·' | replace: '](/', '](https://jamesonstone.io/' | strip }}

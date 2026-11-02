@@ -216,6 +216,9 @@ class ValidateSiteTest < Minitest::Test
       paintings/index.html
       projects/index.html
       about/index.html
+      reasoning-machines/index.html
+      llms-full.txt
+      full-llms.txt
       feed.xml
     ].each do |route|
       write_site_file(root, route)
@@ -270,6 +273,9 @@ class ValidateSiteTest < Minitest::Test
         - [Paintings](https://jamesonstone.github.io/paintings/): Painting archive.
         - [Projects](https://jamesonstone.github.io/projects/): Project notes.
         - [About](https://jamesonstone.github.io/about/): Profile and contact.
+        - [Reasoning Machines](https://jamesonstone.github.io/reasoning-machines/): Directory.
+        - [Full content](https://jamesonstone.github.io/llms-full.txt): Content.
+        - [Full alias](https://jamesonstone.github.io/full-llms.txt): Alias.
         - [RSS](https://jamesonstone.github.io/feed.xml): Feed.
 
         ## Latest Posts

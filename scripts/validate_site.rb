@@ -31,6 +31,9 @@ REQUIRED_ROUTES = [
   "/paintings/index.html",
   "/projects/index.html",
   "/about/index.html",
+  "/reasoning-machines/index.html",
+  "/llms-full.txt",
+  "/full-llms.txt",
   "/feed.xml"
 ].freeze
 
@@ -40,6 +43,9 @@ LLMS_REQUIRED_SITE_ROUTES = [
   "/paintings/",
   "/projects/",
   "/about/",
+  "/reasoning-machines/",
+  "/llms-full.txt",
+  "/full-llms.txt",
   "/feed.xml"
 ].freeze
 
