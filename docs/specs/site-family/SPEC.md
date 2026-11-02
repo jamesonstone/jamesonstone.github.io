@@ -29,3 +29,6 @@ This spec retains the navigation and publication boundaries; the program ledger 
 ## Organization descriptions
 
 A later explicit request replaces the Limina Dev and Spectral7 placeholders with evidence-backed high-level summaries. Limina Dev covers warehouse and logistics software, including the owner-named mapr/sortr projects. Spectral7 spans applied AI, logistics, communications, and knowledge systems. Authorized repository inventory/README review supports these categories; no private implementation, customer, operational details, or other private project names are published. The personal homepage and machine index use the same positioning as Reasoning Machines.
+
+## Dedicated directory (GH-82)
+The studio directory now lives at /reasoning-machines/ with a Reasoning Machines header link. The old homepage #site-family anchor remains as a compact link to that page. Public descriptions and destinations are unchanged. Machine content is covered by docs/specs/0003-reasoning-machines-machine-content/SPEC.md.
