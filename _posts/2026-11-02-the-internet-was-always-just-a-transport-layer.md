@@ -1,4 +1,8 @@
-# The Internet was Always Just a Transport Layer
+---
+layout: post
+title: "The Internet was Always Just a Transport Layer"
+date: 2026-11-02 10:10:00 -0500
+---
 
 Much of what we call using the internet is operating somebody else's interface to get something out of their database. We search, compare, fill out forms and copy information between systems. The website makes us do the translation.
 
