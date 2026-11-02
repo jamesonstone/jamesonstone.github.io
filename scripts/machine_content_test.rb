@@ -23,8 +23,10 @@ class MachineContentTest < Minitest::Test
       File.write(File.join(root, "unlisted.md"), "---\nlayout: default\n---\nUNLISTED_SENTINEL")
       write_post(root, "2000-01-01-private.md", "published: false", "PRIVATE_SENTINEL")
       write_post(root, "2999-01-01-future.md", "", "FUTURE_SENTINEL")
-      code = "```sh\nif [ 1 -lt 2 ]; then echo '<keep>'; fi\n```"
-      write_post(root, "2000-01-02-public.md", "", "PUBLIC_SENTINEL\n\n#{code}\n\n[Home](/)")
+      code_body = "if [ 1 -lt 2 ]; then echo '<keep>'; fi\n<html>\nlayout: example\npermalink: /example/\n{% literal %}"
+      code = "```sh\n#{code_body}\n```"
+      File.write(File.join(root, "_posts", "fixture-snippet.txt"), "RELATIVE_SNIPPET_SENTINEL")
+      write_post(root, "2000-01-02-public.md", "", "PUBLIC_SENTINEL\n\n{{ page.title }}\n\n{% include_relative fixture-snippet.txt %}\n\n{% raw %}#{code}{% endraw %}\n\n[Home](/)")
       stdout, stderr, status = Open3.capture3(
         "bundle", "exec", "jekyll", "build", "--safe", "--source", root,
         "--destination", File.join(root, "_site"), chdir: ROOT
@@ -34,12 +36,22 @@ class MachineContentTest < Minitest::Test
       assert_equal full, File.read(File.join(root, "_site", "full-llms.txt"))
       assert full.start_with?("# Jameson Stone"), full[0, 100]
       assert_includes full, "PUBLIC_SENTINEL"
-      assert_includes full, code
+      assert_includes full, code_body
+      assert_match(/```\n#{Regexp.escape(code_body)}\n+```/, full)
+      assert_includes full, "RELATIVE_SNIPPET_SENTINEL"
+      public_post = full.split("Source: https://jamesonstone.io/blog/2000/01/02/public.html").last
+      assert_includes public_post, "Fixture"
       assert_includes full, "[Home](https://jamesonstone.io/)"
       %w[INTERNAL_SENTINEL DRAFT_SENTINEL PRIVATE_SENTINEL FUTURE_SENTINEL UNLISTED_SENTINEL].each do |secret|
         refute_includes full, secret
       end
-      refute_match(/<\/?(?:html|body|nav|footer|header|ul|li)\b|layout:|permalink:|\{%/, full)
+      # Generated shell/metadata must be clean; fenced examples may contain these strings.
+      generated = full.gsub(/```[^\n]*\n.*?```/m, "")
+      refute_match(/<\/?(?:html|body|nav|footer|header|ul|li)\b|^layout:|^permalink:|\{%/, generated)
+      %w[amoteofdust continuity thelightthatbeckons].each do |painting|
+        assert_includes full, "https://jamesonstone.io/assets/images/paintings/#{painting}.jpg"
+      end
+      assert_includes full, "![A Mote of Dust Suspended in a Sunbeam]"
       %w[reasoningmachines.co github.com/appliedsymbolics ambientos.dev opencarrier.dev
          openvital.co limina-dev.github.io github.com/spectral7-ltd
          scout.jamesonstone.io narrowband.jamesonstone.io].each do |host|

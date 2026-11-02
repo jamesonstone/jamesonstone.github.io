@@ -33,9 +33,6 @@ Source: {{ document.url | absolute_url }}
 
 Source: {{ post.url | absolute_url }}
 Date: {{ post.date | date_to_xmlschema }}
-{% capture source %}{% include_relative {{ post.path }} %}{% endcapture %}
-{% assign metadata = source | split: '---' | slice: 1 | first %}
-{% capture frontmatter %}---{{ metadata }}---{% endcapture %}
-{{ source | remove_first: frontmatter | replace: '](/', '](https://jamesonstone.io/' | strip }}
+{% include machine-page.txt body=post.content %}
 {% endif %}
 {% endfor %}
