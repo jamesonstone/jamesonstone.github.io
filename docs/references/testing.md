@@ -10,6 +10,7 @@ ruby -c scripts/validate_site.rb
 ruby scripts/update_projects_from_github_test.rb
 ruby scripts/update_projects_workflow_test.rb
 ruby scripts/validate_site_test.rb
+ruby scripts/machine_content_test.rb
 bundle exec jekyll build
 ruby scripts/validate_site.rb
 actionlint .github/workflows/update-projects.yml
@@ -39,3 +40,7 @@ Repository metadata can also be a deterministic JSON fixture; no credentials are
 ## Production verification
 
 After an authorized merge, observe `Update projects page` for the exact merge commit. Confirm its validation passes and any generated PR includes both files. Do not automatically merge the generated content PR. Separately verify `pages-build-deployment` and the live article; an updater run is not deployment evidence.
+
+## Machine-readable public content
+
+Both full-content endpoints are normal Jekyll Liquid pages that share `_includes/llms-full.txt`. They regenerate during the standard GitHub Pages build without custom plugins or an extra publishing workflow. The page allowlist and public post collection prevent arbitrary repository Markdown from being included. The integration test builds with Pages safe mode and sentinels for private docs, unlisted pages, drafts, unpublished posts, and future posts (including with preview flags enabled), and verifies preserved code, absolute links, alias equality, and navigation. `.txt` files use GitHub Pages native text/plain MIME behavior. `llms.txt` remains the curated index and should be updated with public route changes.

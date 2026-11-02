@@ -1,0 +1,41 @@
+# Jameson Stone
+
+> Public writing, paintings, projects, and studio directory by Jameson Stone.
+
+Canonical site: {{ '/' | absolute_url }}
+Curated index: {{ '/llms.txt' | absolute_url }}
+
+## Home
+
+[Jameson Stone]({{ '/' | absolute_url }})
+
+Just put the AGI in the bag, bro.
+
+## Blog
+
+[Writing archive]({{ '/blog/' | absolute_url }})
+{% assign public_paths = 'about.md|reasoning-machines.md|projects.md|paintings/index.md' | split: '|' %}
+{% for public_path in public_paths %}
+{% assign document = site.pages | where: 'path', public_path | first %}
+{% if document and document.published != false %}
+## {{ document.title }}
+
+Source: {{ document.url | absolute_url }}
+{% capture source %}{% include_relative {{ public_path }} %}{% endcapture %}
+{% include machine-page.txt source=source %}
+{% endif %}
+{% endfor %}
+## Published posts
+{% for post in site.posts %}
+{% assign post_directory = post.path | split: '/' | first %}
+{% if post_directory == '_posts' and post.published != false and post.date <= site.time %}
+## {{ post.title }}
+
+Source: {{ post.url | absolute_url }}
+Date: {{ post.date | date_to_xmlschema }}
+{% capture source %}{% include_relative {{ post.path }} %}{% endcapture %}
+{% assign metadata = source | split: '---' | slice: 1 | first %}
+{% capture frontmatter %}---{{ metadata }}---{% endcapture %}
+{{ source | remove_first: frontmatter | replace: '](/', '](https://jamesonstone.io/' | strip }}
+{% endif %}
+{% endfor %}

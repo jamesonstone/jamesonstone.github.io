@@ -1,0 +1,21 @@
+{%- assign metadata = include.source | split: '---' | slice: 1 | first -%}
+{%- capture frontmatter -%}---{{ metadata }}---{%- endcapture -%}
+{%- assign body = include.source | remove_first: frontmatter -%}
+{%- assign pieces = body | split: '<a href="' -%}
+{%- capture linked_body -%}
+{{- pieces | first -}}
+{%- for piece in pieces offset: 1 -%}
+{%- assign url = piece | split: '"' | first -%}
+{%- assign rest = piece | remove_first: url | remove_first: '">' -%}
+{%- assign label = rest | split: '</a>' | first -%}
+[{{ label }}]({{ url }}) {{ rest | remove_first: label | remove_first: '</a>' }}
+{%- endfor -%}
+{%- endcapture -%}
+{{ linked_body | replace: '<li>', '' | replace: '</li>', '
+
+' | replace: '</p>', '
+
+' | replace: '<h2>', '
+## ' | replace: '</h2>', '
+
+' | strip_html | replace: '&amp;', '&' | replace: '&middot;', '·' | replace: '](/', '](https://jamesonstone.io/' | strip }}

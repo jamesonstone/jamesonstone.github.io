@@ -60,6 +60,7 @@ a:focus {
 .site-header__inner {
   display: flex;
   align-items: baseline;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 1.5rem;
 }
@@ -402,3 +403,6 @@ blockquote {
 .site-family-list strong { font-size: 1.15rem; }
 .site-family-list p { margin: .35rem 0 0; font-size: 1rem; }
 .site-family-research { font-size: 1rem; }
+
+.site-nav a, .footer-links a { white-space: nowrap; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }

@@ -35,6 +35,7 @@ jobs:
           ruby scripts/update_projects_from_github_test.rb
           ruby scripts/update_projects_workflow_test.rb
           ruby scripts/validate_site_test.rb
+          ruby scripts/machine_content_test.rb
           bundle exec jekyll build
           ruby scripts/validate_site.rb
 
