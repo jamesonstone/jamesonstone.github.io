@@ -1,16 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,650&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap");
 
 :root {
   --bg: #fbfaf4;
   --text: #24211c;
-  --muted: #756e63;
+  --muted: #686458;
   --line: #ded7c9;
   --accent: #0b6358;
   --accent-2: #8b3f2d;
   --code-bg: #f1ece2;
   --measure: 42.5rem;
   --mono: "Fira Code", "MesloLGS NF", "Meslo LG S", "SFMono-Regular", Consolas, monospace;
-  --body: "Literata", Charter, Georgia, serif;
+  --body: "Source Serif 4", Charter, Georgia, serif;
+  --sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color-scheme: light;
 }
 
 * {
@@ -70,7 +72,7 @@ a:focus {
   align-items: baseline;
   gap: 0.55ch;
   color: var(--text);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.2;
@@ -88,7 +90,7 @@ a:focus {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.78rem;
   font-weight: 500;
 }
@@ -122,10 +124,10 @@ h1,
 h2,
 h3 {
   color: var(--text);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-weight: 600;
-  letter-spacing: 0;
-  line-height: 1.08;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
 }
 
 h1 {
@@ -141,6 +143,14 @@ h2 {
 h3 {
   margin: 1.65rem 0 0.45rem;
   font-size: 1.25rem;
+}
+
+.eyebrow {
+  margin: 0 0 1.25rem;
+  color: var(--accent);
+  font: 600 0.7rem/1.5 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 p,
@@ -175,48 +185,6 @@ blockquote {
   padding-left: 1rem;
   border-left: 2px solid var(--accent);
   color: var(--muted);
-}
-
-.home-page {
-  display: grid;
-  gap: 4.25rem;
-}
-
-.home-hero {
-  position: relative;
-  max-width: 34rem;
-  padding: 3.5rem 0 1rem;
-}
-
-.home-hero::before {
-  content: "";
-  display: block;
-  width: 5rem;
-  height: 2px;
-  margin-bottom: 1.25rem;
-  background: var(--accent);
-}
-
-.home-hero h1 {
-  max-width: 10ch;
-  margin-bottom: 1.1rem;
-  font-size: clamp(3.1rem, 12vw, 5.7rem);
-  line-height: 0.98;
-}
-
-.tagline {
-  max-width: 25rem;
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: clamp(1.08rem, 3vw, 1.45rem);
-  font-weight: 500;
-  line-height: 1.45;
-}
-
-.home-section h2 {
-  margin-top: 0;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
 }
 
 .post-list,
@@ -259,29 +227,8 @@ blockquote {
   display: block;
   margin-bottom: 0.35rem;
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.76rem;
-}
-
-.post-list--home {
-  gap: 0;
-}
-
-.post-list--home li {
-  padding: 1.25rem 0 1.45rem;
-}
-
-.post-card h3 {
-  margin: 0 0 0.45rem;
-  font-size: clamp(1.35rem, 4vw, 1.95rem);
-}
-
-.post-card p {
-  max-width: 34rem;
-  margin-bottom: 0;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.58;
 }
 
 .project-list--featured {
@@ -304,7 +251,7 @@ blockquote {
 
 .project-entry__meta {
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.78rem;
 }
 
@@ -312,7 +259,7 @@ blockquote {
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem 1rem;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.82rem;
 }
 
@@ -324,7 +271,7 @@ blockquote {
   border-radius: 999px;
   background: var(--bg);
   color: var(--accent);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -338,7 +285,7 @@ blockquote {
 
 .archive-link {
   margin: 1.1rem 0 0;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.85rem;
 }
 
@@ -348,7 +295,7 @@ blockquote {
 
 .post-header time {
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.82rem;
 }
 
@@ -356,7 +303,7 @@ blockquote {
   margin-top: 3.25rem;
   padding-top: 1rem;
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.82rem;
 }
 
@@ -384,18 +331,6 @@ blockquote {
   .site-main {
     padding: 3rem 0 3.25rem;
   }
-
-  .home-page {
-    gap: 3.2rem;
-  }
-
-  .home-hero {
-    padding-top: 2.5rem;
-  }
-
-  .home-hero h1 {
-    font-size: clamp(3rem, 16vw, 4.8rem);
-  }
 }
 
 /* The homepage directory follows the writing, using the existing reading measure. */
@@ -406,3 +341,9 @@ blockquote {
 
 .site-nav a, .footer-links a { white-space: nowrap; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+.skip-link { position: absolute; top: 0.75rem; left: 1rem; padding: 0.6rem 1rem; background: var(--bg); z-index: 10; transform: translateY(-200%); font-family: var(--sans); }
+.skip-link:focus { transform: translateY(0); }
+.site-title { white-space: nowrap; }
+.site-nav a { padding-block: 0.35rem; }
+@media (prefers-reduced-motion: reduce) { a { transition: none; } }

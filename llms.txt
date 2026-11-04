@@ -6,7 +6,7 @@ Put the AGI in the bag, bro.
 
 ## Primary Pages
 
-- [Home](https://jamesonstone.io/): The blog homepage and latest writing.
+- [Home](https://jamesonstone.io/): The blog homepage, latest writing, and a painting from the visual archive.
 - [Blog](https://jamesonstone.io/blog/): Complete writing archive.
 - [Paintings](https://jamesonstone.io/paintings/): A small visual archive.
 - [Projects](https://jamesonstone.io/projects/): Public tools and project records.
