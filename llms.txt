@@ -16,11 +16,11 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
+- [Expertise Is Learned Structure](https://jamesonstone.io/blog/2026/11/04/expertise-is-learned-structure.html): Prediction, learned structure, and the boundary between expertise and understanding.
 - [The Internet was Always Just a Transport Layer](https://jamesonstone.io/blog/2026/11/02/the-internet-was-always-just-a-transport-layer.html): Agents make the website visit optional for many tasks while deliberate human experiences retain their value.
 - [Complexity Generators](https://jamesonstone.io/blog/2026/10/28/complexity-generators.html): A Complexity Generator repeatedly creates work for other people while reporting their own work as complete.
 - [Team Joiners](https://jamesonstone.io/blog/2026/10/28/team-joiners.html): The useful divide in applied AI is between the mentally flexible and the team joiners.
 - [Applied Philosophy](https://jamesonstone.io/blog/2026/10/25/applied-philosophy.html): An engineering analogy for designing and implementing philosophical ideas in the real world.
-- [Superposition IV: Cheap Execution, Expensive Frames](https://jamesonstone.io/blog/2026/10/25/superposition-cheap-execution.html): How always-on agents expand ambition while making inherited problem frames expensive to abandon.
 
 ## Public Projects
 
