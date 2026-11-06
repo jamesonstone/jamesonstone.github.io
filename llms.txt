@@ -16,6 +16,7 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
+- [The Structure Beneath Language](https://jamesonstone.io/blog/2026/11/06/the-structure-beneath-language.html): Language, learned structure, and representations that transfer across domains.
 - [Expertise Is Learned Structure](https://jamesonstone.io/blog/2026/11/04/expertise-is-learned-structure.html): Prediction, learned structure, and the boundary between expertise and understanding.
 - [The Internet was Always Just a Transport Layer](https://jamesonstone.io/blog/2026/11/02/the-internet-was-always-just-a-transport-layer.html): Agents make the website visit optional for many tasks while deliberate human experiences retain their value.
 - [Complexity Generators](https://jamesonstone.io/blog/2026/10/28/complexity-generators.html): A Complexity Generator repeatedly creates work for other people while reporting their own work as complete.
