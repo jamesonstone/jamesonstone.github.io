@@ -16,12 +16,11 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
-- [The Structure Beneath Language](https://jamesonstone.io/blog/2026/11/06/the-structure-beneath-language.html): Language, learned structure, and representations that transfer across domains.
-- [Expertise Is Learned Structure](https://jamesonstone.io/blog/2026/11/04/expertise-is-learned-structure.html): Prediction, learned structure, and the boundary between expertise and understanding.
-- [The Internet was Always Just a Transport Layer](https://jamesonstone.io/blog/2026/11/02/the-internet-was-always-just-a-transport-layer.html): Agents make the website visit optional for many tasks while deliberate human experiences retain their value.
-- [Complexity Generators](https://jamesonstone.io/blog/2026/10/28/complexity-generators.html): A Complexity Generator repeatedly creates work for other people while reporting their own work as complete.
-- [Team Joiners](https://jamesonstone.io/blog/2026/10/28/team-joiners.html): The useful divide in applied AI is between the mentally flexible and the team joiners.
-- [Applied Philosophy](https://jamesonstone.io/blog/2026/10/25/applied-philosophy.html): An engineering analogy for designing and implementing philosophical ideas in the real world.
+- [Memory Systems XV: Emulate, Then Supersede](https://jamesonstone.io/blog/2026/11/08/memory-systems-emulate-then-supersede.html): Emulate the useful parts of human memory, then replace the judgment layer when evidence supports a better one.
+- [Memory Systems XIV: The Lake](https://jamesonstone.io/blog/2026/11/08/memory-systems-the-lake.html): Store traces so a later judgment layer can improve, while serve still admits only what a current toward requires.
+- [Memory Systems XIII: Capacity](https://jamesonstone.io/blog/2026/11/08/memory-systems-capacity.html): Cheap storage is an advantage. Judgment, not capacity, decides what becomes a memory.
+- [Memory Systems XII: Lessons](https://jamesonstone.io/blog/2026/11/08/memory-systems-lessons.html): A lesson is a memory that has acquired specific utility.
+- [Memory Systems XI: Bricks](https://jamesonstone.io/blog/2026/11/08/memory-systems-bricks.html): A memory is a brick formed from experience and compacted into layers.
 
 ## Public Projects
 
