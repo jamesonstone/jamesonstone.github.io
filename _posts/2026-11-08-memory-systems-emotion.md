@@ -15,4 +15,4 @@ The recommender failure would be serving what seems wanted, or what will engage.
 Dreaming can notice that a mood has been gathering around a thread one wasn't facing. It should not chase melancholy, or optimize it away.
 
 
-*A philosophical exploration in memory systems, part 9.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Reason](/blog/2026/11/08/memory-systems-reason.html) · [Next: Experience](/blog/2026/11/08/memory-systems-experience.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 9.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Reason](/blog/2026/11/08/memory-systems-reason.html) · [Next: Experience](/blog/2026/11/08/memory-systems-experience.html)

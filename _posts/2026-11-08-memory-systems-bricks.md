@@ -13,4 +13,4 @@ Recall, even in unusual cases of near-complete autobiographical memory, is close
 The design question is not whether a brick can be nearly complete. It is what we are willing to leave unbricked, and what we think happens when too little is allowed to stay that way.
 
 
-*A philosophical exploration in memory systems, part 11.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Experience](/blog/2026/11/08/memory-systems-experience.html) · [Next: Lessons](/blog/2026/11/08/memory-systems-lessons.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 11.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Experience](/blog/2026/11/08/memory-systems-experience.html) · [Next: Lessons](/blog/2026/11/08/memory-systems-lessons.html)

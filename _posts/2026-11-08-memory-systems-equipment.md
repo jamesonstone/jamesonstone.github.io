@@ -17,4 +17,4 @@ The flattening error is to treat everything perceived as a tool in the same way,
 Breakdown belongs here too. The hammer becomes conspicuous when it fails. That is when something withdrawn may interrupt: not because it matched a query, but because the current toward just broke.
 
 
-*A philosophical exploration in memory systems, part 2.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Facing](/blog/2026/11/08/memory-systems-facing.html) · [Next: Chekhov's Gun](/blog/2026/11/08/memory-systems-chekhovs-gun.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 2.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Facing](/blog/2026/11/08/memory-systems-facing.html) · [Next: Chekhov's Gun](/blog/2026/11/08/memory-systems-chekhovs-gun.html)

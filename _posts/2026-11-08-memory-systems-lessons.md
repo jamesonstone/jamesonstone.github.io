@@ -13,4 +13,4 @@ Dreaming is one way a memory gets proposed as a lesson. Reconcile is what makes 
 A lesson may stay tied to the memories that formed it, so it can be unwound when the compaction was wrong. It may also detach and live as a standalone method. Which of those is safer is still open. Detachment travels; it also forgets its evidence.
 
 
-*A philosophical exploration in memory systems, part 12.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Bricks](/blog/2026/11/08/memory-systems-bricks.html) · [Next: Capacity](/blog/2026/11/08/memory-systems-capacity.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 12.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Bricks](/blog/2026/11/08/memory-systems-bricks.html) · [Next: Capacity](/blog/2026/11/08/memory-systems-capacity.html)

@@ -13,4 +13,4 @@ Dreaming may propose hanging something back up. Reconcile is who approves the se
 The substitution to refuse is search: given a query, return nearby items. Nearby is not the same as required. A system that retrieves well can still dress the stage with unused guns.
 
 
-*A philosophical exploration in memory systems, part 4.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Chekhov's Gun](/blog/2026/11/08/memory-systems-chekhovs-gun.html) · [Next: Not a Recommender](/blog/2026/11/08/memory-systems-not-a-recommender.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 4.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Chekhov's Gun](/blog/2026/11/08/memory-systems-chekhovs-gun.html) · [Next: Not a Recommender](/blog/2026/11/08/memory-systems-not-a-recommender.html)

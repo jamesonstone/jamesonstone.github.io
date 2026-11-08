@@ -15,4 +15,4 @@ The reason may be a cause in the world that is not yet placeable. It may also be
 Chekhov still holds. One does not put the storm on stage until it breaks. One also does not throw away the barometer because it is not raining.
 
 
-*A philosophical exploration in memory systems, part 8.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Weather](/blog/2026/11/08/memory-systems-weather.html) · [Next: Emotion](/blog/2026/11/08/memory-systems-emotion.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 8.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Weather](/blog/2026/11/08/memory-systems-weather.html) · [Next: Emotion](/blog/2026/11/08/memory-systems-emotion.html)

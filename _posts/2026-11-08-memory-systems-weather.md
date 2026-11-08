@@ -13,4 +13,4 @@ Project-tracking cannot say this. It needs a status, an owner, a next action. We
 Dreaming, under this analogy, is less "keep working the thread" than watching the pressure change: noticing that two fronts might meet, or that something once climatic has gone quiet. It proposes a shift in conditions, not a next task.
 
 
-*A philosophical exploration in memory systems, part 7.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Threads](/blog/2026/11/08/memory-systems-threads.html) · [Next: Reason](/blog/2026/11/08/memory-systems-reason.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 7.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Threads](/blog/2026/11/08/memory-systems-threads.html) · [Next: Reason](/blog/2026/11/08/memory-systems-reason.html)

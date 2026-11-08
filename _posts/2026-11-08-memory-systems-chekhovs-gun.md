@@ -15,4 +15,4 @@ Chekhov is a rule for what the audience may see, not a rule that every object in
 A gun that should have gone off and didn't is the other failure: the one thing that mattered, left in the wings.
 
 
-*A philosophical exploration in memory systems, part 3.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Equipment](/blog/2026/11/08/memory-systems-equipment.html) · [Next: Withholding](/blog/2026/11/08/memory-systems-withholding.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 3.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Equipment](/blog/2026/11/08/memory-systems-equipment.html) · [Next: Withholding](/blog/2026/11/08/memory-systems-withholding.html)

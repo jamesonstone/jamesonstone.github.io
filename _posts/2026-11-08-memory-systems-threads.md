@@ -15,4 +15,4 @@ Two motions continue without attention, and they are not the same. The world kee
 If the dream is allowed to update the thread itself, a second self writes truth while one sleeps. If it only proposes, the thread can grow without being conscious, and nothing becomes real until reconcile.
 
 
-*A philosophical exploration in memory systems, part 6.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Not a Recommender](/blog/2026/11/08/memory-systems-not-a-recommender.html) · [Next: Weather](/blog/2026/11/08/memory-systems-weather.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 6.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Not a Recommender](/blog/2026/11/08/memory-systems-not-a-recommender.html) · [Next: Weather](/blog/2026/11/08/memory-systems-weather.html)

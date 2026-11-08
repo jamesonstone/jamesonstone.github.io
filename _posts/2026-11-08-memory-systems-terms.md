@@ -44,4 +44,4 @@ The terms below describe how those layers are faced, shown, revised, and allowed
 
 **Breakdown** is when equipment fails and becomes conspicuous. That is one honest reason a withdrawn thread may interrupt: not because it matched a query, but because the current toward just broke.
 
-*This page will be revised as the exploration deepens.* [Next: Facing](/blog/2026/11/08/memory-systems-facing.html)
+*This page will be revised as the exploration deepens.* [Introduction](/blog/2026/11/08/memory-systems-introduction.html) · [Next: Facing](/blog/2026/11/08/memory-systems-facing.html)

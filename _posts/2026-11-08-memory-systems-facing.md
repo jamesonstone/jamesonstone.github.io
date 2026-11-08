@@ -15,4 +15,4 @@ Intention is prospective: what one is about. Narrative identity is retrospective
 The narrative, then, is not a running story to be interpreted. It is the written face of a toward — sharp enough to decide what may appear. A longer memoir quietly requires another reasoner, then a graph, then a second agent, then a new tool.
 
 
-*A philosophical exploration in memory systems, part 1.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Next: Equipment](/blog/2026/11/08/memory-systems-equipment.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 1.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Next: Equipment](/blog/2026/11/08/memory-systems-equipment.html)

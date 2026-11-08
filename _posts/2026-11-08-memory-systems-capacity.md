@@ -13,4 +13,4 @@ The constraint worth copying is not capacity. It is the difference between a tra
 The raw recording can exist underneath. Serving from it is already the trap.
 
 
-*A philosophical exploration in memory systems, part 13.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Lessons](/blog/2026/11/08/memory-systems-lessons.html) · [Next: The Lake](/blog/2026/11/08/memory-systems-the-lake.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 13.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Lessons](/blog/2026/11/08/memory-systems-lessons.html) · [Next: The Lake](/blog/2026/11/08/memory-systems-the-lake.html)

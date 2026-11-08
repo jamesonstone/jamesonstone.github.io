@@ -13,4 +13,4 @@ The lake is not the memory, and it is not served from. Serve still admits only w
 "Store everything" does not mean "show everything." It also does not mean the lake should grow a smart API. Capacity is what lets the philosophy remain revisable. Without the lake, the first theory of encoding becomes a tomb.
 
 
-*A philosophical exploration in memory systems, part 14.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Capacity](/blog/2026/11/08/memory-systems-capacity.html) · [Next: Emulate, Then Supersede](/blog/2026/11/08/memory-systems-emulate-then-supersede.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 14.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Capacity](/blog/2026/11/08/memory-systems-capacity.html) · [Next: Emulate, Then Supersede](/blog/2026/11/08/memory-systems-emulate-then-supersede.html)

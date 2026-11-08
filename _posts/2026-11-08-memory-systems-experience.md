@@ -13,4 +13,4 @@ A system can keep experience more completely than a person can. That does not pr
 If experience is served directly, the stage becomes a recording. If only memories are kept, the first judgment about what mattered is fossilized. The hierarchy exists so those mistakes can be distinguished.
 
 
-*A philosophical exploration in memory systems, part 10.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Emotion](/blog/2026/11/08/memory-systems-emotion.html) · [Next: Bricks](/blog/2026/11/08/memory-systems-bricks.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 10.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Emotion](/blog/2026/11/08/memory-systems-emotion.html) · [Next: Bricks](/blog/2026/11/08/memory-systems-bricks.html)

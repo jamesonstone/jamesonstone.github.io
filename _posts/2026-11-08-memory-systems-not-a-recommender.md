@@ -13,4 +13,4 @@ The tell is familiar: ranking candidates, optimizing for uptake, promoting what 
 Fitness, if it exists later, is whether the toward itself was true — not whether an item got taken up. Chekhov's rule bans decoration. It does not rank props.
 
 
-*A philosophical exploration in memory systems, part 5.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Withholding](/blog/2026/11/08/memory-systems-withholding.html) · [Next: Threads](/blog/2026/11/08/memory-systems-threads.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 5.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Withholding](/blog/2026/11/08/memory-systems-withholding.html) · [Next: Threads](/blog/2026/11/08/memory-systems-threads.html)
