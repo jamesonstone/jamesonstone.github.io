@@ -16,11 +16,11 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
+- [You probably don't need the big model](https://jamesonstone.io/blog/2026/11/10/you-probably-dont-need-the-big-model.html): Most software work is well-trodden CRUD and integration, so start with the cheapest model that works and fix the context before you reach for more intelligence.
 - [Memory Systems XV: Emulate, Then Supersede](https://jamesonstone.io/blog/2026/11/08/memory-systems-emulate-then-supersede.html): Emulate the useful parts of human memory, then replace the judgment layer when evidence supports a better one.
 - [Memory Systems XIV: The Lake](https://jamesonstone.io/blog/2026/11/08/memory-systems-the-lake.html): Store traces so a later judgment layer can improve, while serve still admits only what a current toward requires.
 - [Memory Systems XIII: Capacity](https://jamesonstone.io/blog/2026/11/08/memory-systems-capacity.html): Cheap storage is an advantage. Judgment, not capacity, decides what becomes a memory.
 - [Memory Systems XII: Lessons](https://jamesonstone.io/blog/2026/11/08/memory-systems-lessons.html): A lesson is a memory that has acquired specific utility.
-- [Memory Systems XI: Bricks](https://jamesonstone.io/blog/2026/11/08/memory-systems-bricks.html): A memory is a brick formed from experience and compacted into layers.
 
 ## Public Projects
 
