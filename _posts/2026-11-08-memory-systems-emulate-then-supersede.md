@@ -13,4 +13,4 @@ Those methods are a starting analog, not a destination. The lake is what makes s
 "Better" cannot mean denser recall. It would have to mean a truer toward, cleaner serve, and bricks that have reasons. Superseding without that standard just produces a more powerful cabinet. New categories may appear that we do not yet have good names for. The hierarchy — experience, memory, lesson — is where we start, not where we are required to end.
 
 
-*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 15.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: The Lake](/blog/2026/11/08/memory-systems-the-lake.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 15.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: The Lake](/blog/2026/11/08/memory-systems-the-lake.html) · [Next: Reason, Not Prediction](/blog/2026/11/09/memory-systems-reason-not-prediction.html)
