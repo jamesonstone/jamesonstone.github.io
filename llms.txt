@@ -16,11 +16,11 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
+- [Relationships die when you stop saying thank you](https://jamesonstone.io/blog/2026/11/10/relationships-die-when-you-stop-saying-thank-you.html): Relationships end when you stop noticing what the other person gives you and stop saying thank you.
 - [Memory Systems XV: Emulate, Then Supersede](https://jamesonstone.io/blog/2026/11/08/memory-systems-emulate-then-supersede.html): Emulate the useful parts of human memory, then replace the judgment layer when evidence supports a better one.
 - [Memory Systems XIV: The Lake](https://jamesonstone.io/blog/2026/11/08/memory-systems-the-lake.html): Store traces so a later judgment layer can improve, while serve still admits only what a current toward requires.
 - [Memory Systems XIII: Capacity](https://jamesonstone.io/blog/2026/11/08/memory-systems-capacity.html): Cheap storage is an advantage. Judgment, not capacity, decides what becomes a memory.
 - [Memory Systems XII: Lessons](https://jamesonstone.io/blog/2026/11/08/memory-systems-lessons.html): A lesson is a memory that has acquired specific utility.
-- [Memory Systems XI: Bricks](https://jamesonstone.io/blog/2026/11/08/memory-systems-bricks.html): A memory is a brick formed from experience and compacted into layers.
 
 ## Public Projects
 
