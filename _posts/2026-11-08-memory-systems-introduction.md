@@ -29,5 +29,7 @@ The notes, in the order they were written:
 13. [Capacity](/blog/2026/11/08/memory-systems-capacity.html)
 14. [The Lake](/blog/2026/11/08/memory-systems-the-lake.html)
 15. [Emulate, Then Supersede](/blog/2026/11/08/memory-systems-emulate-then-supersede.html)
+16. [Reason, Not Prediction](/blog/2026/11/09/memory-systems-reason-not-prediction.html)
+17. [Tense Is Not Toward](/blog/2026/11/09/memory-systems-tense-is-not-toward.html)
 
 *A philosophical exploration in memory systems.* [Next: Terms](/blog/2026/11/08/memory-systems-terms.html)

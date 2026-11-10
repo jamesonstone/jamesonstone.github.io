@@ -34,13 +34,13 @@ The terms below describe how those layers are faced, shown, revised, and allowed
 
 **Use** means belonging to the scene, not a click and not engagement. Treating use as a score turns the system into a recommender.
 
-**Reason** is why a memory formed or remains, even when it is not relevant now. Relevance is local and temporary. Reason is not a guarantee of eventual display.
+**Reason** is why a memory formed or remains, even when it is not relevant now. Relevance is local and temporary. Reason is not a prediction of future need, and not a guarantee of eventual display.
 
 **Weather** is the better analogy for threads than work. Weather has reasons and climate, not percent-done. Some of it arrives whether one attends or not.
 
 **World-motion** is a thread changing while withdrawn because time, people, or events moved. It is not dreaming.
 
-**Forgetting**, on the stage, is taking unused scenery down so the scene can stay honest. In the inventory of memories and lessons, it is what happens when the reason itself has gone still. The lake may still hold the trace.
+**Forgetting**, on the stage, is taking unused scenery down so the scene can stay honest. In the inventory of memories and lessons, it is what happens when the reason itself has gone still. The lake may still hold the trace. Forgetting follows the thread, not the clock.
 
 **Breakdown** is when equipment fails and becomes conspicuous. That is one honest reason a withdrawn thread may interrupt: not because it matched a query, but because the current toward just broke.
 
