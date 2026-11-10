@@ -16,11 +16,11 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
+- [Autonomy Needs Procedures](https://jamesonstone.io/blog/2026/11/10/autonomy-needs-procedures.html): Rules define constraints; SOPs connect recurring work to a verifiable result as coding agents become more autonomous.
 - [You probably don't need the big model](https://jamesonstone.io/blog/2026/11/10/you-probably-dont-need-the-big-model.html): Most software work is well-trodden CRUD and integration, so start with the cheapest model that works and fix the context before you reach for more intelligence.
 - [Relationships die when you stop saying thank you](https://jamesonstone.io/blog/2026/11/10/relationships-die-when-you-stop-saying-thank-you.html): Relationships end when you stop noticing what the other person gives you and stop saying thank you.
 - [Memory Systems XVII: Tense Is Not Toward](https://jamesonstone.io/blog/2026/11/09/memory-systems-tense-is-not-toward.html): A finished date can flip a fact's tense, but forgetting follows the thread, not the clock.
 - [Memory Systems XVI: Reason, Not Prediction](https://jamesonstone.io/blog/2026/11/09/memory-systems-reason-not-prediction.html): A memory is held for a reason, not as a prediction about what the future will need.
-- [Memory Systems XV: Emulate, Then Supersede](https://jamesonstone.io/blog/2026/11/08/memory-systems-emulate-then-supersede.html): Emulate the useful parts of human memory, then replace the judgment layer when evidence supports a better one.
 
 ## Public Projects
 
