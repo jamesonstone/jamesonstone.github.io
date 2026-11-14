@@ -62,6 +62,7 @@ stays easy to scan.
   <li><strong><a href="https://github.com/jamesonstone/outpost">outpost</a></strong>: Durable Alerts From Committed Events.</li>
   <li><strong><a href="https://github.com/jamesonstone/touchstone">touchstone</a></strong>: Personal Benchmark of LLM Performance and Efficiency.</li>
   <li><strong><a href="https://github.com/jamesonstone/alfred-mac-emoji-picker">alfred-mac-emoji-picker</a></strong>: Type e or emoji in Alfred to open the built-in macOS emoji picker (Ctrl+Cmd+Space).</li>
+  <li><strong><a href="https://github.com/jamesonstone/pip">pip</a></strong>: Pip: native macOS and iOS share extension that sends links, text, and images to pip&#39;s personal intake.</li>
 </ul>
 
 ## Archive

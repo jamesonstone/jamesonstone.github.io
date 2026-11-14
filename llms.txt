@@ -53,6 +53,7 @@ Put the AGI in the bag, bro.
 - [outpost](https://github.com/jamesonstone/outpost): Durable Alerts From Committed Events.
 - [touchstone](https://github.com/jamesonstone/touchstone): Personal Benchmark of LLM Performance and Efficiency.
 - [alfred-mac-emoji-picker](https://github.com/jamesonstone/alfred-mac-emoji-picker): Type e or emoji in Alfred to open the built-in macOS emoji picker (Ctrl+Cmd+Space).
+- [pip](https://github.com/jamesonstone/pip): Pip: native macOS and iOS share extension that sends links, text, and images to pip&#39;s personal intake.
 ## Machine Indexes
 
 - [llms.txt](https://jamesonstone.io/llms.txt): Curated LLM entrypoint for this site.
