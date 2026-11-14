@@ -15,4 +15,4 @@ Actionability is what selection acts on. An operation that is never acted on die
 What is an operation's neighborhood? If only the current thread decides its fate, the loop is a filter. If co-served operations affect each other, the loop can produce emergence, and a graph can sneak back in.
 
 
-*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 18.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Tense Is Not Toward](/blog/2026/11/09/memory-systems-tense-is-not-toward.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 18.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Tense Is Not Toward](/blog/2026/11/09/memory-systems-tense-is-not-toward.html) · [Next: Memory Is a Process, Not a Taxonomy](/blog/2026/11/14/memory-systems-memory-is-a-process-not-a-taxonomy.html)
