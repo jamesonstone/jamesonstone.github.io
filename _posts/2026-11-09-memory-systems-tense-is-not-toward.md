@@ -13,4 +13,4 @@ Forgetting should follow threads, not clocks. The item comes down when its reaso
 Does a thread close by evidence, or only when one reconciles it?
 
 
-*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 17.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Reason, Not Prediction](/blog/2026/11/09/memory-systems-reason-not-prediction.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 17.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Reason, Not Prediction](/blog/2026/11/09/memory-systems-reason-not-prediction.html) · [Next: A Rule, Not a Structure](/blog/2026/11/14/memory-systems-a-rule-not-a-structure.html)

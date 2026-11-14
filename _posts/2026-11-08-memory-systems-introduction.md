@@ -31,5 +31,6 @@ The notes, in the order they were written:
 15. [Emulate, Then Supersede](/blog/2026/11/08/memory-systems-emulate-then-supersede.html)
 16. [Reason, Not Prediction](/blog/2026/11/09/memory-systems-reason-not-prediction.html)
 17. [Tense Is Not Toward](/blog/2026/11/09/memory-systems-tense-is-not-toward.html)
+18. [A Rule, Not a Structure](/blog/2026/11/14/memory-systems-a-rule-not-a-structure.html)
 
 *A philosophical exploration in memory systems.* [Next: Terms](/blog/2026/11/08/memory-systems-terms.html)
