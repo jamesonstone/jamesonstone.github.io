@@ -83,10 +83,16 @@ def front_matter(text):
     return load_yaml(match.group(1))
 
 
+def yaml_text(value):
+    if value is None:
+        return ""
+    return str(value)
+
+
 def site_fields():
     data = load_yaml(Path(ROOT, "_config.yml").read_text(encoding="utf-8"))
-    title = str(data.get("title", "")).strip()
-    description = str(data.get("description", "")).strip()
+    title = yaml_text(data.get("title", ""))
+    description = yaml_text(data.get("description", "")).strip()
     if not title or not description:
         raise SystemExit("generate_social_cards: _config.yml needs title and description")
     return title, description
@@ -216,7 +222,7 @@ def posts():
         if not match:
             raise SystemExit(f"generate_social_cards: invalid post filename: {path.name}")
         data = front_matter(path.read_text(encoding="utf-8"))
-        title = str(data.get("title", "")).strip()
+        title = yaml_text(data.get("title"))
         if not title:
             raise SystemExit(f"generate_social_cards: missing title: {path.name}")
         found.append((path.stem, title))
