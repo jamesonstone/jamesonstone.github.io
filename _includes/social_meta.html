@@ -1,0 +1,57 @@
+{%- assign social_title = site.title -%}
+{%- unless page.home -%}
+  {%- if page.title != blank -%}
+    {%- assign social_title = page.title -%}
+  {%- endif -%}
+{%- endunless -%}
+{%- assign social_description = page.description | default: site.description -%}
+{%- assign social_type = "website" -%}
+{%- assign social_image = "/assets/images/social/default.png" -%}
+{%- if page.layout == "post" -%}
+  {%- assign social_type = "article" -%}
+  {%- assign excerpt_source = page.excerpt | strip -%}
+  {%- assign excerpt_mark = excerpt_source | slice: 0, 1 -%}
+  {%- if excerpt_source != blank and excerpt_mark != "<" -%}
+    {%- assign social_description = excerpt_source | strip_html | normalize_whitespace | strip -%}
+  {%- else -%}
+    {%- assign social_description = page.content | strip_html | normalize_whitespace | strip -%}
+    {%- assign social_lead = social_description | slice: 0, 6 -%}
+    {%- if social_lead == "tl;dr:" -%}
+      {%- assign social_description = social_description | remove_first: "tl;dr:" | strip -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- if social_description == blank -%}
+    {%- assign social_description = page.description | default: site.description -%}
+  {%- endif -%}
+  {%- assign card_path = "/assets/images/social/posts/" | append: page.slug | append: ".png" -%}
+  {%- assign card = site.static_files | where: "path", card_path | first -%}
+  {%- if card -%}
+    {%- assign social_image = card_path -%}
+  {%- endif -%}
+{%- endif -%}
+{%- assign social_description = social_description | truncatewords: 28 -%}
+{%- if social_description.size > 320 -%}
+  {%- assign social_description = social_description | truncate: 320 -%}
+{%- endif -%}
+{%- assign social_image_url = social_image | absolute_url -%}
+{%- assign social_url = page.url | absolute_url -%}
+<meta name="description" content="{{ social_description | escape }}">
+<link rel="canonical" href="{{ social_url }}">
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:title" content="{{ social_title | escape }}">
+<meta property="og:description" content="{{ social_description | escape }}">
+<meta property="og:url" content="{{ social_url }}">
+<meta property="og:type" content="{{ social_type }}">
+<meta property="og:image" content="{{ social_image_url }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ social_title | escape }}">
+{%- if social_type == "article" %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{%- endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ social_title | escape }}">
+<meta name="twitter:description" content="{{ social_description | escape }}">
+<meta name="twitter:image" content="{{ social_image_url }}">
+<meta name="twitter:image:alt" content="{{ social_title | escape }}">

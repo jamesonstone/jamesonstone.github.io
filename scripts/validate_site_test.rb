@@ -5,6 +5,7 @@ require "fileutils"
 require "minitest/autorun"
 require "open3"
 require "tmpdir"
+require "zlib"
 
 REPO_ROOT = File.expand_path("..", __dir__)
 VALIDATOR = File.join(REPO_ROOT, "scripts", "validate_site.rb")
@@ -184,6 +185,71 @@ class ValidateSiteTest < Minitest::Test
     end
   end
 
+  def test_missing_social_card_fails
+    with_site_fixture do |root|
+      FileUtils.rm_f(File.join(root, "assets", "images", "social", "posts", "new-post.png"))
+
+      _stdout, stderr, status = run_validator(root)
+
+      refute status.success?
+      assert_includes stderr, "missing social card: assets/images/social/posts/new-post.png"
+    end
+  end
+
+  def test_stale_social_card_title_fails
+    with_site_fixture do |root|
+      write_card_png(File.join(root, "assets", "images", "social", "posts", "new-post.png"), "Old Title")
+
+      _stdout, stderr, status = run_validator(root)
+
+      refute status.success?
+      assert_includes stderr, 'card title is "Old Title"'
+    end
+  end
+
+  def test_post_without_og_image_fails
+    with_site_fixture do |root|
+      write_site_file(
+        root,
+        "blog/2026/06/07/new-post.html",
+        article_html("New Post", "/blog/2026/06/07/new-post.html", "2026-06-07").sub(
+          %r{<meta property="og:image" content="[^"]+">\n},
+          ""
+        )
+      )
+
+      _stdout, stderr, status = run_validator(root)
+
+      refute status.success?
+      assert_includes stderr, "2026-06-07-new-post og:image"
+    end
+  end
+
+  def test_sitewide_post_description_fails
+    with_site_fixture do |root|
+      File.write(
+        File.join(root, "_config.yml"),
+        <<~YAML
+          title: Jameson Stone
+          url: "https://jamesonstone.github.io"
+          baseurl: ""
+          description: Shared site description.
+        YAML
+      )
+      post_path = File.join(root, "_site", "blog", "2026", "06", "07", "new-post.html")
+      html = File.read(post_path).sub(
+        'content="Fixture description for New Post."',
+        'content="Shared site description."'
+      )
+      File.write(post_path, html)
+
+      _stdout, stderr, status = run_validator(root)
+
+      refute status.success?
+      assert_includes stderr, "og:description still uses the site-wide description"
+    end
+  end
+
   private
 
   def with_site_fixture
@@ -210,13 +276,19 @@ class ValidateSiteTest < Minitest::Test
       File.write(File.join(root, "#{name}.md"), "#{name}\n")
     end
 
+    {
+      "index.html" => "Jameson Stone",
+      "blog/index.html" => "Blog",
+      "paintings/index.html" => "Paintings",
+      "projects/index.html" => "Projects",
+      "about/index.html" => "About",
+      "reasoning-machines/index.html" => "Reasoning Machines"
+    }.each do |route, title|
+      write_site_file(root, route, website_html(title))
+    end
+    write_card_png(File.join(root, "assets", "images", "social", "default.png"), "Jameson Stone")
+
     %w[
-      index.html
-      blog/index.html
-      paintings/index.html
-      projects/index.html
-      about/index.html
-      reasoning-machines/index.html
       llms-full.txt
       full-llms.txt
       feed.xml
@@ -224,7 +296,7 @@ class ValidateSiteTest < Minitest::Test
       write_site_file(root, route)
     end
 
-    LEGACY_POSTS.each do |post_id, route|
+    LEGACY_POSTS.each do |post_id, _route|
       write_post(
         root,
         post_id,
@@ -236,7 +308,6 @@ class ValidateSiteTest < Minitest::Test
           date_source: legacy_git_first_commit
         YAML
       )
-      write_site_file(root, route.delete_prefix("/"))
     end
 
     write_post(
@@ -248,7 +319,6 @@ class ValidateSiteTest < Minitest::Test
         date: 2026-06-07 12:00:00 -0400
       YAML
     )
-    write_site_file(root, "blog/2026/06/07/new-post.html")
     write_llms_file(root)
   end
 
@@ -256,6 +326,74 @@ class ValidateSiteTest < Minitest::Test
     post_path = File.join(root, "_posts", "#{post_id}.md")
     FileUtils.mkdir_p(File.dirname(post_path))
     File.write(post_path, "---\n#{metadata}---\n\nBody.\n")
+    title = metadata[/^title:\s*(.+)$/, 1]&.strip
+    return unless title
+    return unless post_id.match?(/\A\d{4}-\d{2}-\d{2}-.+\z/)
+
+    slug = post_id.sub(/\A\d{4}-\d{2}-\d{2}-/, "")
+    date = post_id[0, 10]
+    route = "/blog/#{date.tr("-", "/")}/#{slug}.html"
+    write_card_png(File.join(root, "assets", "images", "social", "posts", "#{slug}.png"), title)
+    write_site_file(root, route.delete_prefix("/"), article_html(title, route, date))
+  end
+
+  def website_html(title)
+    url = "https://jamesonstone.github.io/"
+    image = "https://jamesonstone.github.io/assets/images/social/default.png"
+    <<~HTML
+      <!doctype html>
+      <html><head>
+      <link rel="canonical" href="#{url}">
+      <meta property="og:title" content="#{title}">
+      <meta property="og:description" content="Fixture page.">
+      <meta property="og:url" content="#{url}">
+      <meta property="og:type" content="website">
+      <meta property="og:image" content="#{image}">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="#{image}">
+      </head></html>
+    HTML
+  end
+
+  def article_html(title, route, date)
+    url = "https://jamesonstone.github.io#{route}"
+    image = "https://jamesonstone.github.io/assets/images/social/posts/#{File.basename(route, ".html")}.png"
+    <<~HTML
+      <!doctype html>
+      <html><head>
+      <link rel="canonical" href="#{url}">
+      <meta property="og:title" content="#{title}">
+      <meta property="og:description" content="Fixture description for #{title}.">
+      <meta property="og:url" content="#{url}">
+      <meta property="og:type" content="article">
+      <meta property="og:image" content="#{image}">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+      <meta property="article:published_time" content="#{date}T12:00:00-05:00">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="#{image}">
+      </head></html>
+    HTML
+  end
+
+  def write_card_png(path, title, width = 1200, height = 630)
+    row = "\x00".b + ("\xFB\xFA\xF4".b * width)
+    raw = row * height
+    ihdr = [width, height, 8, 2, 0, 0, 0].pack("NNCCCCC")
+    text = "Title\0#{title}".b
+    png = "\x89PNG\r\n\x1A\n".b
+    png << png_chunk("IHDR", ihdr)
+    png << png_chunk("tEXt", text)
+    png << png_chunk("IDAT", Zlib::Deflate.deflate(raw, 9))
+    png << png_chunk("IEND", "".b)
+    FileUtils.mkdir_p(File.dirname(path))
+    File.binwrite(path, png)
+  end
+
+  def png_chunk(type, data)
+    [data.bytesize].pack("N") + type + data + [Zlib.crc32(type + data)].pack("N")
   end
 
   def write_llms_file(root)

@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require "cgi"
 require "yaml"
 require "date"
 require "time"
@@ -50,6 +51,10 @@ LLMS_REQUIRED_SITE_ROUTES = [
 ].freeze
 
 LLMS_LATEST_POST_LIMIT = 5
+SOCIAL_WIDTH = 1200
+SOCIAL_HEIGHT = 630
+SOCIAL_DESCRIPTION_LIMIT = 500
+PNG_SIGNATURE = "\x89PNG\r\n\x1A\n".b
 
 ALLOWED_WORKFLOWS = [
   "auto-assign.yml",
@@ -161,6 +166,121 @@ def post_slug(path)
   match[1]
 end
 
+def social_default_path
+  File.join(ROOT, "assets", "images", "social", "default.png")
+end
+
+def social_post_path(slug)
+  File.join(ROOT, "assets", "images", "social", "posts", "#{slug}.png")
+end
+
+def png_chunks(path)
+  chunks = []
+  File.open(path, "rb") do |file|
+    return nil unless file.read(8) == PNG_SIGNATURE
+
+    until file.eof?
+      length_bytes = file.read(4)
+      break if length_bytes.nil? || length_bytes.bytesize < 4
+
+      length = length_bytes.unpack1("N")
+      type = file.read(4)
+      data = file.read(length)
+      file.read(4)
+      break if type.nil? || data.nil? || data.bytesize < length
+
+      chunks << [type, data]
+      break if type == "IEND"
+    end
+  end
+  chunks
+end
+
+def png_dimensions(chunks)
+  chunk = chunks.find { |type, _data| type == "IHDR" }
+  return nil unless chunk && chunk[1].bytesize >= 8
+
+  chunk[1].unpack("NN")
+end
+
+def png_title(chunks)
+  marker = "Title\0".b
+  chunk = chunks.find { |type, data| type == "tEXt" && data.start_with?(marker) }
+  return nil unless chunk
+
+  chunk[1].byteslice(marker.bytesize..-1).force_encoding("UTF-8")
+end
+
+def assert_social_card(path, title)
+  relative = path.delete_prefix("#{ROOT}/")
+  unless File.file?(path)
+    fail_with("missing social card: #{relative} (run python3 scripts/generate_social_cards.py)")
+  end
+
+  chunks = png_chunks(path)
+  fail_with("#{relative} is not a PNG social card") unless chunks
+
+  width, height = png_dimensions(chunks)
+  unless [width, height] == [SOCIAL_WIDTH, SOCIAL_HEIGHT]
+    fail_with("#{relative} must be #{SOCIAL_WIDTH}x#{SOCIAL_HEIGHT}")
+  end
+
+  card_title = png_title(chunks)
+  return if card_title == title
+
+  fail_with("#{relative} card title is #{card_title.inspect}, expected #{title.inspect}")
+end
+
+def meta_content(html, attribute, name)
+  html[/<meta\s+#{attribute}="#{Regexp.escape(name)}"\s+content="([^"]*)"/, 1]
+end
+
+def decoded_meta(html, attribute, name)
+  value = meta_content(html, attribute, name)
+  return nil if value.nil?
+
+  CGI.unescapeHTML(value)
+end
+
+def assert_absolute_url(label, value)
+  fail_with("#{label} missing absolute URL") if value.nil? || value.empty?
+  return if value == "#{site_base_url}/" || value.start_with?("#{site_base_url}/")
+
+  fail_with("#{label} is not an absolute site URL: #{value}")
+end
+
+def assert_social_tags(html, label, type:, image:, title: nil)
+  og_title = decoded_meta(html, "property", "og:title")
+  description = decoded_meta(html, "property", "og:description")
+  og_url = meta_content(html, "property", "og:url")
+  canonical = html[/rel="canonical"\s+href="([^"]+)"/, 1]
+  og_type = meta_content(html, "property", "og:type")
+  og_image = meta_content(html, "property", "og:image")
+  width = meta_content(html, "property", "og:image:width")
+  height = meta_content(html, "property", "og:image:height")
+  card = meta_content(html, "name", "twitter:card")
+  twitter_image = meta_content(html, "name", "twitter:image")
+
+  fail_with("#{label} missing og:title") if og_title.nil? || og_title.strip.empty?
+  fail_with("#{label} og:title is #{og_title.inspect}, expected #{title.inspect}") if title && og_title != title
+  fail_with("#{label} missing og:description") if description.nil? || description.strip.empty?
+  if description.length > SOCIAL_DESCRIPTION_LIMIT
+    fail_with("#{label} og:description is longer than #{SOCIAL_DESCRIPTION_LIMIT} characters")
+  end
+  fail_with("#{label} og:type is #{og_type.inspect}, expected #{type.inspect}") unless og_type == type
+  fail_with("#{label} og:image is #{og_image.inspect}, expected #{image}") unless og_image == image
+  fail_with("#{label} og:image:width is #{width.inspect}") unless width == SOCIAL_WIDTH.to_s
+  fail_with("#{label} og:image:height is #{height.inspect}") unless height == SOCIAL_HEIGHT.to_s
+  fail_with("#{label} twitter:card is #{card.inspect}") unless card == "summary_large_image"
+  fail_with("#{label} twitter:image does not match og:image") unless twitter_image == og_image
+  assert_absolute_url("#{label} og:url", og_url)
+  fail_with("#{label} canonical does not match og:url") unless canonical == og_url
+  fail_with("#{label} must not set twitter:site") if html.include?('name="twitter:site"')
+  fail_with("#{label} must not set twitter:creator") if html.include?('name="twitter:creator"')
+
+  [og_title, description, og_url]
+end
+
 def post_date_path(post_id, value)
   post_time(post_id, value).strftime("%Y/%m/%d")
 end
@@ -230,13 +350,75 @@ REQUIRED_ROUTES.each do |route|
   assert_file(site_path(route))
 end
 
+assert_social_card(social_default_path, site_config["title"].to_s)
+
 post_sources.each do |source_path|
   post_id = File.basename(source_path, ".md")
   metadata = front_matter(source_path)
   assert_post_front_matter(post_id, metadata)
 
-  route = "/blog/#{post_date_path(post_id, metadata["date"])}/#{post_slug(source_path)}.html"
+  slug = post_slug(source_path)
+  route = "/blog/#{post_date_path(post_id, metadata["date"])}/#{slug}.html"
   assert_post_permalink(post_id, route)
+  assert_social_card(social_post_path(slug), metadata["title"].to_s)
+
+  html = File.read(site_path(route))
+  _og_title, description, og_url = assert_social_tags(
+    html,
+    post_id,
+    type: "article",
+    image: absolute_site_url("/assets/images/social/posts/#{slug}.png"),
+    title: metadata["title"].to_s
+  )
+  site_description = site_config["description"].to_s.strip
+  if !site_description.empty? && description == site_description
+    fail_with("#{post_id} og:description still uses the site-wide description")
+  end
+
+  published = meta_content(html, "property", "article:published_time")
+  expected_date = post_time(post_id, metadata["date"]).strftime("%Y-%m-%d")
+  if published.nil? || !published.include?(expected_date)
+    fail_with("#{post_id} missing article:published_time for #{expected_date}")
+  end
+  expected_url = absolute_site_url(route)
+  fail_with("#{post_id} og:url is #{og_url}, expected #{expected_url}") unless og_url == expected_url
+end
+
+expected_cards = post_sources.map { |source_path| "#{post_slug(source_path)}.png" }
+Dir.glob(File.join(ROOT, "assets", "images", "social", "posts", "*.png")).each do |path|
+  name = File.basename(path)
+  next if expected_cards.include?(name)
+
+  fail_with("orphan social card: assets/images/social/posts/#{name}")
+end
+
+home_html = File.read(site_path("/index.html"))
+_home_title, home_description, _home_url = assert_social_tags(
+  home_html,
+  "home",
+  type: "website",
+  image: absolute_site_url("/assets/images/social/default.png"),
+  title: site_config["title"].to_s
+)
+site_description = site_config["description"].to_s.strip
+if !site_description.empty? && home_description != site_description
+  fail_with("home og:description is #{home_description.inspect}")
+end
+fail_with("home must not use article:published_time") if home_html.include?("article:published_time")
+
+%w[
+  /blog/index.html
+  /paintings/index.html
+  /projects/index.html
+  /about/index.html
+  /reasoning-machines/index.html
+].each do |route|
+  assert_social_tags(
+    File.read(site_path(route)),
+    route,
+    type: "website",
+    image: absolute_site_url("/assets/images/social/default.png")
+  )
 end
 
 LEGACY_POSTS.each do |post_id, route|

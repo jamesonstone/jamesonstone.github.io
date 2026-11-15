@@ -44,6 +44,14 @@ bundle exec jekyll build
 ruby scripts/validate_site.rb
 ```
 
+Generate social cards after adding or retitling a post. GitHub Pages does not run the script. A missing card still builds against the default image, and the site validator rejects that post until the card exists.
+
+```sh
+python3 scripts/generate_social_cards.py
+```
+
+The script needs Pillow (`python3 -m pip install Pillow`).
+
 Run whitespace checks before completing documentation or code changes:
 
 ```sh
