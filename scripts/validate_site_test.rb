@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require "fileutils"
+require "json"
 require "minitest/autorun"
 require "open3"
 require "tmpdir"
@@ -184,6 +185,72 @@ class ValidateSiteTest < Minitest::Test
     end
   end
 
+  def test_link_preview_requires_data_on_posts
+    with_site_fixture do |root|
+      install_link_preview_assets(root)
+
+      _stdout, stderr, status = run_validator(root)
+
+      refute status.success?
+      assert_includes stderr, "/blog/2019/12/28/i-hop.html missing link preview data"
+    end
+  end
+
+  def test_link_preview_rejects_invalid_json
+    with_site_fixture do |root|
+      install_link_preview_assets(root)
+      write_post_preview_html(root, "{")
+
+      _stdout, stderr, status = run_validator(root)
+
+      refute status.success?
+      assert_includes stderr, "link preview data is invalid JSON"
+    end
+  end
+
+  def test_link_preview_rejects_missing_x_status
+    with_site_fixture do |root|
+      install_link_preview_assets(root)
+      write_post_preview_html(root, preview_index(x_posts: {}))
+      FileUtils.mkdir_p(File.join(root, "_data"))
+      File.write(
+        File.join(root, "_data", "x_posts.yml"),
+        <<~YAML
+          "1":
+            text: "Captured post text."
+        YAML
+      )
+
+      _stdout, stderr, status = run_validator(root)
+
+      refute status.success?
+      assert_includes stderr, "x preview missing status 1"
+    end
+  end
+
+  def test_link_preview_accepts_complete_index
+    with_site_fixture do |root|
+      install_link_preview_assets(root)
+      write_post_preview_html(
+        root,
+        preview_index(x_posts: { "1" => { "text" => "Captured post text." } })
+      )
+      FileUtils.mkdir_p(File.join(root, "_data"))
+      File.write(
+        File.join(root, "_data", "x_posts.yml"),
+        <<~YAML
+          "1":
+            text: "Captured post text."
+        YAML
+      )
+
+      stdout, stderr, status = run_validator(root)
+
+      assert status.success?, stderr
+      assert_includes stdout, "validate_site: ok"
+    end
+  end
+
   private
 
   def with_site_fixture
@@ -292,6 +359,41 @@ class ValidateSiteTest < Minitest::Test
   def write_llms_text(root, text)
     File.write(File.join(root, "llms.txt"), text)
     write_site_file(root, "llms.txt", text)
+  end
+
+  def install_link_preview_assets(root)
+    FileUtils.mkdir_p(File.join(root, "assets", "js"))
+    File.write(File.join(root, "assets", "js", "link-previews.js"), "var linkPreviews = true;\n")
+    write_site_file(root, "assets/js/link-previews.js", "var linkPreviews = true;\n")
+    write_site_file(
+      root,
+      "assets/css/site.css",
+      ".link-preview { transition: opacity 120ms ease; }\n@media (prefers-reduced-motion: reduce) { .link-preview { transition: none; } }\n"
+    )
+  end
+
+  def fixture_post_routes
+    LEGACY_POSTS.values + ["/blog/2026/06/07/new-post.html"]
+  end
+
+  def preview_index(x_posts:)
+    posts = fixture_post_routes.to_h do |route|
+      [route, { "title" => "Title", "date" => "June 7, 2026", "excerpt" => "" }]
+    end
+    JSON.generate({ "posts" => posts, "x" => x_posts })
+  end
+
+  def write_post_preview_html(root, json)
+    html = <<~HTML
+      <div class="post-content"></div>
+      <script type="application/json" id="link-preview-data">
+      #{json}
+      </script>
+      <script src="/assets/js/link-previews.js" defer></script>
+    HTML
+    fixture_post_routes.each do |route|
+      write_site_file(root, route.delete_prefix("/"), html)
+    end
   end
 
   def write_site_file(root, route, body = "<!doctype html>\n")
