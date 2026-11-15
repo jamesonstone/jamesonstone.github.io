@@ -1,0 +1,45 @@
+{
+  "posts": {
+    {%- for post in site.posts -%}
+      {%- assign excerpt = "" -%}
+      {%- assign chunks = post.content | split: "</p>" -%}
+      {%- for chunk in chunks -%}
+        {%- if excerpt.size < 80 -%}
+          {%- assign cleaned = chunk | strip_html | strip -%}
+          {%- assign nav = false -%}
+          {%- if cleaned.size < 220 -%}
+            {%- if cleaned contains "Previous:" or cleaned contains "Next:" -%}
+              {%- assign nav = true -%}
+            {%- endif -%}
+          {%- endif -%}
+          {%- if nav == false and cleaned != "" -%}
+            {%- if excerpt == "" -%}
+              {%- assign excerpt = cleaned -%}
+            {%- else -%}
+              {%- assign excerpt = excerpt | append: " " | append: cleaned -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign excerpt = excerpt | replace: "&amp;", "&" | replace: "&nbsp;", " " | replace: "&quot;", '"' | replace: "&#39;", "'" | replace: "&lt;", "<" | replace: "&gt;", ">" -%}
+      {%- assign excerpt = excerpt | truncatewords: 32 -%}
+      {{ post.url | jsonify }}: {
+        "title": {{ post.title | jsonify | replace: "<", "\u003c" }},
+        "date": {{ post.date | date: "%B %-d, %Y" | jsonify }},
+        "excerpt": {{ excerpt | jsonify | replace: "<", "\u003c" }}
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  },
+  "x": {
+    {%- for pair in site.data.x_posts -%}
+      {%- assign status_id = pair[0] | append: "" -%}
+      {%- assign entry = pair[1] -%}
+      {{ status_id | jsonify }}: {
+        "text": {{ entry.text | jsonify | replace: "<", "\u003c" }}
+        {%- if entry.author -%},"author": {{ entry.author | jsonify | replace: "<", "\u003c" }}{%- endif -%}
+        {%- if entry.handle -%},"handle": {{ entry.handle | jsonify | replace: "<", "\u003c" }}{%- endif -%}
+        {%- if entry.created_at -%},"created_at": {{ entry.created_at | append: "" | jsonify }}{%- endif -%}
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  }
+}

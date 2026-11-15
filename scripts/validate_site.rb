@@ -4,6 +4,7 @@
 require "yaml"
 require "date"
 require "time"
+require "json"
 
 ROOT = File.expand_path("..", __dir__)
 SITE = File.join(ROOT, "_site")
@@ -287,6 +288,59 @@ HIDDEN_DRAFT_SLUGS.each do |slug|
   fail_with("hidden draft slug #{slug.inspect} found in #{offenders.first.delete_prefix("#{ROOT}/")}")
 end
 
+def link_preview_script?
+  File.file?(File.join(ROOT, "assets", "js", "link-previews.js"))
+end
+
+def parse_link_preview_json(html, route)
+  match = html.match(%r{<script type="application/json" id="link-preview-data">(.*?)</script>}m)
+  fail_with("#{route} link preview data is not parseable") unless match
+
+  JSON.parse(match[1])
+rescue JSON::ParserError
+  fail_with("#{route} link preview data is invalid JSON")
+end
+
+def assert_link_previews
+  return unless link_preview_script?
+
+  fail_with("link preview script is empty") if File.read(File.join(ROOT, "assets", "js", "link-previews.js")).strip.empty?
+  assert_file(site_path("/assets/js/link-previews.js"))
+  assert_file(site_path("/assets/css/site.css"))
+
+  css = File.read(site_path("/assets/css/site.css"))
+  fail_with("site.css missing link preview styles") unless css.include?(".link-preview")
+  fail_with("site.css missing reduced-motion link preview rule") unless css.include?(".link-preview { transition: none; }")
+
+  x_path = File.join(ROOT, "_data", "x_posts.yml")
+  x_posts = if File.file?(x_path)
+    YAML.safe_load(File.read(x_path), permitted_classes: [Date, Time], aliases: false) || {}
+  end
+
+  post_sources.each do |source_path|
+    post_id = File.basename(source_path, ".md")
+    metadata = front_matter(source_path)
+    route = "/blog/#{post_date_path(post_id, metadata["date"])}/#{post_slug(source_path)}.html"
+    html = File.read(site_path(route))
+    fail_with("#{route} missing link preview data") unless html.include?('id="link-preview-data"')
+    fail_with("#{route} missing link preview script") unless html.include?("/assets/js/link-previews.js")
+    data = parse_link_preview_json(html, route)
+    fail_with("#{route} link preview data is invalid JSON") unless data.is_a?(Hash)
+    preview = data.dig("posts", route)
+    fail_with("#{route} missing from link preview index") unless preview.is_a?(Hash)
+    fail_with("#{route} preview missing title") if preview["title"].to_s.strip.empty?
+    fail_with("#{route} preview missing date") if preview["date"].to_s.strip.empty?
+    fail_with("#{route} preview missing excerpt") unless preview.key?("excerpt")
+    next unless x_posts
+
+    x_posts.each do |id, entry|
+      x_preview = data.dig("x", id.to_s)
+      fail_with("#{route} x preview missing status #{id}") unless x_preview.is_a?(Hash)
+      fail_with("#{route} x preview #{id} text does not match source") unless x_preview["text"] == entry["text"].to_s
+    end
+  end
+end
+
 source_files.each do |path|
   text = File.read(path)
 
@@ -299,5 +353,7 @@ source_files.each do |path|
     assert_file(site_path(match.first))
   end
 end
+
+assert_link_previews
 
 puts "validate_site: ok"

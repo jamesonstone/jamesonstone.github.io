@@ -346,4 +346,95 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .skip-link:focus { transform: translateY(0); }
 .site-title { white-space: nowrap; }
 .site-nav a { padding-block: 0.35rem; }
-@media (prefers-reduced-motion: reduce) { a { transition: none; } }
+.link-preview {
+  position: fixed;
+  z-index: 30;
+  width: min(19rem, calc(100vw - 1.5rem));
+  padding: 0.75rem 0.9rem 0.8rem;
+  border: 1px solid #d4cdc0;
+  border-radius: 2px;
+  background: #fffdf8;
+  box-shadow: 0 1px 1px rgba(36, 33, 28, 0.04), 0 14px 34px rgba(36, 33, 28, 0.14);
+  color: var(--text);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.link-preview.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.link-preview.is-open::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 9px;
+}
+
+.link-preview.is-open[data-placement="below"]::before {
+  top: -9px;
+}
+
+.link-preview.is-open[data-placement="above"]::before {
+  bottom: -9px;
+}
+
+.link-preview__meta,
+.link-preview__title,
+.link-preview__excerpt,
+.link-preview__text {
+  margin: 0;
+}
+
+.link-preview__meta {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+}
+
+.link-preview__title {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.link-preview__meta + .link-preview__title,
+.link-preview__title + .link-preview__meta {
+  margin-top: 0.22rem;
+}
+
+.link-preview__excerpt,
+.link-preview__text {
+  margin-top: 0.42rem;
+  overflow: hidden;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.link-preview__excerpt {
+  color: var(--text);
+  -webkit-line-clamp: 3;
+}
+
+.link-preview__text {
+  color: var(--text);
+  -webkit-line-clamp: 5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a { transition: none; }
+  .link-preview { transition: none; }
+}
