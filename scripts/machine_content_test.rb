@@ -26,7 +26,8 @@ class MachineContentTest < Minitest::Test
       code_body = "if [ 1 -lt 2 ]; then echo '<keep>'; fi\nprintf '```'\n<html>\nlayout: example\npermalink: /example/\n{% literal %}"
       code = "```sh\n#{code_body}\n```"
       File.write(File.join(root, "_posts", "fixture-snippet.txt"), "RELATIVE_SNIPPET_SENTINEL")
-      write_post(root, "2000-01-02-public.md", "", "PUBLIC_SENTINEL\n\n{{ page.title }}\n\n{% include_relative fixture-snippet.txt %}\n\n{% raw %}#{code}{% endraw %}\n\n[Home](/)")
+      write_post(root, "2000-01-02-public.md", "", "PUBLIC_SENTINEL Research & development.\n\n{{ page.title }}\n\n{% include_relative fixture-snippet.txt %}\n\n{% raw %}#{code}{% endraw %}\n\n[Home](/)")
+      write_post(root, "2000-01-03-explicit.md", "excerpt: \"<p>Explicit social excerpt.</p>\"", "BODY_SHOULD_NOT_WIN")
       stdout, stderr, status = Open3.capture3(
         "bundle", "exec", "jekyll", "build", "--safe", "--source", root,
         "--destination", File.join(root, "_site"), chdir: ROOT
@@ -61,6 +62,37 @@ class MachineContentTest < Minitest::Test
       index = File.read(File.join(root, "_site", "index.html"))
       assert_includes index, 'id="site-family"'
       refute_includes index, 'site-family-list'
+      assert_includes index, 'property="og:title" content="Jameson Stone"'
+      assert_includes index, 'property="og:type" content="website"'
+      assert_includes index, 'property="og:image" content="https://jamesonstone.io/assets/images/social/default.png"'
+      assert_includes index, 'property="og:image:width" content="1200"'
+      assert_includes index, 'property="og:image:height" content="630"'
+      assert_includes index, 'name="twitter:card" content="summary_large_image"'
+      assert_includes index, 'property="og:description" content="Notes, archive posts, paintings, and projects by Jameson Stone."'
+      refute_includes index, 'name="twitter:site"'
+      refute_includes index, 'name="twitter:creator"'
+      refute_includes index, "article:published_time"
+      preview = File.read(File.join(root, "_site", "blog", "2026", "11", "15", "micromanaging-the-model.html"))
+      assert_includes preview, 'property="og:title" content="Micromanaging the Model"'
+      assert_includes preview, 'property="og:type" content="article"'
+      assert_includes preview, 'property="og:image" content="https://jamesonstone.io/assets/images/social/posts/2026-11-15-micromanaging-the-model.png"'
+      assert_includes preview, "A skill is micromanagement written down."
+      assert_match(/property="article:published_time" content="2026-11-15T/, preview)
+      refute_includes preview, 'name="twitter:site"'
+      fallback = File.read(File.join(root, "_site", "blog", "2000", "01", "02", "public.html"))
+      assert_match(/property="og:description" content="[^"]*PUBLIC_SENTINEL/, fallback)
+      assert_match(/property="og:description" content="[^"]*Research &amp; development\./, fallback)
+      refute_match(/property="og:description" content="[^"]*&amp;amp;/, fallback)
+      assert_includes fallback, 'property="og:image" content="https://jamesonstone.io/assets/images/social/default.png"'
+      assert_includes fallback, 'property="og:type" content="article"'
+      assert_includes fallback, 'name="twitter:card" content="summary_large_image"'
+      explicit = File.read(File.join(root, "_site", "blog", "2000", "01", "03", "explicit.html"))
+      assert_includes explicit, 'property="og:description" content="Explicit social excerpt."'
+      refute_match(/property="og:description" content="[^"]*BODY_SHOULD_NOT_WIN/, explicit)
+      assert_includes explicit, 'property="og:image" content="https://jamesonstone.io/assets/images/social/default.png"'
+      expertise = File.read(File.join(root, "_site", "blog", "2026", "11", "04", "expertise-is-learned-structure.html"))
+      assert_match(/property="og:description" content="Expertise is learned structure\./, expertise)
+      refute_match(/property="og:description" content="tl;dr:/, expertise)
       page = File.read(File.join(root, "_site", "reasoning-machines", "index.html"))
       assert_includes page, '<h1 id="reasoning-machines">Reasoning Machines</h1>'
       assert_includes page, 'href="/llms.txt" aria-label='
