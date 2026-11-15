@@ -47,7 +47,7 @@ Commit X previews instead of calling X, oEmbed, or a syndication endpoint from t
 
 Keep the card out of the accessibility tree. A tooltip role plus `aria-describedby` would speak the preview after the link name. `aria-hidden` keeps a single announcement for the link while sighted keyboard users still see the card.
 
-The open card accepts the pointer, including a small bridge across the gap, so a reader can move onto it. It stays up while the pointer is on the link or the card, or while the link has keyboard focus. Escape still dismisses it. Excerpt text decodes the common HTML character references left by `strip_html` before the card is built. The committed X text is already plain text and is not decoded.
+The open card accepts the pointer, including a small bridge across the gap, so a reader can move onto it. It stays up while the pointer is on the link or the card, or while the focused link has a preview. The bridge fills the gap and does not cover the link. Escape still dismisses it. Excerpt text decodes the common HTML character references left by `strip_html` before the card is built. The committed X text is already plain text and is not decoded.
 
 Skip paragraphs that are series navigation ("Previous:" / "Next:" under 220 characters) when choosing an excerpt, then keep the first substantial paragraph, joined with the next one when the first is under 80 characters, and truncate to 32 words so the cut lands on a word. The title remains the primary label when the excerpt is thin.
 

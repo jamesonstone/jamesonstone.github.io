@@ -373,15 +373,15 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   position: absolute;
   right: 0;
   left: 0;
-  height: 14px;
+  height: 9px;
 }
 
 .link-preview.is-open[data-placement="below"]::before {
-  top: -14px;
+  top: -9px;
 }
 
 .link-preview.is-open[data-placement="above"]::before {
-  bottom: -14px;
+  bottom: -9px;
 }
 
 .link-preview__meta,

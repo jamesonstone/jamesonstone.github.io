@@ -199,8 +199,7 @@
       if (pointerOnCard || (pointerOnLink && openLink === link) || focusLink === link) {
         return;
       }
-      if (focusLink && suppressed !== focusLink) {
-        show(focusLink);
+      if (focusLink && suppressed !== focusLink && show(focusLink)) {
         return;
       }
       if (openLink === link) {
@@ -211,12 +210,12 @@
 
   function show(link) {
     if (suppressed === link) {
-      return;
+      return false;
     }
     var preview = lookup(link);
     var usable = preview && (preview.kind === "post" ? preview.title : preview.text);
     if (!usable) {
-      return;
+      return false;
     }
     window.clearTimeout(hideTimer);
     render(preview);
@@ -224,7 +223,7 @@
     pendingLink = null;
     place(link);
     if (openLink !== link) {
-      return;
+      return false;
     }
     card.classList.add("is-open");
     window.requestAnimationFrame(function () {
@@ -232,6 +231,7 @@
         place(link);
       }
     });
+    return true;
   }
 
   function scheduleShow(link) {
