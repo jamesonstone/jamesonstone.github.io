@@ -5,7 +5,9 @@ GitHub Pages does not run this script. Run it after adding or retitling a post,
 then commit assets/images/social/. Requires Pillow.
 """
 
+import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -31,39 +33,60 @@ MUTED = (104, 100, 88)
 TEAL = (11, 99, 88)
 LINE = (222, 215, 201)
 
-POST_NAME = re.compile(r"\A\d{4}-\d{2}-\d{2}-(.+)\.md\Z")
+POST_NAME = re.compile(r"\A\d{4}-\d{2}-\d{2}-.+\.md\Z")
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
+YAML_TO_JSON = r"""
+require "json"
+require "yaml"
+require "date"
+require "time"
+
+def stringify(value)
+  case value
+  when Hash
+    value.each_with_object({}) { |(key, item), result| result[key.to_s] = stringify(item) }
+  when Array
+    value.map { |item| stringify(item) }
+  when Time, Date
+    value.to_s
+  else
+    value
+  end
+end
+
+data = YAML.safe_load(STDIN.read, permitted_classes: [Date, Time]) || {}
+puts JSON.generate(stringify(data))
+"""
 
 
-def parse_scalar(value):
-    value = value.strip()
-    if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
-        return value[1:-1]
-    return value
+def load_yaml(text):
+    completed = subprocess.run(
+        ["ruby", "-e", YAML_TO_JSON],
+        input=text,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        message = completed.stderr.strip() or "YAML parse failed"
+        raise SystemExit(f"generate_social_cards: {message}")
+    data = json.loads(completed.stdout)
+    if not isinstance(data, dict):
+        raise SystemExit("generate_social_cards: YAML document must be a mapping")
+    return data
 
 
 def front_matter(text):
     match = FRONT_MATTER.match(text)
     if not match:
         raise SystemExit("generate_social_cards: missing front matter")
-    data = {}
-    for line in match.group(1).splitlines():
-        if not line or line[:1].isspace() or ":" not in line:
-            continue
-        key, value = line.split(":", 1)
-        data[key.strip()] = parse_scalar(value)
-    return data
+    return load_yaml(match.group(1))
 
 
 def site_fields():
-    data = {}
-    for line in Path(ROOT, "_config.yml").read_text(encoding="utf-8").splitlines():
-        if not line or line[:1].isspace() or line.startswith("#") or ":" not in line:
-            continue
-        key, value = line.split(":", 1)
-        data[key.strip()] = parse_scalar(value)
-    title = data.get("title", "").strip()
-    description = data.get("description", "").strip()
+    data = load_yaml(Path(ROOT, "_config.yml").read_text(encoding="utf-8"))
+    title = str(data.get("title", "")).strip()
+    description = str(data.get("description", "")).strip()
     if not title or not description:
         raise SystemExit("generate_social_cards: _config.yml needs title and description")
     return title, description
@@ -106,9 +129,11 @@ def line_box(font):
 
 
 def draw_tracked(draw, text, x, y, font, fill, tracking):
+    ascent, _descent = font.getmetrics()
+    baseline = y + ascent
     cursor = x
     for character in text:
-        draw.text((cursor, y), character, font=font, fill=fill, anchor="lt")
+        draw.text((cursor, baseline), character, font=font, fill=fill, anchor="ls")
         cursor += font.getlength(character) + tracking
 
 
@@ -191,10 +216,10 @@ def posts():
         if not match:
             raise SystemExit(f"generate_social_cards: invalid post filename: {path.name}")
         data = front_matter(path.read_text(encoding="utf-8"))
-        title = data.get("title", "").strip()
+        title = str(data.get("title", "")).strip()
         if not title:
             raise SystemExit(f"generate_social_cards: missing title: {path.name}")
-        found.append((match.group(1), title))
+        found.append((path.stem, title))
     return found
 
 
@@ -204,9 +229,9 @@ def main():
     site_name, description = site_fields()
     save_card(render_default(site_name, description), OUTPUT_DIR / "default.png", site_name)
     expected = set()
-    for slug, title in posts():
-        expected.add(f"{slug}.png")
-        save_card(render_post(title, site_name), OUTPUT_DIR / "posts" / f"{slug}.png", title)
+    for card_id, title in posts():
+        expected.add(f"{card_id}.png")
+        save_card(render_post(title, site_name), OUTPUT_DIR / "posts" / f"{card_id}.png", title)
     posts_dir = OUTPUT_DIR / "posts"
     for path in posts_dir.glob("*.png"):
         if path.name not in expected:

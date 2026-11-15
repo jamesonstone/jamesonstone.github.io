@@ -187,18 +187,18 @@ class ValidateSiteTest < Minitest::Test
 
   def test_missing_social_card_fails
     with_site_fixture do |root|
-      FileUtils.rm_f(File.join(root, "assets", "images", "social", "posts", "new-post.png"))
+      FileUtils.rm_f(File.join(root, "assets", "images", "social", "posts", "2026-06-07-new-post.png"))
 
       _stdout, stderr, status = run_validator(root)
 
       refute status.success?
-      assert_includes stderr, "missing social card: assets/images/social/posts/new-post.png"
+      assert_includes stderr, "missing social card: assets/images/social/posts/2026-06-07-new-post.png"
     end
   end
 
   def test_stale_social_card_title_fails
     with_site_fixture do |root|
-      write_card_png(File.join(root, "assets", "images", "social", "posts", "new-post.png"), "Old Title")
+      write_card_png(File.join(root, "assets", "images", "social", "posts", "2026-06-07-new-post.png"), "Old Title")
 
       _stdout, stderr, status = run_validator(root)
 
@@ -212,7 +212,7 @@ class ValidateSiteTest < Minitest::Test
       write_site_file(
         root,
         "blog/2026/06/07/new-post.html",
-        article_html("New Post", "/blog/2026/06/07/new-post.html", "2026-06-07").sub(
+        article_html("New Post", "/blog/2026/06/07/new-post.html", "2026-06-07", "2026-06-07-new-post").sub(
           %r{<meta property="og:image" content="[^"]+">\n},
           ""
         )
@@ -247,6 +247,58 @@ class ValidateSiteTest < Minitest::Test
 
       refute status.success?
       assert_includes stderr, "og:description still uses the site-wide description"
+    end
+  end
+
+  def test_latin1_card_title_passes
+    with_site_fixture do |root|
+      write_post(
+        root,
+        "2019-01-01-cafe",
+        <<~YAML
+          layout: post
+          title: Café
+          date: 2019-01-01 12:00:00 -0500
+        YAML
+      )
+
+      stdout, stderr, status = run_validator(root)
+
+      assert status.success?, stderr
+      assert_includes stdout, "validate_site: ok"
+    end
+  end
+
+  def test_itxt_card_title_passes
+    with_site_fixture do |root|
+      title = "Model\u2019s Limits"
+      post_id = "2019-01-02-model-limits"
+      post_path = File.join(root, "_posts", "#{post_id}.md")
+      FileUtils.mkdir_p(File.dirname(post_path))
+      File.write(
+        post_path,
+        <<~MARKDOWN
+          ---
+          layout: post
+          title: "#{title}"
+          date: 2019-01-02 12:00:00 -0500
+          ---
+
+          Body.
+        MARKDOWN
+      )
+      route = "/blog/2019/01/02/model-limits.html"
+      write_site_file(root, route.delete_prefix("/"), article_html(title, route, "2019-01-02", post_id))
+      write_card_png(
+        File.join(root, "assets", "images", "social", "posts", "#{post_id}.png"),
+        title,
+        chunk: :itxt
+      )
+
+      stdout, stderr, status = run_validator(root)
+
+      assert status.success?, stderr
+      assert_includes stdout, "validate_site: ok"
     end
   end
 
@@ -333,8 +385,8 @@ class ValidateSiteTest < Minitest::Test
     slug = post_id.sub(/\A\d{4}-\d{2}-\d{2}-/, "")
     date = post_id[0, 10]
     route = "/blog/#{date.tr("-", "/")}/#{slug}.html"
-    write_card_png(File.join(root, "assets", "images", "social", "posts", "#{slug}.png"), title)
-    write_site_file(root, route.delete_prefix("/"), article_html(title, route, date))
+    write_card_png(File.join(root, "assets", "images", "social", "posts", "#{post_id}.png"), title)
+    write_site_file(root, route.delete_prefix("/"), article_html(title, route, date, post_id))
   end
 
   def website_html(title)
@@ -357,9 +409,9 @@ class ValidateSiteTest < Minitest::Test
     HTML
   end
 
-  def article_html(title, route, date)
+  def article_html(title, route, date, post_id)
     url = "https://jamesonstone.github.io#{route}"
-    image = "https://jamesonstone.github.io/assets/images/social/posts/#{File.basename(route, ".html")}.png"
+    image = "https://jamesonstone.github.io/assets/images/social/posts/#{post_id}.png"
     <<~HTML
       <!doctype html>
       <html><head>
@@ -378,14 +430,20 @@ class ValidateSiteTest < Minitest::Test
     HTML
   end
 
-  def write_card_png(path, title, width = 1200, height = 630)
+  def write_card_png(path, title, width = 1200, height = 630, chunk: :text)
     row = "\x00".b + ("\xFB\xFA\xF4".b * width)
     raw = row * height
     ihdr = [width, height, 8, 2, 0, 0, 0].pack("NNCCCCC")
-    text = "Title\0#{title}".b
+    if chunk == :itxt
+      text = "Title".b + ("\0".b * 5) + title.encode("UTF-8").b
+      text_type = "iTXt"
+    else
+      text = "Title\0".b + title.encode("ISO-8859-1").b
+      text_type = "tEXt"
+    end
     png = "\x89PNG\r\n\x1A\n".b
     png << png_chunk("IHDR", ihdr)
-    png << png_chunk("tEXt", text)
+    png << png_chunk(text_type, text)
     png << png_chunk("IDAT", Zlib::Deflate.deflate(raw, 9))
     png << png_chunk("IEND", "".b)
     FileUtils.mkdir_p(File.dirname(path))

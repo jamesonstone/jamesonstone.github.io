@@ -5,6 +5,7 @@ require "cgi"
 require "yaml"
 require "date"
 require "time"
+require "zlib"
 
 ROOT = File.expand_path("..", __dir__)
 SITE = File.join(ROOT, "_site")
@@ -170,8 +171,8 @@ def social_default_path
   File.join(ROOT, "assets", "images", "social", "default.png")
 end
 
-def social_post_path(slug)
-  File.join(ROOT, "assets", "images", "social", "posts", "#{slug}.png")
+def social_post_path(card_id)
+  File.join(ROOT, "assets", "images", "social", "posts", "#{card_id}.png")
 end
 
 def png_chunks(path)
@@ -203,12 +204,39 @@ def png_dimensions(chunks)
   chunk[1].unpack("NN")
 end
 
+def split_png_text(data)
+  index = data.index("\0".b)
+  return [data, "".b] unless index
+
+  [data.byteslice(0, index), data.byteslice((index + 1)..-1)]
+end
+
+def png_utf8(value)
+  value.force_encoding("UTF-8")
+  return value if value.valid_encoding?
+
+  nil
+end
+
 def png_title(chunks)
   marker = "Title\0".b
-  chunk = chunks.find { |type, data| type == "tEXt" && data.start_with?(marker) }
-  return nil unless chunk
+  text_chunk = chunks.find { |type, data| type == "tEXt" && data.start_with?(marker) }
+  if text_chunk
+    value = text_chunk[1].byteslice(marker.bytesize..-1)
+    return value.force_encoding("ISO-8859-1").encode("UTF-8")
+  end
 
-  chunk[1].byteslice(marker.bytesize..-1).force_encoding("UTF-8")
+  itxt = chunks.find { |type, data| type == "iTXt" && data.start_with?(marker) }
+  return nil unless itxt
+
+  rest = itxt[1].byteslice(marker.bytesize..-1)
+  return nil if rest.nil? || rest.bytesize < 2
+
+  compressed = rest.getbyte(0) == 1
+  _language, after_language = split_png_text(rest.byteslice(2..-1) || "".b)
+  _translated, text = split_png_text(after_language || "".b)
+  text = Zlib.inflate(text) if compressed && text
+  png_utf8(text || "".b)
 end
 
 def assert_social_card(path, title)
@@ -360,14 +388,14 @@ post_sources.each do |source_path|
   slug = post_slug(source_path)
   route = "/blog/#{post_date_path(post_id, metadata["date"])}/#{slug}.html"
   assert_post_permalink(post_id, route)
-  assert_social_card(social_post_path(slug), metadata["title"].to_s)
+  assert_social_card(social_post_path(post_id), metadata["title"].to_s)
 
   html = File.read(site_path(route))
   _og_title, description, og_url = assert_social_tags(
     html,
     post_id,
     type: "article",
-    image: absolute_site_url("/assets/images/social/posts/#{slug}.png"),
+    image: absolute_site_url("/assets/images/social/posts/#{post_id}.png"),
     title: metadata["title"].to_s
   )
   site_description = site_config["description"].to_s.strip
@@ -384,7 +412,7 @@ post_sources.each do |source_path|
   fail_with("#{post_id} og:url is #{og_url}, expected #{expected_url}") unless og_url == expected_url
 end
 
-expected_cards = post_sources.map { |source_path| "#{post_slug(source_path)}.png" }
+expected_cards = post_sources.map { |source_path| "#{File.basename(source_path, ".md")}.png" }
 Dir.glob(File.join(ROOT, "assets", "images", "social", "posts", "*.png")).each do |path|
   name = File.basename(path)
   next if expected_cards.include?(name)

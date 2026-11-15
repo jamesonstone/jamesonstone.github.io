@@ -33,11 +33,11 @@ Commit the PNGs. GitHub Pages builds with the github-pages gem in safe mode and 
 
 ## DECISIONS
 
-Committed images, not a Pages plugin and not a new deploy workflow. Descriptions are computed while rendering, so a new post does not need new front matter to stay valid. The default image keeps a missing card from producing a broken image URL. Validation still requires the card before the post is accepted. No X handle is invented. Cards stay limited to the site name and the post title.
+Committed images, not a Pages plugin and not a new deploy workflow. Card filenames use the post source filename, so two posts that share a slug on different dates do not overwrite one card. Descriptions are computed while rendering, so a new post does not need new front matter to stay valid. The default image keeps a missing card from producing a broken image URL. Validation still requires the card before the post is accepted. No X handle is invented. Cards stay limited to the site name and the post title.
 
 ## VALIDATION
 
-PASS: `ruby -c scripts/validate_site.rb`, `ruby -c scripts/update_projects_from_github.rb`, validator tests (15 runs, 45 assertions), updater tests (10 runs, 42 assertions), workflow tests (5 runs, 33 assertions), machine-content test (1 run, 123 assertions), `bundle exec jekyll build`, and `ruby scripts/validate_site.rb`. `git diff --check` reported no whitespace errors. `actionlint` was unavailable in this environment. `kit check` was unavailable because the Kit CLI is not installed.
+PASS: `ruby -c scripts/validate_site.rb`, `ruby -c scripts/update_projects_from_github.rb`, validator tests (17 runs, 51 assertions), updater tests (10 runs, 42 assertions), workflow tests (5 runs, 33 assertions), machine-content test (1 run, 127 assertions), `bundle exec jekyll build`, and `ruby scripts/validate_site.rb`. `git diff --check` reported no whitespace errors. `actionlint` was unavailable in this environment. `kit check` was unavailable because the Kit CLI is not installed.
 
 The Micromanaging the Model page renders an article card, an absolute 1200×630 post image, a canonical URL, and a description taken from the opening text. A fixture post with no card still points at the default image. A fixture post with an explicit excerpt uses that excerpt. The home page uses the site title, the site description, and the default image. No `twitter:site` or `twitter:creator` tag is emitted.
 

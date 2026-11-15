@@ -9,12 +9,13 @@
 {%- assign social_image = "/assets/images/social/default.png" -%}
 {%- if page.layout == "post" -%}
   {%- assign social_type = "article" -%}
-  {%- assign excerpt_source = page.excerpt | strip -%}
-  {%- assign excerpt_mark = excerpt_source | slice: 0, 1 -%}
-  {%- if excerpt_source != blank and excerpt_mark != "<" -%}
-    {%- assign social_description = excerpt_source | strip_html | normalize_whitespace | strip -%}
+  {%- assign excerpt_text = page.excerpt | strip_html | normalize_whitespace | strip -%}
+  {%- assign body_text = page.content | strip_html | normalize_whitespace | strip -%}
+  {%- assign body_prefix = body_text | slice: 0, excerpt_text.size -%}
+  {%- if excerpt_text != blank and body_prefix != excerpt_text -%}
+    {%- assign social_description = excerpt_text -%}
   {%- else -%}
-    {%- assign social_description = page.content | strip_html | normalize_whitespace | strip -%}
+    {%- assign social_description = body_text -%}
     {%- assign social_lead = social_description | slice: 0, 6 -%}
     {%- if social_lead == "tl;dr:" -%}
       {%- assign social_description = social_description | remove_first: "tl;dr:" | strip -%}
@@ -23,7 +24,8 @@
   {%- if social_description == blank -%}
     {%- assign social_description = page.description | default: site.description -%}
   {%- endif -%}
-  {%- assign card_path = "/assets/images/social/posts/" | append: page.slug | append: ".png" -%}
+  {%- assign card_name = page.path | split: "/" | last | replace: ".md", ".png" -%}
+  {%- assign card_path = "/assets/images/social/posts/" | append: card_name -%}
   {%- assign card = site.static_files | where: "path", card_path | first -%}
   {%- if card -%}
     {%- assign social_image = card_path -%}
@@ -35,11 +37,11 @@
 {%- endif -%}
 {%- assign social_image_url = social_image | absolute_url -%}
 {%- assign social_url = page.url | absolute_url -%}
-<meta name="description" content="{{ social_description | escape }}">
+<meta name="description" content="{{ social_description | escape_once }}">
 <link rel="canonical" href="{{ social_url }}">
 <meta property="og:site_name" content="{{ site.title | escape }}">
 <meta property="og:title" content="{{ social_title | escape }}">
-<meta property="og:description" content="{{ social_description | escape }}">
+<meta property="og:description" content="{{ social_description | escape_once }}">
 <meta property="og:url" content="{{ social_url }}">
 <meta property="og:type" content="{{ social_type }}">
 <meta property="og:image" content="{{ social_image_url }}">
@@ -52,6 +54,6 @@
 {%- endif %}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ social_title | escape }}">
-<meta name="twitter:description" content="{{ social_description | escape }}">
+<meta name="twitter:description" content="{{ social_description | escape_once }}">
 <meta name="twitter:image" content="{{ social_image_url }}">
 <meta name="twitter:image:alt" content="{{ social_title | escape }}">

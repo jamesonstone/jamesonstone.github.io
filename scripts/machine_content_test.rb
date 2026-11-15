@@ -26,8 +26,8 @@ class MachineContentTest < Minitest::Test
       code_body = "if [ 1 -lt 2 ]; then echo '<keep>'; fi\nprintf '```'\n<html>\nlayout: example\npermalink: /example/\n{% literal %}"
       code = "```sh\n#{code_body}\n```"
       File.write(File.join(root, "_posts", "fixture-snippet.txt"), "RELATIVE_SNIPPET_SENTINEL")
-      write_post(root, "2000-01-02-public.md", "", "PUBLIC_SENTINEL\n\n{{ page.title }}\n\n{% include_relative fixture-snippet.txt %}\n\n{% raw %}#{code}{% endraw %}\n\n[Home](/)")
-      write_post(root, "2000-01-03-explicit.md", "excerpt: Explicit social excerpt.", "BODY_SHOULD_NOT_WIN")
+      write_post(root, "2000-01-02-public.md", "", "PUBLIC_SENTINEL Research & development.\n\n{{ page.title }}\n\n{% include_relative fixture-snippet.txt %}\n\n{% raw %}#{code}{% endraw %}\n\n[Home](/)")
+      write_post(root, "2000-01-03-explicit.md", "excerpt: \"<p>Explicit social excerpt.</p>\"", "BODY_SHOULD_NOT_WIN")
       stdout, stderr, status = Open3.capture3(
         "bundle", "exec", "jekyll", "build", "--safe", "--source", root,
         "--destination", File.join(root, "_site"), chdir: ROOT
@@ -75,12 +75,14 @@ class MachineContentTest < Minitest::Test
       preview = File.read(File.join(root, "_site", "blog", "2026", "11", "15", "micromanaging-the-model.html"))
       assert_includes preview, 'property="og:title" content="Micromanaging the Model"'
       assert_includes preview, 'property="og:type" content="article"'
-      assert_includes preview, 'property="og:image" content="https://jamesonstone.io/assets/images/social/posts/micromanaging-the-model.png"'
+      assert_includes preview, 'property="og:image" content="https://jamesonstone.io/assets/images/social/posts/2026-11-15-micromanaging-the-model.png"'
       assert_includes preview, "A skill is micromanagement written down."
       assert_match(/property="article:published_time" content="2026-11-15T/, preview)
       refute_includes preview, 'name="twitter:site"'
       fallback = File.read(File.join(root, "_site", "blog", "2000", "01", "02", "public.html"))
       assert_match(/property="og:description" content="[^"]*PUBLIC_SENTINEL/, fallback)
+      assert_match(/property="og:description" content="[^"]*Research &amp; development\./, fallback)
+      refute_match(/property="og:description" content="[^"]*&amp;amp;/, fallback)
       assert_includes fallback, 'property="og:image" content="https://jamesonstone.io/assets/images/social/default.png"'
       assert_includes fallback, 'property="og:type" content="article"'
       assert_includes fallback, 'name="twitter:card" content="summary_large_image"'
