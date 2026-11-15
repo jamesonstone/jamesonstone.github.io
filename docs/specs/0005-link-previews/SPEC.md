@@ -47,6 +47,8 @@ Commit X previews instead of calling X, oEmbed, or a syndication endpoint from t
 
 Keep the card out of the accessibility tree. A tooltip role plus `aria-describedby` would speak the preview after the link name. `aria-hidden` keeps a single announcement for the link while sighted keyboard users still see the card.
 
+The open card accepts the pointer, including a small bridge across the gap, so a reader can move onto it. It stays up while the pointer is on the link or the card, or while the link has keyboard focus. Escape still dismisses it. Excerpt text decodes the common HTML character references left by `strip_html` before the card is built. The committed X text is already plain text and is not decoded.
+
 Skip paragraphs that are series navigation ("Previous:" / "Next:" under 220 characters) when choosing an excerpt, then keep the first substantial paragraph, joined with the next one when the first is under 80 characters, and truncate to 32 words so the cut lands on a word. The title remains the primary label when the excerpt is thin.
 
 Rejected: Twitter widgets, client fetches, and a Jekyll plugin. They either add a third-party runtime, call X from the reader, or fail on GitHub Pages.
@@ -61,11 +63,13 @@ The authenticated `gh` user lookup returned HTTP 403, so the integration token's
 
 PASS: `ruby -c scripts/validate_site.rb`, `bundle exec jekyll build`, and `ruby scripts/validate_site.rb`. The built index has 54 posts and both captured X statuses. The X text matches `_data/x_posts.yml`.
 
-PASS: `ruby -c scripts/update_projects_from_github.rb`, `ruby scripts/update_projects_from_github_test.rb` (10 runs, 42 assertions), `ruby scripts/update_projects_workflow_test.rb` (5 runs, 33 assertions), `ruby scripts/validate_site_test.rb` (15 runs, 45 assertions), `ruby scripts/machine_content_test.rb` (1 run, 73 assertions), `node --check assets/js/link-previews.js`, and `git diff --check`.
+PASS: `ruby -c scripts/update_projects_from_github.rb`, `ruby scripts/update_projects_from_github_test.rb` (10 runs, 42 assertions), `ruby scripts/update_projects_workflow_test.rb` (5 runs, 33 assertions), `ruby scripts/validate_site_test.rb` (16 runs, 48 assertions), `ruby scripts/machine_content_test.rb` (1 run, 73 assertions), `node --check assets/js/link-previews.js`, and `git diff --check`.
 
 UNAVAILABLE: `actionlint` is not installed, so `.github/workflows/update-projects.yml` was not linted. That workflow was not edited.
 
-Browser, on the built site: mouse hover opens the internal card and the X card; leaving the link closes it; a GitHub link and an unknown status stay plain; keyboard focus opens the card; Escape closes it while focus remains; focus again reopens it; a touch pointer does not open it; a `twitter.com` status URL uses the same captured post; a root-relative post link opens that post's card; `prefers-reduced-motion: reduce` sets the card transition to `none`. The card stays `aria-hidden="true"` and the link has no `aria-describedby`.
+Browser, on the built site: mouse hover opens the internal card and the X card; the pointer can move onto the card and it stays open; leaving both closes it; a GitHub link and an unknown status stay plain; keyboard focus opens the card and keeps it open after the pointer leaves; Escape closes it while focus remains; focus again reopens it; a touch pointer does not open it; a `twitter.com` status URL uses the same captured post; a root-relative post link opens that post's card; `prefers-reduced-motion: reduce` sets the card transition to `none`. The card stays `aria-hidden="true"` and the link has no `aria-describedby`.
+
+The built excerpt for the archive post that opens with a Markdown image and links is plain prose. `strip_html` already received HTML for every post in that build, so the index was not switched to another excerpt source.
 
 ## OUTCOME
 

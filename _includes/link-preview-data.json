@@ -21,6 +21,7 @@
           {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
+      {%- assign excerpt = excerpt | replace: "&amp;", "&" | replace: "&nbsp;", " " | replace: "&quot;", '"' | replace: "&#39;", "'" | replace: "&lt;", "<" | replace: "&gt;", ">" -%}
       {%- assign excerpt = excerpt | truncatewords: 32 -%}
       {{ post.url | jsonify }}: {
         "title": {{ post.title | jsonify | replace: "<", "\u003c" }},

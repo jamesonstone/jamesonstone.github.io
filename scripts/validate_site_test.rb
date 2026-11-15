@@ -196,6 +196,29 @@ class ValidateSiteTest < Minitest::Test
     end
   end
 
+  def test_link_preview_rejects_malformed_json_on_later_page
+    with_site_fixture do |root|
+      install_link_preview_assets(root)
+      write_post_preview_html(root, preview_index(x_posts: {}))
+      later_route = "blog/2020/01/12/weather-pre.html"
+      write_site_file(
+        root,
+        later_route,
+        <<~HTML
+          <script type="application/json" id="link-preview-data">
+          {
+          </script>
+          <script src="/assets/js/link-previews.js" defer></script>
+        HTML
+      )
+
+      _stdout, stderr, status = run_validator(root)
+
+      refute status.success?
+      assert_includes stderr, "/blog/2020/01/12/weather-pre.html link preview data is invalid JSON"
+    end
+  end
+
   def test_link_preview_rejects_invalid_json
     with_site_fixture do |root|
       install_link_preview_assets(root)

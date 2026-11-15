@@ -22,7 +22,10 @@
 
   var openLink = null;
   var pendingLink = null;
+  var focusLink = null;
   var suppressed = null;
+  var pointerOnLink = false;
+  var pointerOnCard = false;
   var showTimer = 0;
   var hideTimer = 0;
 
@@ -157,6 +160,7 @@
     window.clearTimeout(hideTimer);
     pendingLink = null;
     openLink = null;
+    pointerOnCard = false;
     card.classList.remove("is-open");
   }
 
@@ -183,8 +187,26 @@
     if (left < margin) {
       left = margin;
     }
+    card.dataset.placement = top >= rect.bottom ? "below" : "above";
     card.style.top = top + "px";
     card.style.left = left + "px";
+  }
+
+  function armHide(link) {
+    window.clearTimeout(hideTimer);
+    var delay = reduceMotion.matches ? 0 : 280;
+    hideTimer = window.setTimeout(function () {
+      if (pointerOnCard || (pointerOnLink && openLink === link) || focusLink === link) {
+        return;
+      }
+      if (focusLink && suppressed !== focusLink) {
+        show(focusLink);
+        return;
+      }
+      if (openLink === link) {
+        hide();
+      }
+    }, delay);
   }
 
   function show(link) {
@@ -213,10 +235,13 @@
   }
 
   function scheduleShow(link) {
-    if (openLink === link || pendingLink === link || suppressed === link) {
+    if (suppressed === link) {
       return;
     }
     window.clearTimeout(hideTimer);
+    if (openLink === link || pendingLink === link) {
+      return;
+    }
     window.clearTimeout(showTimer);
     if (openLink) {
       openLink = null;
@@ -247,6 +272,7 @@
     if (suppressed && suppressed !== link) {
       suppressed = null;
     }
+    pointerOnLink = true;
     scheduleShow(link);
   });
 
@@ -261,13 +287,49 @@
     if (event.relatedTarget && link.contains(event.relatedTarget)) {
       return;
     }
+    pointerOnLink = false;
     clearSuppressed(link);
-    if (openLink !== link && pendingLink !== link) {
+    if (event.relatedTarget && card.contains(event.relatedTarget)) {
+      pointerOnCard = true;
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
       return;
     }
-    window.clearTimeout(showTimer);
-    pendingLink = null;
-    hideTimer = window.setTimeout(hide, 60);
+    if (pendingLink === link) {
+      window.clearTimeout(showTimer);
+      pendingLink = null;
+    }
+    if (openLink !== link || focusLink === link) {
+      return;
+    }
+    armHide(link);
+  });
+
+  card.addEventListener("pointerover", function (event) {
+    if (event.pointerType !== "mouse") {
+      return;
+    }
+    pointerOnCard = true;
+    window.clearTimeout(hideTimer);
+  });
+
+  card.addEventListener("pointerout", function (event) {
+    if (event.pointerType !== "mouse") {
+      return;
+    }
+    if (event.relatedTarget && card.contains(event.relatedTarget)) {
+      return;
+    }
+    pointerOnCard = false;
+    if (event.relatedTarget && openLink && openLink.contains(event.relatedTarget)) {
+      pointerOnLink = true;
+      window.clearTimeout(hideTimer);
+      return;
+    }
+    if (!openLink || focusLink === openLink) {
+      return;
+    }
+    armHide(openLink);
   });
 
   root.addEventListener("focusin", function (event) {
@@ -275,7 +337,9 @@
     if (!link || !link.matches(":focus-visible")) {
       return;
     }
+    focusLink = link;
     window.clearTimeout(showTimer);
+    window.clearTimeout(hideTimer);
     show(link);
   });
 
@@ -284,7 +348,16 @@
     if (!link) {
       return;
     }
+    if (event.relatedTarget && link.contains(event.relatedTarget)) {
+      return;
+    }
     clearSuppressed(link);
+    if (focusLink === link) {
+      focusLink = null;
+    }
+    if (pointerOnLink || pointerOnCard) {
+      return;
+    }
     if (openLink === link) {
       hide();
     }
