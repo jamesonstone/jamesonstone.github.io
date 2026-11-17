@@ -16,11 +16,11 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
+- [Same Definitions, Different Invoice](https://jamesonstone.io/blog/2026/11/17/same-definitions-different-invoice.html): A software factory and a harness are one job under two names, as are a semantic layer and an ontology, so define what a model cannot infer and call the rest whatever raises the round.
 - [Micromanaging the Model](https://jamesonstone.io/blog/2026/11/15/micromanaging-the-model.html): A skill is micromanagement written down, and it constrains the model more as the model improves, so state the outcome and own only the rules a model should not infer.
 - [Memory Systems XIX: Memory Is a Process, Not a Taxonomy](https://jamesonstone.io/blog/2026/11/14/memory-systems-memory-is-a-process-not-a-taxonomy.html): Memory is the running loop over durable state; the store is what the process leaves behind, and replay of the log makes that store a cache.
 - [Memory Systems XVIII: A Rule, Not a Structure](https://jamesonstone.io/blog/2026/11/14/memory-systems-a-rule-not-a-structure.html): Four verbs are the rule and an operation is the cell; lessons are patterns that survive the loop, not a structure designed above it.
 - [Autonomy Needs Procedures](https://jamesonstone.io/blog/2026/11/10/autonomy-needs-procedures.html): Rules define constraints; SOPs connect recurring work to a verifiable result as coding agents become more autonomous.
-- [You probably don't need the big model](https://jamesonstone.io/blog/2026/11/10/you-probably-dont-need-the-big-model.html): Most software work is well-trodden CRUD and integration, so start with the cheapest model that works and fix the context before you reach for more intelligence.
 
 ## Public Projects
 
