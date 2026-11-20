@@ -16,11 +16,11 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
+- [Jameson's Law of Adjacent Problems](https://jamesonstone.io/blog/2026/11/20/jamesons-law-of-adjacent-problems.html): The harder the real problem, the more likely we are to solve the one next to it and call it done; when implementation is cheap, that adjacent solution often replaces a system its author believes is complete.
 - [Context Above the Assistant](https://jamesonstone.io/blog/2026/11/20/context-above-the-assistant.html): Each assistant is its own isolated context, so a shared layer above them is what lets one see that another already handled the same task.
 - [Same Definitions, Different Invoice](https://jamesonstone.io/blog/2026/11/17/same-definitions-different-invoice.html): A software factory and a harness are one job under two names, as are a semantic layer and an ontology, so define what a model cannot infer and call the rest whatever raises the round.
 - [Micromanaging the Model](https://jamesonstone.io/blog/2026/11/15/micromanaging-the-model.html): A skill is micromanagement written down, and it constrains the model more as the model improves, so state the outcome and own only the rules a model should not infer.
 - [Memory Systems XIX: Memory Is a Process, Not a Taxonomy](https://jamesonstone.io/blog/2026/11/14/memory-systems-memory-is-a-process-not-a-taxonomy.html): Memory is the running loop over durable state; the store is what the process leaves behind, and replay of the log makes that store a cache.
-- [Memory Systems XVIII: A Rule, Not a Structure](https://jamesonstone.io/blog/2026/11/14/memory-systems-a-rule-not-a-structure.html): Four verbs are the rule and an operation is the cell; lessons are patterns that survive the loop, not a structure designed above it.
 
 ## Public Projects
 
