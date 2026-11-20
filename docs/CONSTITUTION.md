@@ -48,6 +48,11 @@ If a change touches behavior covered by existing specs, update the relevant spec
 - Aim for 300–600 body words, excluding title metadata and front matter; finish sooner when the argument is complete, and approach 1,000 only when substance warrants it. Present the idea, justify it, and move on: do not repeat claims or add filler to meet a quota. Use natural paragraph breaks at coherent turns, without dense walls of text, arbitrary paragraph counts, or excessive standalone fragments.
 - Test the argument against its strongest objection. Let an objection change the thesis when warranted; do not force reconciliation or protect the author's intuition from scrutiny.
 
+## POST REFERENCES
+
+- Posts use no in-text links or inline citations. Mark references with numbered `[1]`-style markers in the text and put sources, including any links, only in a footer at the end of the post.
+- Do not use DOI links. Keep references to a few and keep the ideas over a pile of names. Heavy outbound linking adds security exposure to the blog.
+
 ## NON-GOALS
 
 - Do not turn the site into a SaaS landing page, portfolio funnel, CMS, SPA, server-rendered application, analytics platform, or newsletter system by default.
