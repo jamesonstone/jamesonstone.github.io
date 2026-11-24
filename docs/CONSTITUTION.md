@@ -50,7 +50,7 @@ If a change touches behavior covered by existing specs, update the relevant spec
 
 ## POST REFERENCES
 
-- Posts use no in-text links or inline citations. Mark references with numbered `[1]`-style markers in the text and put sources, including any links, only in a footer at the end of the post.
+- Link the author's own jamesonstone.io posts inline in the text as normal Markdown links. Cite other people's work only with numbered `[1]`-style markers in the text, with those sources (including any links) listed only in a footer at the end of the post, separated with `<br>`.
 - Do not use DOI links. Keep references to a few and keep the ideas over a pile of names. Heavy outbound linking adds security exposure to the blog.
 
 ## NON-GOALS
