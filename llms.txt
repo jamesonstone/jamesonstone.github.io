@@ -16,11 +16,11 @@ Put the AGI in the bag, bro.
 
 ## Latest Posts
 
+- [Specificity Is the Solution](https://jamesonstone.io/blog/2026/11/24/specificity-is-the-solution.html): Generalization is the default a language model's training objective sets; the job is finding the thinking that specifically does not generalize, because a general answer is right on average and wrong here.
+- [The Right Task](https://jamesonstone.io/blog/2026/11/24/the-right-task.html): As correctness gets cheap, the remaining work is a tactical check on whether the task is the right task: models reward the typical answer, and someone still has to want the answer.
 - [Coding-Agent Harness Research II: When a Version Is a Decision](https://jamesonstone.io/blog/2026/11/23/coding-agent-harness-research-when-a-version-is-a-decision.html): How Kit PR #310 moves Mint release selection to runtime while preserving compatibility for legacy deployment jobs.
 - [Coding-Agent Harness Research I: What the Repo Knows](https://jamesonstone.io/blog/2026/11/22/coding-agent-harness-research-what-the-repo-knows.html): Kit's config and review changes test which facts belong in a coding-agent harness as models improve.
 - [Prediction Forces Understanding](https://jamesonstone.io/blog/2026/11/21/prediction-forces-understanding.html): You understand a system when you can predict what a change will do before you make it; bugs, outages, and the X/Y problem are prediction failures, and the adjacent problem is the one your predictions already cover.
-- [Jameson's Law of Adjacent Problems](https://jamesonstone.io/blog/2026/11/20/jamesons-law-of-adjacent-problems.html): The harder the real problem, the more likely we are to solve the one next to it and call it done; when implementation is cheap, that adjacent solution often replaces a system its author believes is complete.
-- [Context Above the Assistant](https://jamesonstone.io/blog/2026/11/20/context-above-the-assistant.html): Each assistant is its own isolated context, so a shared layer above them is what lets one see that another already handled the same task.
 
 ## Public Projects
 
