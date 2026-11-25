@@ -17,4 +17,4 @@ Delete the operations file. Replay the log of serves, proposals, reconciles, and
 Must any state be durable in its own right?
 
 
-*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 19.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: A Rule, Not a Structure](/blog/2026/11/14/memory-systems-a-rule-not-a-structure.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 19.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: A Rule, Not a Structure](/blog/2026/11/14/memory-systems-a-rule-not-a-structure.html) · [Next: The Price of Compiling](/blog/2026/11/25/memory-systems-the-price-of-compiling.html)
