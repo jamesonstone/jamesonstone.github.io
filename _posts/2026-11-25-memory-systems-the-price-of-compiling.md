@@ -23,4 +23,4 @@ Keep the text as the record. Compile only the small core the loop has proven, an
 [1] Engram, ["Predicting LoRA size for any dataset"](https://engram.com/blog/lora-size), Nov 24, 2026<br>
 [2] Shi, Kou and Zhou, ["InstructReplay: Replaying Assistant Turns to Preserve General Behavior During Factual Fine-Tuning"](https://arxiv.org/abs/2611.32918), preprint, Nov 24, 2026
 
-*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 20.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Memory Is a Process, Not a Taxonomy](/blog/2026/11/14/memory-systems-memory-is-a-process-not-a-taxonomy.html)
+*[A philosophical exploration in memory systems](/blog/2026/11/08/memory-systems-introduction.html), part 20.* [Terms](/blog/2026/11/08/memory-systems-terms.html) · [Previous: Memory Is a Process, Not a Taxonomy](/blog/2026/11/14/memory-systems-memory-is-a-process-not-a-taxonomy.html) · [Next: No Surgical Fix](/blog/2026/11/27/memory-systems-no-surgical-fix.html)
