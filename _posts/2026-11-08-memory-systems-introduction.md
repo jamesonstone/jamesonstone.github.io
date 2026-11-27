@@ -34,5 +34,6 @@ The notes, in the order they were written:
 18. [A Rule, Not a Structure](/blog/2026/11/14/memory-systems-a-rule-not-a-structure.html)
 19. [Memory Is a Process, Not a Taxonomy](/blog/2026/11/14/memory-systems-memory-is-a-process-not-a-taxonomy.html)
 20. [The Price of Compiling](/blog/2026/11/25/memory-systems-the-price-of-compiling.html)
+21. [No Surgical Fix](/blog/2026/11/27/memory-systems-no-surgical-fix.html)
 
 *A philosophical exploration in memory systems.* [Next: Terms](/blog/2026/11/08/memory-systems-terms.html)
